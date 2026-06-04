@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <a class="logo" href="#">Projects<span class="logo-dot"></span><span class="logo-count" id="projectCount">12</span></a>
+
+    <div class="header-center" id="headerCenter">
+        <div class="search-wrap">
+            <input type="text" id="searchInput" placeholder="search..." autocomplete="off" spellcheck="false">
+            <button class="clear-btn" id="clearBtn">×</button>
+        </div>
+        <div class="tags-row" id="tagsRow">
+            <button class="tag active" data-tag="all">all</button>
+            <button class="tag" data-tag="design">design</button>
+            <button class="tag" data-tag="dev">dev</button>
+            <button class="tag" data-tag="ai">ai</button>
+            <button class="tag" data-tag="tool">tools</button>
+            <button class="tag" data-tag="portfolio">portfolio</button>
+            <button class="tag" data-tag="news">news</button>
+            <button class="tag" data-tag="3d">3d</button>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
+        <button class="burger" id="burgerBtn" aria-label="Menu">
+            <span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile drawer -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+    <div class="drawer-head">
+        <span class="drawer-title">Menu</span>
+        <button class="drawer-close" id="drawerClose">×</button>
+    </div>
+    <div class="drawer-search">
+        <input type="text" id="searchMobile" placeholder="search..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="drawer-tags" id="drawerTags">
+        <button class="tag active" data-tag="all">all</button>
+        <button class="tag" data-tag="design">design</button>
+        <button class="tag" data-tag="dev">dev</button>
+        <button class="tag" data-tag="ai">ai</button>
+        <button class="tag" data-tag="tool">tools</button>
+        <button class="tag" data-tag="portfolio">portfolio</button>
+        <button class="tag" data-tag="news">news</button>
+        <button class="tag" data-tag="3d">3d</button>
+    </div>
+    <div class="drawer-footer">
+        <span id="drawerCount">12 projects</span>
+    </div>
+</div>
+
+<main>
+    <div class="grid" id="grid"></div>
+    <div class="empty-state" id="emptyState">
+        <span>— nothing found</span>
+    </div>
+</main>
+
+<footer>
+    <span>Projects<span class="logo-dot" style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin:0 1px 1px;vertical-align:middle;"></span></span>
+    <span id="footerCount">12 projects</span>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="modal-meta">
+                <span class="modal-title" id="modalTitle"></span>
+                <span class="modal-url" id="modalUrl"></span>
+            </div>
+            <div class="modal-actions">
+                <a class="modal-btn" id="modalOpenBtn" target="_blank" rel="noopener" title="Open">↗</a>
+                <button class="modal-btn" id="modalCloseBtn">×</button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="iframe-loader" id="iframeLoader">
+                <div class="loader-line"></div>
+                <span>loading...</span>
+            </div>
+            <iframe id="previewIframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" loading="lazy"></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
