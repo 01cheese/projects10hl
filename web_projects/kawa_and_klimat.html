@@ -12,7 +12,6 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- ВЫСОКАЯ ТИПОГРАФИКА: Cormorant Garamond & Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
@@ -196,6 +195,7 @@
         .menu-grid.active { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; }
         @media (min-width: 768px) { .menu-grid.active { display: grid; grid-template-columns: repeat(2, 1fr); overflow-x: visible; } }
         @media (min-width: 1024px) { .menu-grid.active { grid-template-columns: repeat(3, 1fr); } }
+        
 
         .menu-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; min-width: 290px; scroll-snap-align: start; border: 1px solid rgba(0,0,0,0.02); }
         .menu-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(22,21,19,0.08); }
@@ -216,6 +216,87 @@
         .gallery-item { break-inside: avoid; margin-bottom: 20px; border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative; box-shadow: var(--shadow); }
         .gallery-item img { width: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .gallery-item:hover img { transform: scale(1.06); }
+        /* ЦЕНТРИРОВАНИЕ ИКОНОК В КРУГЛЫХ КНОПКАХ */
+        .btn-circle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 54px;
+            height: 54px;
+            background-color: rgba(44, 44, 44, 0.8); /* темный полупрозрачный фон */
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            color: #ffffff;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            padding: 0;
+        }
+
+        .btn-circle:hover {
+            background-color: rgba(26, 26, 26, 1);
+            transform: scale(1.05);
+        }
+
+        /* Стили для иконок внутри кнопок (SVG или картинки) */
+        .btn-circle svg,
+        .btn-circle img {
+            width: 18px;
+            height: 18px;
+            display: block;
+        }
+
+
+        /* СТИЛИ ГАЛЕРЕИ */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: serif; /* Замените на ваш шрифт, если нужно */
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Ровно 3 колонки */
+            gap: 24px; /* Отступы между карточками */
+        }
+
+        .gallery-item {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px; /* Мягкое закругление углов */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 4 / 5; /* Задает единую вертикальную пропорцию для всех фото */
+            object-fit: cover; /* Фотографии аккуратно подрезаются, не искажаясь */
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        /* Эффект приближения при наведении */
+        .gallery-item img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Адаптация под планшеты и мобильные */
+        @media (max-width: 900px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); } /* 2 колонки */
+        }
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; } /* 1 колонка */
+        }
+
+
         @media (min-width: 768px) { .gallery-masonry { column-count: 2; } }
         @media (min-width: 1280px) { .gallery-masonry { column-count: 3; } }
 
@@ -223,11 +304,115 @@
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,14,13,0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; backdrop-filter: blur(10px); }
         .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox img { max-width: 90%; max-height: 85vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .lb-btn { position: absolute; color: #fff; font-size: 24px; background: rgba(255,255,255,0.08); width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
-        .lb-btn:hover { background: var(--col-gold); }
-        .lb-close { top: 24px; right: 24px; font-size: 28px; }
-        .lb-prev { left: 24px; }
-        .lb-next { right: 24px; }
+
+        /* ==========================================================================
+   КОНТЕЙНЕР ЛАЙТБОКСА (Оверлей на весь экран)
+   ========================================================================== */
+        .lightbox {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        /* Стили самой картинки, чтобы она не растягивалась */
+        #lightbox-img {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+            user-select: none;
+        }
+
+        /* ==========================================================================
+           БАЗОВЫЙ КРУГ ДЛЯ ВСЕХ КНОПОК И ЦЕНТРИРОВАНИЕ SVG
+           ========================================================================== */
+        .lb-btn {
+            /* Жесткий Flexbox-центр для SVG */
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+
+            /* Размеры круга */
+            width: 50px !important;
+            height: 50px !important;
+            border-radius: 50% !important;
+
+            /* Внешний вид */
+            background-color: rgba(255, 255, 255, 0.1) !important; /* Легкий белый как на макете, либо ваш темный */
+            color: #ffffff !important;
+            border: none !important;
+            cursor: pointer;
+
+            /* Сброс отступов (ВАЖНО для центровки) */
+            padding: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .lb-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            transform: scale(1.05);
+        }
+
+        /* Настройка геометрии SVG-иконок */
+        .lb-btn svg {
+            width: 20px !important;
+            height: 20px !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            flex-shrink: 0;
+        }
+
+
+        /* ==========================================================================
+           АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ КНОПОК НА ЭКРАНЕ
+           ========================================================================== */
+
+        /* КРЕСТИК: Строго в правый верхний угол */
+        .lb-close {
+            position: absolute !important;
+            top: 30px !important;
+            right: 30px !important;
+        }
+
+        /* СТРЕЛКА НАЗАД: В левый центр */
+        .lb-prev {
+            position: absolute !important;
+            left: 30px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        /* СТРЕЛКА ВПЕРЕД: В правый центр */
+        .lb-next {
+            position: absolute !important;
+            right: 30px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        /* Адаптив под мобилки (чтобы кнопки не перекрывали фото на узких экранах) */
+        @media (max-width: 768px) {
+            .lb-close {
+                top: 20px !important;
+                right: 20px !important;
+            }
+            .lb-prev { left: 15px !important; }
+            .lb-next { right: 15px !important; }
+            .lb-btn {
+                width: 44px !important;
+                height: 44px !important;
+            }
+        }
 
         /* --- REVIEWS --- */
         .reviews-slider { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; -webkit-overflow-scrolling: touch; }
@@ -242,7 +427,7 @@
         .contact-wrapper { display: flex; flex-direction: column-reverse; gap: 40px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; border: 1px solid rgba(0,0,0,0.02); }
         .contact-info { padding: 40px 24px; flex: 1; }
         .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
-        .contact-item h3 { font-size: 18px; margin-bottom: 6px; color: rgba(22,21,19,0.6); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 12px;}
+        .contact-item h3 { margin-bottom: 6px; color: rgba(22,21,19,0.6); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 12px;}
         .contact-item .body-text { color: var(--col-dark); font-size: 16px; font-weight: 500; }
         .contact-icon-box { background: #fbfaf7; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--col-border); }
         .contact-icon-box svg { width: 20px; height: 20px; fill: none; stroke: var(--col-gold); stroke-width: 2; }
@@ -252,13 +437,200 @@
             .contact-info { padding: 50px; }
         }
 
+        /* ==========================================================================
+           ЖЕСТКОЕ ЦЕНТРИРОВАНИЕ ДЛЯ КРУГЛЫХ КНОПОК И ИКОНОК (Слайдер, Стрелки, Крестик)
+           ========================================================================== */
+        .info-icon,
+        .btn-circle,
+        .control-button,
+        .close-button {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            box-sizing: border-box;
+            padding: 0 !important; /* Убираем дефолтные внутренние отступы кнопок */
+        }
+
+        /* Принудительный сброс для всех внутренних SVG, чтобы они не косили */
+        .info-icon svg,
+        .btn-circle svg,
+        .control-button svg,
+        .close-button svg {
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        /* Специфичный размер для иконок в контактах */
+        .info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #a18c7e; /* Элегантный бежево-кофейный цвет иконки */
+        }
+
+        /* Специфичный размер для иконок в кнопках управления слайдером/галереей */
+        .btn-circle svg,
+        .control-button svg,
+        .close-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+
+        /* ==========================================================================
+           СТИЛИ ДЛЯ СЕКЦИИ КОНТАКТОВ
+           ========================================================================== */
+        .contact-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .contact-card {
+            display: flex;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+        }
+
+        .contact-left {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .contact-right {
+            flex: 1;
+            min-height: 550px;
+        }
+
+        .contact-right iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Контейнер для иконки контакта */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            background: #fbf9f6;
+            border-radius: 12px; /* Приятные скругленные квадраты как на макете */
+            border: 1px solid #f2ede6;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: #a18c7e;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .info-text {
+            font-size: 0.95rem;
+            color: #2c2c2c;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .contact-divider {
+            border: 0;
+            height: 1px;
+            background: #f2ede6;
+            margin: 0;
+        }
+
+        /* Форма обратной связи */
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-title {
+            font-family: serif;
+            font-size: 1.5rem;
+            color: #2c2c2c;
+            margin: 0 0 4px 0;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e3ded7;
+            border-radius: 10px;
+            background-color: #fdfcfb;
+            font-size: 0.95rem;
+            color: #2c2c2c;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #a18c7e;
+            background-color: #ffffff;
+        }
+
+        .form-submit-btn {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 6px;
+        }
+
+        .form-submit-btn:hover {
+            background-color: #454545;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .contact-card {
+                flex-direction: column;
+            }
+            .contact-left {
+                padding: 30px;
+            }
+            .contact-right {
+                height: 350px;
+                min-height: auto;
+            }
+        }
+
         /* --- FOOTER --- */
         footer { background: var(--col-dark); color: #fff; padding: 80px 24px 32px; margin-top: var(--pad-sec); position: relative; }
         .footer-content { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 50px; text-align: center; }
         @media (min-width: 768px) { .footer-content { grid-template-columns: 1.5fr 1fr 1fr; text-align: left; } }
         .social-icons { display: flex; gap: 14px; justify-content: center; margin-top: 20px; }
         @media (min-width: 768px) { .social-icons { justify-content: flex-start; } }
-        .social-icons a { display: block; width: 44px; height: 44px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 14px; font-weight: 600; }
+        .social-icons a { width: 44px; height: 44px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 14px; font-weight: 600; }
         .social-icons a:hover { background: var(--col-gold); color: var(--col-dark); transform: translateY(-3px); }
         .footer-bottom { text-align: center; margin-top: 80px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.8; }
         .footer-bottom span { color: var(--col-gold); font-weight: 500; }
@@ -282,16 +654,13 @@
 </head>
 <body>
 
-<!-- ДВИЖУЩИЙСЯ БЕКГРАУНД ДЕКОР -->
 <div class="floating-decor">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <!-- Кастомные парящие SVG зерна -->
     <svg class="floating-bean bean-1" viewBox="0 0 24 24"><path d="M21.1 2.9c-2.4-2.4-6.3-2.4-8.7 0L2.9 12.4c-2.4 2.4-2.4 6.3 0 8.7 2.4 2.4 6.3 2.4 8.7 0l9.5-9.5c2.4-2.4 2.4-6.3 0-8.7zm-2.1 7.3l-8.1 8.1c-1.2 1.2-3.2 1.2-4.4 0-1.2-1.2-1.2-3.2 0-4.4l8.1-8.1c.4-.4 1-.4 1.4 0s.4 1 0 1.4L7.9 15.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l8.1-8.1c1.2-1.2 3.2-1.2 4.4 0 1.2 1.2 1.2 3.2 0 4.4z"/></svg>
     <svg class="floating-bean bean-2" viewBox="0 0 24 24"><path d="M21.1 2.9c-2.4-2.4-6.3-2.4-8.7 0L2.9 12.4c-2.4 2.4-2.4 6.3 0 8.7 2.4 2.4 6.3 2.4 8.7 0l9.5-9.5c2.4-2.4 2.4-6.3 0-8.7zm-2.1 7.3l-8.1 8.1c-1.2 1.2-3.2 1.2-4.4 0-1.2-1.2-1.2-3.2 0-4.4l8.1-8.1c.4-.4 1-.4 1.4 0s.4 1 0 1.4L7.9 15.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l8.1-8.1c1.2-1.2 3.2-1.2 4.4 0 1.2 1.2 1.2 3.2 0 4.4z"/></svg>
 </div>
 
-<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
     <div class="nav-container">
         <a href="#" class="logo slow-scroll-link" aria-label="Kawa i Klimat Strona Główna">
@@ -322,7 +691,6 @@
     </div>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
     <a href="#menu" class="nav-link mobile-link slow-scroll-link" data-i18n="nav_menu">Menu</a>
     <a href="#o-nas" class="nav-link mobile-link slow-scroll-link" data-i18n="nav_about">O nas</a>
@@ -335,7 +703,6 @@
     </div>
 </div>
 
-<!-- HERO -->
 <header id="home" class="hero">
     <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1600" alt="Wnętrze kawiarni" class="hero-img">
     <div class="hero-overlay"></div>
@@ -351,29 +718,27 @@
 </header>
 
 <main>
-    <!-- O NAS -->
     <section id="o-nas" class="reveal">
         <div class="about-grid">
             <div>
                 <h2 data-i18n="about_title">Nasza historia</h2>
-                <p class="body-text">Kawa & Klimat to rodzinna kawiarnia założona w 2018 roku z pasji do wyjątkowych ziaren i gościnności. Codziennie dbamy o to, aby każda filiżanka była małym dziełem sztuki. Wierzymy, że dobra kawa łączy ludzi, dlatego stworzyliśmy przestrzeń, w której każdy poczuje się jak w domu.</p>
+                <p class="body-text" data-i18n="about_desc">Kawa & Klimat to rodzinna kawiarnia założona w 2018 roku z pasji do wyjątkowych ziaren i gościnności. Codziennie dbamy o to, aby każda filiżanka była małym dziełem sztuki. Wierzymy, że dobra kawa łączy ludzi, dlatego stworzyliśmy przestrzeń, w której każdy poczuje się jak w domu.</p>
 
                 <div class="stats" id="stats-container">
                     <div class="stat-item">
-                        <!-- SVG ТЕПЕРЬ ВМЕСТО СТИКЕРОВ -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
                         <div class="stat-num" data-target="2018">0</div>
-                        <div class="stat-label">Rok otwarcia</div>
+                        <div class="stat-label" data-i18n="stat_opened">Rok otwarcia</div>
                     </div>
                     <div class="stat-item">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.1 2.9c-2.4-2.4-6.3-2.4-8.7 0L2.9 12.4c-2.4 2.4-2.4 6.3 0 8.7 2.4 2.4 6.3 2.4 8.7 0l9.5-9.5c2.4-2.4 2.4-6.3 0-8.7zm-2.1 7.3l-8.1 8.1c-1.2 1.2-3.2 1.2-4.4 0-1.2-1.2-1.2-3.2 0-4.4l8.1-8.1c.4-.4 1-.4 1.4 0s.4 1 0 1.4L7.9 15.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l8.1-8.1c1.2-1.2 3.2-1.2 4.4 0 1.2 1.2 1.2 3.2 0 4.4z"/></svg>
                         <div class="stat-num" data-target="40">0</div>
-                        <div class="stat-label">Rodzajów kawy</div>
+                        <div class="stat-label" data-i18n="stat_coffee_types">Rodzajów kawy</div>
                     </div>
                     <div class="stat-item">
                         <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         <div class="stat-num" data-target="4.9" data-decimal="true">0</div>
-                        <div class="stat-label">Ocena Google</div>
+                        <div class="stat-label" data-i18n="stat_google_rate">Ocena Google</div>
                     </div>
                 </div>
             </div>
@@ -383,63 +748,60 @@
         </div>
     </section>
 
-    <!-- MENU -->
     <section id="menu" class="reveal">
         <h2 class="section-title" data-i18n="nav_menu">Menu</h2>
 
         <div class="menu-tabs">
-            <button class="tab-btn active" data-tab="kawa">Kawa</button>
-            <button class="tab-btn" data-tab="herbata">Herbata</button>
-            <button class="tab-btn" data-tab="desery">Desery</button>
-            <button class="tab-btn" data-tab="sniadania">Śniadania</button>
+            <button class="tab-btn active" data-tab="kawa" data-i18n="tab_coffee">Kawa</button>
+            <button class="tab-btn" data-tab="herbata" data-i18n="tab_tea">Herbata</button>
+            <button class="tab-btn" data-tab="desery" data-i18n="tab_desserts">Desery</button>
+            <button class="tab-btn" data-tab="sniadania" data-i18n="tab_breakfast">Śniadania</button>
         </div>
 
-        <!-- Kawa Tab -->
         <div class="menu-grid active" id="tab-kawa">
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400" alt="Espresso" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Espresso</h3><span class="menu-price">12 zł</span></div>
-                    <p class="body-text">Intensywne i aromatyczne</p>
+                    <p class="body-text" data-i18n="menu_espresso_desc">Intensywne i aromatyczne</p>
                 </div>
             </div>
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400" alt="Cappuccino" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Cappuccino</h3><span class="menu-price">16 zł</span></div>
-                    <p class="body-text">Kremowa pianka z delikatnym mlekiem</p>
+                    <p class="body-text" data-i18n="menu_cappuccino_desc">Kremowa pianka z delikatnym mlekiem</p>
                 </div>
             </div>
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=400" alt="Latte" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Latte</h3><span class="menu-price">17 zł</span></div>
-                    <p class="body-text">Aksamitna kawa z mlekiem</p>
+                    <p class="body-text" data-i18n="menu_latte_desc">Aksamitna kawa z mlekiem</p>
                 </div>
             </div>
             <div class="menu-card">
                 <img src="https://spokokawa.pl/userdata/public/news/images/65.jpg" alt="Flat White" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Flat White</h3><span class="menu-price">18 zł</span></div>
-                    <p class="body-text">Australijski klasyk, mocna kawa</p>
+                    <p class="body-text" data-i18n="menu_flat_desc">Australijski klasyk, mocna kawa</p>
                 </div>
             </div>
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=400" alt="Americano" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Americano</h3><span class="menu-price">14 zł</span></div>
-                    <p class="body-text">Łagodna i długa</p>
+                    <p class="body-text" data-i18n="menu_americano_desc">Łagodna i długa</p>
                 </div>
             </div>
         </div>
 
-        <!-- Herbata Tab -->
         <div class="menu-grid" id="tab-herbata">
             <div class="menu-card">
                 <img src="https://schroniskobukowina.pl/media/wysiwyg/filizanka-zielona-herbata.jpg" alt="Zielona" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Zielona</h3><span class="menu-price">12 zł</span></div>
-                    <p class="body-text">Klasyczna, orzeźwiająca</p>
+                    <div class="menu-card-header"><h3 data-i18n="menu_tea_green">Zielona</h3><span class="menu-price">12 zł</span></div>
+                    <p class="body-text" data-i18n="menu_tea_green_desc">Klasyczna, orzeźwiająca</p>
                 </div>
             </div>
             <div class="menu-card">
@@ -452,7 +814,6 @@
                     <p class="body-text" data-i18n="menu_tea_black_desc">Mocny napar</p>
                 </div>
             </div>
-
             <div class="menu-card">
                 <img src="https://www.konesso.pl/data/include/img/news/1600842764.jpg" alt="Rumiankowa" loading="lazy">
                 <div class="menu-card-body">
@@ -463,7 +824,6 @@
                     <p class="body-text" data-i18n="menu_tea_chamomile_desc">Uspokajająca, ziołowa</p>
                 </div>
             </div>
-
             <div class="menu-card">
                 <img src="https://img.wprost.pl/img/pijcie-regularnie-ten-napar-a-pozegnacie-sie-z-boczkami-szybko-poczujecie-sie-lzej-ale-to-nie-koniec/xx/cd/69771efdf9f898061f2ca07b1905.webp" alt="Miętowa" loading="lazy">
                 <div class="menu-card-body">
@@ -474,495 +834,474 @@
                     <p class="body-text" data-i18n="menu_tea_mint_desc">Świeża mięta z ogrodu</p>
                 </div>
             </div>
-
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400" alt="Chai Latte" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Chai Latte</h3><span class="menu-price">16 zł</span></div>
-                    <p class="body-text">Korzenna herbata z mlekiem</p>
+                    <p class="body-text" data-i18n="menu_chai_desc">Korzenna herbata z mlekiem</p>
                 </div>
             </div>
         </div>
 
-        <!-- Desery Tab -->
         <div class="menu-grid" id="tab-desery">
             <div class="menu-card">
-                <img src="https://cdn.aniagotuje.com/pictures/articles/2023/11/51869617-v-1500x1500.jpg" alt="Sernik" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400" alt="Sernik" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Sernik</h3><span class="menu-price">18 zł</span></div>
-                    <p class="body-text">Z palonym masłem</p>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://cdn.aniagotuje.com/pictures/articles/2024/10/69063944-v-1080x1080.jpg" alt="Szarlotka" loading="lazy">
-                <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Szarlotka</h3><span class="menu-price">16 zł</span></div>
-                    <p class="body-text">Na ciepło z lodami</p>
+                    <div class="menu-card-header"><h3 data-i18n="menu_cheesecake">Sernik</h3><span class="menu-price">18 zł</span></div>
+                    <p class="body-text" data-i18n="menu_cheesecake_desc">Klasyczny, kremowy, z musem malinowym</p>
                 </div>
             </div>
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400" alt="Brownie" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Brownie</h3><span class="menu-price">17 zł</span></div>
-                    <p class="body-text">Mocno czekoladowе</p>
+                    <div class="menu-card-header"><h3>Brownie</h3><span class="menu-price">16 zł</span></div>
+                    <p class="body-text" data-i18n="menu_brownie_desc">Mocno czekoladowe ciasto podawane na ciepło</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://thescranline.com/wp-content/uploads/2025/12/TIRAMISU-25-S-01.jpg" alt="Tiramisu" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" alt="Croissant" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Tiramisu</h3><span class="menu-price">22 zł</span></div>
-                    <p class="body-text">Włoski klasyk z mascarpone</p>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://cdn.aniagotuje.com/pictures/articles/2017/12/34922-v-1080x867.jpg" alt="Makowiec" loading="lazy">
-                <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Makowiec</h3><span class="menu-price">15 zł</span></div>
-                    <p class="body-text">Tradycyjny z lukrem</p>
+                    <div class="menu-card-header"><h3>Croissant</h3><span class="menu-price">10 zł</span></div>
+                    <p class="body-text" data-i18n="menu_croissant_desc">Maślany, chrupiący, prosto z pieca</p>
                 </div>
             </div>
         </div>
 
-        <!-- Śniadania Tab -->
         <div class="menu-grid" id="tab-sniadania">
             <div class="menu-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_s1WiZktN7MVaz_dMCgl6zya5NxJIjfAW4A&s" alt="Jajka sadzone" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400" alt="Tosty z awokado" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Jajka sadzone</h3><span class="menu-price">26 zł</span></div>
-                    <p class="body-text">Z bekonem i pieczywem</p>
+                    <div class="menu-card-header"><h3 data-i18n="menu_avocado">Tosty z awokado</h3><span class="menu-price">26 zł</span></div>
+                    <p class="body-text" data-i18n="menu_avocado_desc">Chleb rzemieślniczy, jajko pošowane, awokado</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://grill360.pl/wp-content/uploads/2019/06/australijskie-tosty-z-grilla-2.jpg" alt="Tost z awokado" loading="lazy">
+                <img src="https://www.wygodnadieta.pl/files/blog/posts/banners/owsianka-z-owocami-energia-baner.webp" alt="Owsianka" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Tost z awokado</h3><span class="menu-price">28 zł</span></div>
-                    <p class="body-text">Jajko w koszulce, pomidorki</p>
+                    <div class="menu-card-header"><h3 data-i18n="menu_oatmeal">Owsianka</h3><span class="menu-price">19 zł</span></div>
+                    <p class="body-text" data-i18n="menu_oatmeal_desc">Mleko migdałowe, świeże owoce, miód</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://cdn.aniagotuje.com/pictures/articles/2022/05/27876793-v-1500x1500.jpg" alt="Owsianka" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400" alt="Jajecznica" loading="lazy">
                 <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Owsianka</h3><span class="menu-price">24 zł</span></div>
-                    <p class="body-text">Z owocami leśnymi i orzechami</p>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400" alt="Pancakes" loading="lazy">
-                <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Pancakes</h3><span class="menu-price">32 zł</span></div>
-                    <p class="body-text">Z syropem klonowym</p>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1517093602195-b40af9688b46?w=400" alt="Granola" loading="lazy">
-                <div class="menu-card-body">
-                    <div class="menu-card-header"><h3>Granola</h3><span class="menu-price">26 zł</span></div>
-                    <p class="body-text">Domowa z jogurtem greckim</p>
+                    <div class="menu-card-header"><h3 data-i18n="menu_eggs">Jajecznica</h3><span class="menu-price">22 zł</span></div>
+                    <p class="body-text" data-i18n="menu_eggs_desc">Z 3 jajek wiejskich, masło, szczypiorek, pieczywo</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- REZERWACJA -->
     <section id="rezerwacja" class="reveal">
         <div class="reservation">
-            <h2 data-i18n="reservation_title">Zarezerwuj stolik online</h2>
-            <p class="body-text" style="margin-bottom:32px;">Rezerwacja przez Booksy — szybko, łatwo i bez telefonu</p>
-            <a href="https://booksy.com" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 16px; padding: 16px 36px;">Zarezerwuj przez Booksy →</a>
-            <span class="res-phone">Wolisz zadzwonić? <b>+48 12 345 67 89</b></span>
+            <h2 data-i18n="res_title">Zarezerwuj wyjątkowy stolik</h2>
+            <p class="body-text" data-i18n="res_desc" style="max-width: 600px; margin: 0 auto 32px;">Zaplanuj spotkanie z przyjaciółmi lub relaksujący wieczór. Skorzystaj z szybkiej rezerwacji online przez platformę Booksy lub zadzwoń bezpośrednio do nas.</p>
+            <a href="https://booksy.com" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="hero_btn_reserve">Zarezerwuj stolik</a>
+            <span class="res-phone"><span data-i18n="res_or_call">lub zadzwoń:</span> <strong>+48 123 456 789</strong></span>
         </div>
     </section>
 
-    <!-- GALERIA -->
-    <section id="galeria">
-        <h2 class="section-title" data-i18n="gallery_title">Galeria</h2>
-        <div class="gallery-masonry" id="gallery-container">
-            <div class="gallery-item stagger-item" style="--i: 1"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" alt="Zdjęcie kawiarni 1" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 2"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600" alt="Zdjęcie kawiarni 2" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 3"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600" alt="Zdjęcie kawiarni 3" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 4"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600" alt="Zdjęcie kawiarni 4" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 5"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600" alt="Zdjęcie kawiarni 5" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 6"><img src="https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=600" alt="Zdjęcie kawiarni 6" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 7"><img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=600" alt="Zdjęcie kawiarni 7" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 8"><img src="https://images.unsplash.com/photo-1519671282429-b8d4e4a30b80?w=600" alt="Zdjęcie kawiarni 8" loading="lazy"></div>
-            <div class="gallery-item stagger-item" style="--i: 9"><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600" alt="Zdjęcie kawiarni 9" loading="lazy"></div>
+    <section class="gallery-section">
+        <h2 class="section-title">Atmosphere in focus</h2>
+
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600" alt="Detale kawiarni"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" alt="Coffee Art"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600" alt="Coffee Cups"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600" alt="Cheers"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600" alt="Barista place"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600" alt="Filter Coffee"></div>
         </div>
     </section>
 
-    <!-- OPINIE -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+        <button class="lb-btn lb-close" id="lb-close" aria-label="Zamknij">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <button class="lb-btn lb-prev" id="lb-prev" aria-label="Poprzednie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <img src="" id="lightbox-img" alt="Powiększony widok galerii">
+
+        <button class="lb-btn lb-next" id="lb-next" aria-label="Następne">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+
     <section id="opinie" class="reveal">
-        <h2 class="section-title" data-i18n="reviews_title">Opinie gości</h2>
+        <h2 class="section-title" data-i18n="reviews_title">Co mówią nasi goście</h2>
         <div class="reviews-slider">
             <div class="review-card">
                 <div class="review-header">
-                    <div class="avatar">AK</div>
+                    <div class="avatar">AM</div>
                     <div>
-                        <h3>Agnieszka K.</h3>
+                        <h3>Anna Maria</h3>
                         <div class="stars">★★★★★</div>
                     </div>
                 </div>
-                <p class="body-text">"Najlepsza kawa w Krakowie! Miła obsługa i niesamowita atmosfera. Wracam tu co tydzień."</p>
+                <p class="body-text" data-i18n="review_1">"Najlepsza flat white w Krakowie! Cudowny klimat do pracy i spotkań, a obsługa zawsze uśmiechnięta. Sernik malinowy to po prostu poezja."</p>
             </div>
             <div class="review-card">
                 <div class="review-header">
-                    <div class="avatar">TW</div>
+                    <div class="avatar">JK</div>
                     <div>
-                        <h3>Tomasz W.</h3>
+                        <h3>Jan Kowalski</h3>
                         <div class="stars">★★★★★</div>
                     </div>
                 </div>
-                <p class="body-text">"Sernik domowy to hit! Kawa idealna, miejsce klimatyczne. Polecam jedemumu."</p>
+                <p class="body-text" data-i18n="review_2">"Wspaniałe, przytulne wnętrze i genialna kawa single origin. Tosty z awokado na śniadanie idealnie chrupiące. Na pewno wrócę!"</p>
             </div>
             <div class="review-card">
                 <div class="review-header">
-                    <div class="avatar">MP</div>
+                    <div class="avatar">OK</div>
                     <div>
-                        <h3>Marta i Piotr</h3>
+                        <h3>Olena K.</h3>
                         <div class="stars">★★★★★</div>
                     </div>
                 </div>
-                <p class="body-text">"Byliśmy na śniadaniu — wszystko świeże i pyszne. Na pewno wrócimy!"</p>
-            </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="avatar">KB</div>
-                    <div>
-                        <h3>Kamil B.</h3>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-                <p class="body-text">"Świetne miejsce do pracy zdalnej. Dobra kawa, WiFi i spokojna muzyka."</p>
+                <p class="body-text" data-i18n="review_3">"Niesamowite miejsce ukryte w centrum miasta. Bardzo estetycznie podane desery, wysoka kultura i profesjonalizm barista."</p>
             </div>
         </div>
     </section>
 
-    <!-- KONTAKT -->
-    <section id="kontakt" class="reveal">
-        <h2 class="section-title" data-i18n="contact_title">Znajdź nas</h2>
-        <div class="contact-wrapper">
-            <iframe src="https://maps.google.com/maps?q=Floriańska+14+Kraków&output=embed" class="contact-map" style="border:0" loading="lazy" aria-label="Mapa z lokalizacją Kawa & Klimat"></iframe>
-            <div class="contact-info">
+    <section class="contact-section">
+        <h2 class="section-title">Contact</h2>
 
-                <div class="contact-item">
-                    <div class="contact-icon-box">
-                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+        <div class="contact-card">
+
+            <div class="contact-left">
+
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="info-label">ADDRESS</span>
+                            <p class="info-text">ul. Floriańska 14, 31–021 Kraków</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3>Adres</h3>
-                        <p class="body-text">ul. Floriańska 14<br>31-021 Kraków</p>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="info-label">OPENING HOURS</span>
+                            <p class="info-text">Mon - Fri: 7:30 AM - 9:00 PM<br>Sat - Sun: 9:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="info-label">TEXT OR CALL US</span>
+                            <p class="info-text">hello@kawaiiklimat.pl<br>+48 123 456 789</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-item">
-                    <div class="contact-icon-box">
-                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-1.514 2.018a14.981 14.981 0 0 1-6.236-6.236l2.018-1.514c.362-.272.528-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
-                    </div>
-                    <div>
-                        <h3>Telefon</h3>
-                        <p class="body-text">+48 12 345 67 89</p>
-                    </div>
-                </div>
+                <hr class="contact-divider">
 
-                <div class="contact-item">
-                    <div class="contact-icon-box">
-                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
-                    </div>
-                    <div>
-                        <h3>Email</h3>
-                        <p class="body-text">kontakt@kawa-klimat.pl</p>
-                    </div>
-                </div>
+                <form class="feedback-form" action="#" method="POST">
+                    <h3 class="form-title">Write to us</h3>
 
-                <div class="contact-item">
-                    <div class="contact-icon-box">
-                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
                     </div>
-                    <div>
-                        <h3>Godziny otwarcia</h3>
-                        <p class="body-text">Pon–Pt: 7:00–21:00<br>Sob–Nd: 8:00–22:00</p>
-                    </div>
-                </div>
 
-                <a href="https://maps.google.com/?q=Floriańska+14+Kraków" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px;">Otwórz w Google Maps →</a>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit-btn">Send Message</button>
+                </form>
+
             </div>
+
+            <div class="contact-right">
+                <iframe
+                        src="https://maps.google.com/maps?q=ul.%20Floria%C5%84ska%2014,%2031-021%20Krak%C3%B3w&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
         </div>
     </section>
+
 </main>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-content">
         <div>
-            <div class="logo" style="margin-bottom:20px;">
-                <svg viewBox="0 0 24 24"><path d="M4 19h16v2H4zM20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 7h-2V5h2v5z"/></svg>
-                <span class="logo-text">Kawa & Klimat</span>
-            </div>
-            <p class="body-text" style="color:rgba(255,255,255,0.6);" data-i18n="hero_tagline">Miejsce, gdzie kawa smakuje inaczej</p>
-        </div>
-        <div>
-            <h3 style="color:#fff; font-family:var(--font-heading); font-size:24px; margin-bottom:20px;">Nawigacja</h3>
-            <ul style="display:flex; flex-direction:column; gap:12px; font-size: 15px;">
-                <li><a href="#menu" class="slow-scroll-link" data-i18n="nav_menu">Menu</a></li>
-                <li><a href="#o-nas" class="slow-scroll-link" data-i18n="nav_about">O nas</a></li>
-                <li><a href="#rezerwacja" class="slow-scroll-link" data-i18n="nav_reservation">Rezerwacja</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 style="color:#fff; font-family:var(--font-heading); font-size:24px; margin-bottom:20px;">Social Media</h3>
+            <h2 style="color: #fff; margin-bottom: 16px; font-size: 32px;">Kawa & Klimat</h2>
+            <p class="body-text" data-i18n="footer_tagline" style="color: rgba(255,255,255,0.6);">Miejsce, w którym pasja spotyka spokój w sercu Krakowa.</p>
             <div class="social-icons">
                 <a href="#" aria-label="Instagram">IG</a>
                 <a href="#" aria-label="Facebook">FB</a>
-                <a href="#" aria-label="TikTok">TK</a>
+                <a href="#" aria-label="TripAdvisor">TA</a>
             </div>
+        </div>
+        <div>
+            <h3 data-i18n="footer_links_title" style="color: #fff; font-size: 18px; margin-bottom: 16px;">Nawigacja</h3>
+            <ul style="display: flex; flex-direction: column; gap: 10px;">
+                <li><a href="#menu" class="body-text slow-scroll-link" data-i18n="nav_menu" style="color: rgba(255,255,255,0.6);">Menu</a></li>
+                <li><a href="#o-nas" class="body-text slow-scroll-link" data-i18n="nav_about" style="color: rgba(255,255,255,0.6);">O nas</a></li>
+                <li><a href="#rezerwacja" class="body-text slow-scroll-link" data-i18n="nav_reservation" style="color: rgba(255,255,255,0.6);">Rezerwacja</a></li>
+                <li><a href="#kontakt" class="body-text slow-scroll-link" data-i18n="nav_contact" style="color: rgba(255,255,255,0.6);">Kontakt</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 data-i18n="footer_legal_title" style="color: #fff; font-size: 18px; margin-bottom: 16px;">Prawne</h3>
+            <ul style="display: flex; flex-direction: column; gap: 10px; color: rgba(255,255,255,0.6);" class="body-text">
+                <li><a href="#">Polityka prywatności</a></li>
+                <li><a href="#">Regulamin rezerwacji</a></li>
+            </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        © 2026 Kawa & Klimat. Wszelkie prawa zastrzeżone.<br>
-        Strona stworzona przez <span>[Twoje Imię]</span>
+        &copy; 2026 <span>Kawa & Klimat</span>. All rights reserved.<br>
+        Design by <a href="https://vzbb.site">VZBB</a> &lt;3
     </div>
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-    <button class="lb-btn lb-close" aria-label="Zamknij galerię">&times;</button>
-    <button class="lb-btn lb-prev" aria-label="Poprzednie zdjęcie">&#10094;</button>
-    <img src="" alt="Powiększone zdjęcie">
-    <button class="lb-btn lb-next" aria-label="Następne zdjęcie">&#10095;</button>
-</div>
-
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // 1. DICTIONARY LOCALIZATION (i18n)
+    const translations = {
+        pl: {
+            nav_menu: "Menu", nav_about: "O nas", nav_reservation: "Rezerwacja", nav_contact: "Kontakt",
+            hero_tagline: "Miejsce, gdzie kawa smakuje inaczej", hero_btn_reserve: "Zarezerwuj stolik", hero_btn_menu: "Zobacz menu",
+            about_title: "Nasza historia", about_desc: "Kawa & Klimat to rodzinna kawiarnia założona w 2018 roku z pasji do wyjątkowych ziaren i gościnności. Codziennie dbamy o to, aby każda filiżanka była małym dziełem sztuki. Wierzymy, że dobra kawa łączy ludzi, dlatego stworzyliśmy przestrzeń, w której każdy poczuje się jak w domu.",
+            stat_opened: "Rok otwarcia", stat_coffee_types: "Rodzajów kawy", stat_google_rate: "Ocena Google",
+            tab_coffee: "Kawa", tab_tea: "Herbata", tab_desserts: "Desery", tab_breakfast: "Śniadania",
+            menu_espresso_desc: "Intensywne i aromatyczne", menu_cappuccino_desc: "Kremowa pianka z delikatnym mlekiem", menu_latte_desc: "Aksamitna kawa z mlekiem", menu_flat_desc: "Australijski klasyk, mocna kawa", menu_americano_desc: "Łagodna i długa",
+            menu_tea_green: "Zielona", menu_tea_green_desc: "Klasyczna, orzeźwiająca", menu_tea_black: "Czarna", menu_tea_black_desc: "Mocny napar", menu_tea_chamomile: "Rumiankowa", menu_tea_chamomile_desc: "Uspokajająca, ziołowa", menu_tea_mint: "Miętowa", menu_tea_mint_desc: "Świeża mięta z ogrodu", menu_chai_desc: "Korzenna herbata z mlekiem",
+            menu_cheesecake: "Sernik", menu_cheesecake_desc: "Klasyczny, kremowy, z musem malinowym", menu_brownie_desc: "Mocno czekoladowe ciasto podawane na ciepło", menu_croissant_desc: "Maślany, chrupiący, prosto z pieca",
+            menu_avocado: "Tosty z awokado", menu_avocado_desc: "Chleb rzemieślniczy, jajko pošowane, awokado", menu_oatmeal: "Owsianka", menu_oatmeal_desc: "Mleko migdałowe, świeże owoce, miód", menu_eggs: "Jajecznica", menu_eggs_desc: "Z 3 jajek wiejskich, masło, szczypiorek, pieczywo",
+            res_title: "Zarezerwuj wyjątkowy stolik", res_desc: "Zaplanuj spotkanie z przyjaciółmi lub relaksujący wieczór. Skorzystaj z szybkiej rezerwacji online przez platformę Booksy lub zadzwoń bezpośrednio do nas.", res_or_call: "lub zadzwoń:",
+            gallery_title: "Klimat w obiektywie", reviews_title: "Co mówią nasi goście",
+            review_1: '"Najlepsza flat white w Krakowie! Cudowny klimat do pracy i spotkań, a obsługa zawsze uśmiechnięta. Sernik malinowy to po prostu poezja."',
+            review_2: '"Wspaniałe, przytulne wnętrze i genialna kawa single origin. Tosty z awokado na śniadanie idealnie chrupiące. Na pewno wrócę!"',
+            review_3: '"Niesamowite miejsce ukryte w centrum miasta. Bardzo estetycznie podane desery, wysoka kultura i profesjonalizm barista."',
+            contact_address_label: "Adres", contact_hours_label: "Godziny otwarcia", contact_hours_week: "Pon - Pt: 7:30 - 21:00", contact_hours_weekend: "Sob - Nd: 9:00 - 22:00", contact_phone_label: "Napisz lub zadzwoń",
+            footer_tagline: "Miejsce, w którym pasja spotyka spokój w sercu Krakowa.", footer_links_title: "Nawigacja", footer_legal_title: "Prawne"
+        },
+        en: {
+            nav_menu: "Menu", nav_about: "About Us", nav_reservation: "Reservation", nav_contact: "Contact",
+            hero_tagline: "A place where coffee tastes different", hero_btn_reserve: "Book a table", hero_btn_menu: "View menu",
+            about_title: "Our Story", about_desc: "Kawa & Klimat is a family coffee shop founded in 2018 out of passion for unique beans and hospitality. Every day we make sure that each cup is a tiny piece of art. We believe good coffee brings people together.",
+            stat_opened: "Year Opened", stat_coffee_types: "Coffee Varieties", stat_google_rate: "Google Rating",
+            tab_coffee: "Coffee", tab_tea: "Tea", tab_desserts: "Desserts", tab_breakfast: "Breakfast",
+            menu_espresso_desc: "Intense and aromatic", menu_cappuccino_desc: "Creamy foam with delicate milk", menu_latte_desc: "Velvety coffee with steamed milk", menu_flat_desc: "Australian classic, strong coffee punch", menu_americano_desc: "Smooth and long diluted espresso",
+            menu_tea_green: "Green Tea", menu_tea_green_desc: "Classic and refreshing", menu_tea_black: "Black Tea", menu_tea_black_desc: "Strong bold brew", menu_tea_chamomile: "Chamomile", menu_tea_chamomile_desc: "Calming herbal tea", menu_tea_mint: "Mint Tea", menu_tea_mint_desc: "Fresh garden mint leaves", menu_chai_desc: "Spiced aromatic tea with milk",
+            menu_cheesecake: "Cheesecake", menu_cheesecake_desc: "Classic, creamy with sweet raspberry coulis", menu_brownie_desc: "Fudgy double chocolate cake served warm", menu_croissant_desc: "Buttery, flaky, fresh out of the baker oven",
+            menu_avocado: "Avocado Toast", menu_avocado_desc: "Artisan sourdough bread, poached egg, rich avocado", menu_oatmeal: "Oatmeal Bowl", menu_oatmeal_desc: "Creamy almond milk base, fresh fruits, organic honey", menu_eggs: "Scrambled Eggs", menu_eggs_desc: "3 farm fresh eggs, premium butter, chives, toast",
+            res_title: "Reserve a special table", res_desc: "Plan a meeting with friends or a relaxing evening. Use our quick online reservation via Booksy app or call us directly.", res_or_call: "or call:",
+            gallery_title: "Atmosphere in focus", reviews_title: "What our guests say",
+            review_1: '"Best flat white in Krakow! Lovely atmosphere for laptop work or friendly catchups. Raspberry cheesecake is purely divine."',
+            review_2: '"Gorgeous, warm interiors and spectacular single origin pour-overs. The breakfast avocado toasts are crispy perfection."',
+            review_3: '"An amazing hidden gem in the city center. Highly aesthetic plating, exceptional skills and polite manners of the barista."',
+            contact_address_label: "Address", contact_hours_label: "Opening Hours", contact_hours_week: "Mon - Fri: 7:30 AM - 9:00 PM", contact_hours_weekend: "Sat - Sun: 9:00 AM - 10:00 PM", contact_phone_label: "Text or Call Us",
+            footer_tagline: "A venue where exquisite taste matches tranquility in Old Krakow.", footer_links_title: "Navigation", footer_legal_title: "Legal"
+        },
+        uk: {
+            nav_menu: "Меню", nav_about: "Про нас", nav_reservation: "Резервація", nav_contact: "Контакти",
+            hero_tagline: "Місце, де кава смакує інакше", hero_btn_reserve: "Забронювати столик", hero_btn_menu: "Дивитись меню",
+            about_title: "Наша історія", about_desc: "Kawa & Klimat — це сімейна кав'ярня, заснована у 2018 році з палкої любові до добірних кавових зерен та гостинності. Ми віримо, що хороша кава об'єднує людей, тому створили простір, де кожен відчуває себе затишно, як удома.",
+            stat_opened: "Рік відкриття", stat_coffee_types: "Сортів кави", stat_google_rate: "Оцінка Google",
+            tab_coffee: "Кава", tab_tea: "Чай", tab_desserts: "Десерти", tab_breakfast: "Сніданки",
+            menu_espresso_desc: "Інтенсивна та ароматна класика", menu_cappuccino_desc: "Ніжна молочна пінка та виражений смак", menu_latte_desc: "Оксамитова кава з великою кількістю молока", menu_flat_desc: "Австралійська класика, міцна молочна кава", menu_americano_desc: "М'яка та легка класична кава",
+            menu_tea_green: "Зелений", menu_tea_green_desc: "Класичний, освіжаючий та тонізуючий", menu_tea_black: "Чорний", menu_tea_black_desc: "Міцний та насичений настій", menu_tea_chamomile: "Ромашковий", menu_tea_chamomile_desc: "Заспокійливий трав'яний збір", menu_tea_mint: "М'ятний", menu_tea_mint_desc: "Свіжа домашня м'ята з саду", menu_chai_desc: "Пряний традиційний чай з молоком",
+            menu_cheesecake: "Чізкейк", menu_cheesecake_desc: "Класичний, вершковий, з фірмовим малиновим кюлі", menu_brownie_desc: "Насичений шоколадний брауні, подається теплим", menu_croissant_desc: "Вершковий круасан, пухкий та хрусткий",
+            menu_avocado: "Тост з авокадо", menu_avocado_desc: "Крафтовий хліб, яйце пашот, свіже стигле авокадо", menu_oatmeal: "Вівсянка", menu_oatmeal_desc: "На мигдалевому молоці зі свіжими ягодами та медом", menu_eggs: "Яєчня", menu_eggs_desc: "З 3 фермерських яєць, вершкове масло, зелена цибуля, грінки",
+            res_title: "Забронюйте особливий столик", res_desc: "Заплануйте зустріч з близькими або розслаблений вечір самостійно. Скористайтеся швидким онлайн-записом через Booksy або зателефонуйте.", res_or_call: "або зателефонуйте:",
+            gallery_title: "Атмосфера в об'єктиві", reviews_title: "Що говорять гості",
+            review_1: '"Найкращий флет вайт у Кракові! Неймовірний інтер\'єр для роботи, а бариста завжди щиро посміхаються. Малиновий чізкейк — це шедевр."',
+            review_2: '"Дуже затишне місце з фантастичною кавою класу спешелті. Тости з авокадо на сніданок ідеально хрусткі. Обов\'язково повернуся!"',
+            review_3: '"Прекрасна прихована перлина в самому центрі міста. Естетична подача десертів, найвища культура сервісу та професіоналізм бариста."',
+            contact_address_label: "Адреса", contact_hours_label: "Графік роботи", contact_hours_week: "Пн - Пт: 7:30 - 21:00", contact_hours_weekend: "Сб - Нд: 9:00 - 22:00", contact_phone_label: "Напишіть або зателефонуйте",
+            footer_tagline: "Місце, де вишуканий смак зустрічається із затишком у серці Кракова.", footer_links_title: "Навігація", footer_legal_title: "Юридична інформація"
+        }
+    };
 
-        // --- МУЛЬТИЯЗЫЧНОСТЬ (i18n) ---
-        const translations = {
-            pl: {
-                nav_menu: "Menu", nav_about: "O nas", nav_reservation: "Rezerwacja", nav_contact: "Kontakt",
-                hero_tagline: "Miejsce, gdzie kawa smakuje inaczej",
-                hero_btn_reserve: "Zarezerwuj stolik", hero_btn_menu: "Zobacz menu",
-                about_title: "Nasza historia", reservation_title: "Zarezerwuj stolik online",
-                gallery_title: "Galeria", reviews_title: "Opinie gości", contact_title: "Znajdź nas"
-            },
-            en: {
-                nav_menu: "Menu", nav_about: "About", nav_reservation: "Reservation", nav_contact: "Contact",
-                hero_tagline: "A place where coffee tastes different",
-                hero_btn_reserve: "Book a table", hero_btn_menu: "See menu",
-                about_title: "Our story", reservation_title: "Book a table online",
-                gallery_title: "Gallery", reviews_title: "Guest reviews", contact_title: "Find us"
-            },
-            uk: {
-                nav_menu: "Меню", nav_about: "Про нас", nav_reservation: "Бронювання", nav_contact: "Контакт",
-                hero_tagline: "Місце, де кава смакує інакше",
-                hero_btn_reserve: "Забронювати столик", hero_btn_menu: "Переглянути меню",
-                about_title: "Наша історія", reservation_title: "Забронювати столик онлайн",
-                gallery_title: "Галерея", reviews_title: "Відгуки гостей", contact_title: "Знайти нас"
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerText = translations[lang][key];
             }
-        };
-
-        const setLang = (lang) => {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if(translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-            });
-            localStorage.setItem('kawa_lang', lang);
-            document.documentElement.lang = lang;
-        };
-
-        const savedLang = localStorage.getItem('kawa_lang') || 'pl';
-        setLang(savedLang);
-
+        });
         document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => setLang(e.target.getAttribute('data-lang')));
+            if(btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+            else btn.classList.remove('active');
         });
+    }
 
-        // --- КАСТОМНЫЙ МЕДЛЕННЫЙ СКРОЛЛ (Cubic Easing, 1.5 сек) ---
-        const slowScrollTo = (targetSelector, duration = 1500) => {
-            const target = document.querySelector(targetSelector);
-            if (!target) return;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
 
-            const navbarOffset = 80;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            let startTime = null;
+    // 2. NAVBAR STICKY SCROLL EFFECT
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+    });
 
-            const easeInOutCubic = (t, b, c, d) => {
-                t /= d / 2;
-                if (t < 1) return c / 2 * t * t * t + b;
-                t -= 2;
-                return c / 2 * (t * t * t + 2) + b;
-            };
+    // 3. MOBILE MENU TOGGLE
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-            const animation = (currentTime) => {
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-                window.scrollTo(0, run);
-                if (timeElapsed < duration) requestAnimationFrame(animation);
-            };
+    function toggleMobileMenu() {
+        const isOpen = hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen);
+    }
+    hamburger.addEventListener('click', toggleMobileMenu);
+    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', toggleMobileMenu));
 
-            requestAnimationFrame(animation);
-        };
-
-        // Вешаем медленный скролл на все ссылки с классом .slow-scroll-link
-        document.querySelectorAll('.slow-scroll-link').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetAttr = this.getAttribute('href') || this.getAttribute('data-target');
-                if(targetAttr && targetAttr.startsWith('#')) {
-                    e.preventDefault();
-                    // Закрываем мобильное меню если оно открыто
-                    hamburger.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    slowScrollTo(targetAttr);
+    // 4. CUSTOM SLOW/SMOOTH SCROLL HANDLING
+    document.querySelectorAll('.slow-scroll-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetAttr = this.getAttribute('href') || this.getAttribute('data-target');
+            if (targetAttr && targetAttr.startsWith('#')) {
+                const targetElement = document.querySelector(targetAttr);
+                if (targetElement) {
+                    const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                 }
-            });
-        });
-
-        // --- NAVBAR STICKY EFFECT ---
-        const navbar = document.getElementById('navbar');
-        const hamburger = document.querySelector('.hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
             }
         });
+    });
 
-        hamburger.addEventListener('click', () => {
-            const isAct = hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', isAct);
+    // 5. MENU TABS FILTERING
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const menuGrids = document.querySelectorAll('.menu-grid');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            menuGrids.forEach(g => g.classList.remove('active'));
+
+            btn.classList.add('active');
+            const activeTabGrid = document.getElementById(`tab-${btn.dataset.tab}`);
+            if(activeTabGrid) activeTabGrid.classList.add('active');
         });
+    });
 
-        // --- SCROLL ANIMATIONS (Intersection Observer) ---
-        const revealObs = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    if(entry.target.id === 'o-nas' && !entry.target.dataset.counted) {
-                        startCounters();
-                        entry.target.dataset.counted = true;
-                    }
-                    obs.unobserve(entry.target);
+    // 6. SCROLL REVEAL & STATS COUNTER ANIMS (IntersectionObserver)
+    const revealElements = document.querySelectorAll('.reveal');
+    let statsTriggered = false;
+
+    function animateStats() {
+        if (statsTriggered) return;
+        const stats = document.querySelectorAll('.stat-num');
+        stats.forEach(stat => {
+            const target = parseFloat(stat.getAttribute('data-target'));
+            const isDecimal = stat.getAttribute('data-decimal') === 'true';
+            let current = 0;
+            const duration = 2000;
+            const stepTime = 30;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    stat.innerText = isDecimal ? target.toFixed(1) : Math.round(target);
+                    clearInterval(timer);
+                } else {
+                    stat.innerText = isDecimal ? current.toFixed(1) : Math.round(current);
                 }
-            });
-        }, { threshold: 0.15 });
+            }, stepTime);
+        });
+        statsTriggered = true;
+    }
 
-        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
 
-        const staggerObs = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    obs.unobserve(entry.target);
+                // Проверяем, если открылась секция с блоком статистики
+                if(entry.target.id === 'o-nas' || entry.target.querySelector('#stats-container')) {
+                    animateStats();
                 }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.stagger-item').forEach(el => staggerObs.observe(el));
-
-        // --- СЧЕТЧИКИ СТАТИСТИКИ ---
-        const startCounters = () => {
-            document.querySelectorAll('.stat-num').forEach(el => {
-                const target = parseFloat(el.getAttribute('data-target'));
-                const isDecimal = el.getAttribute('data-decimal') === 'true';
-                const duration = 2200;
-                const steps = 60;
-                const stepValue = target / steps;
-                let current = 0;
-
-                const interval = setInterval(() => {
-                    current += stepValue;
-                    if(current >= target) {
-                        current = target;
-                        clearInterval(interval);
-                    }
-                    el.textContent = isDecimal ? current.toFixed(1) : Math.floor(current) + (target === 40 ? '+' : '');
-                }, duration / steps);
-            });
-        };
-
-        // --- ТАБЫ В МЕНЮ ---
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabPanes = document.querySelectorAll('.menu-grid');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetId = `tab-${btn.dataset.tab}`;
-
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                tabPanes.forEach(pane => {
-                    pane.classList.remove('active');
-                    if(pane.id === targetId) {
-                        pane.classList.add('active');
-                        pane.style.opacity = 0;
-                        setTimeout(() => pane.style.opacity = 1, 50);
-                    }
-                });
-            });
+            }
         });
+    }, { threshold: 0.15 });
 
-        // --- СЛАЙДЕР ОТЗЫВОВ С ТАЧ-СОБЫТИЯМИ НА МОБИЛЬНЫХ ---
-        const slider = document.querySelector('.reviews-slider');
-        let isDown = false, startX, scrollLeft;
+    revealElements.forEach(el => observer.observe(el));
 
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft;
-        });
-        slider.addEventListener('mouseleave', () => isDown = false);
-        slider.addEventListener('mouseup', () => isDown = false);
-        slider.addEventListener('mousemove', (e) => {
-            if(!isDown) return; e.preventDefault();
-            const x = e.pageX - slider.offsetLeft; const walk = (x - startX) * 1.5;
-            slider.scrollLeft = scrollLeft - walk;
-        });
+    // 7. LIGHTBOX GALLERY SYSTEM
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let currentImgIdx = 0;
 
-        // --- LIGHTBOX (ГАЛЕРЕЯ) ---
-        const lightbox = document.getElementById('lightbox');
-        const lbImg = lightbox.querySelector('img');
-        const galleryItems = document.querySelectorAll('.gallery-item img');
-        let currentImgIndex = 0;
+    const imgSources = Array.from(galleryItems).map(img => img.src.replace('?w=600', '?w=1200'));
 
-        const openLightbox = (index) => {
-            currentImgIndex = index;
-            lbImg.src = galleryItems[index].src.replace('?w=600', '');
+    galleryItems.forEach((img, idx) => {
+        img.parentNode.addEventListener('click', () => {
+            currentImgIdx = idx;
+            lightboxImg.src = imgSources[currentImgIdx];
             lightbox.classList.add('active');
-        };
-
-        const closeLightbox = () => { lightbox.classList.remove('active'); lbImg.src = ''; };
-
-        const changeImage = (dir) => {
-            currentImgIndex += dir;
-            if(currentImgIndex < 0) currentImgIndex = galleryItems.length - 1;
-            if(currentImgIndex >= galleryItems.length) currentImgIndex = 0;
-            lbImg.src = galleryItems[currentImgIndex].src.replace('?w=600', '');
-        };
-
-        galleryItems.forEach((img, idx) => {
-            img.parentElement.setAttribute('tabindex', '0');
-            img.parentElement.addEventListener('click', () => openLightbox(idx));
-            img.parentElement.addEventListener('keydown', (e) => { if(e.key === 'Enter') openLightbox(idx); });
+            lightbox.setAttribute('aria-hidden', 'false');
         });
+    });
 
-        document.querySelector('.lb-close').addEventListener('click', closeLightbox);
-        document.querySelector('.lb-prev').addEventListener('click', () => changeImage(-1));
-        document.querySelector('.lb-next').addEventListener('click', () => changeImage(1));
-        lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+    }
 
-        document.addEventListener('keydown', (e) => {
-            if(!lightbox.classList.contains('active')) return;
-            if(e.key === 'Escape') closeLightbox();
-            if(e.key === 'ArrowLeft') changeImage(-1);
-            if(e.key === 'ArrowRight') changeImage(1);
-        });
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+    document.getElementById('lb-next').addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImgIdx = (currentImgIdx + 1) % imgSources.length;
+        lightboxImg.src = imgSources[currentImgIdx];
+    });
+
+    document.getElementById('lb-prev').addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImgIdx = (currentImgIdx - 1 + imgSources.length) % imgSources.length;
+        lightboxImg.src = imgSources[currentImgIdx];
+    });
+
+    // Навигация с клавиатуры для удобства (Esc, Стрелки)
+    window.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+        if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
     });
 </script>
 </body>
