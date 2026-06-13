@@ -8,6 +8,13 @@
     <meta property="og:title" content="Kawa & Klimat">
     <meta property="og:description" content="Miejsce, gdzie kawa smakuje inaczej. Zapraszamy na ul. Floriańską 14, Kraków.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1200">
+    <meta name="description" content="Szukasz pysznej kawy na Starym Mieście? Odwiedź Kawa & Klimat przy ul. Floriańskiej 14. Serwujemy świetną kawę, domowe desery i pyszne śniadania. Sprawdź menu!">
+    <meta name="keywords" content="kawiarnia kraków, kawa stare miasto, kawiarnia floriańska, pyszna kawa kraków, śniadanie kraków centrum, desery">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kawa & Klimat | Kawiarnia w Centrum Krakowa">
+    <meta property="og:description" content="Wyjątkowa atmosfera, aromatyczna kawa и domowe desery na ul. Floriańskiej. Wejdź и zobacz nasze menu!">
+    <meta property="og:image" content="https://kawaiiklimat.pl/images/og-share.jpg"> <meta property="og:url" content="https://kawaiiklimat.pl">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -195,7 +202,7 @@
         .menu-grid.active { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; }
         @media (min-width: 768px) { .menu-grid.active { display: grid; grid-template-columns: repeat(2, 1fr); overflow-x: visible; } }
         @media (min-width: 1024px) { .menu-grid.active { grid-template-columns: repeat(3, 1fr); } }
-        
+
 
         .menu-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; min-width: 290px; scroll-snap-align: start; border: 1px solid rgba(0,0,0,0.02); }
         .menu-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(22,21,19,0.08); }
@@ -651,6 +658,55 @@
             *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
         }
     </style>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "CafeOrCoffeeShop",
+            "name": "Kawa & Klimat",
+            "image": "https://01cheese.github.io/projects10hl/web_projects/images/hero-cafe.jpg",
+            "@id": "https://01cheese.github.io/projects10hl/web_projects/kawa_and_klimat.html",
+            "url": "https://01cheese.github.io/projects10hl/web_projects/kawa_and_klimat.html",
+            "telephone": "+48123456789",
+            "priceRange": "$$",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ul. Floriańska 14",
+                "addressLocality": "Kraków",
+                "postalCode": "31-021",
+                "addressCountry": "PL"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 50.0634,
+                "longitude": 19.9407
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                    ],
+                    "opens": "07:30",
+                    "closes": "21:00"
+                },
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Saturday",
+                        "Sunday"
+                    ],
+                    "opens": "09:00",
+                    "closes": "22:00"
+                }
+            ],
+            "menu": "https://01cheese.github.io/projects10hl/web_projects/kawa_and_klimat.html#menu"
+        }
+    </script>
 </head>
 <body>
 
@@ -1296,7 +1352,6 @@
         lightboxImg.src = imgSources[currentImgIdx];
     });
 
-    // Навигация с клавиатуры для удобства (Esc, Стрелки)
     window.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('active')) return;
         if (e.key === 'Escape') closeLightbox();
