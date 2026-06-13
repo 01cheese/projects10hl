@@ -2,98 +2,10 @@
 const projects = [
     {
         id: 1,
-        title: "Awwwards",
-        description: "The platform showcasing the best websites from leading designers and developers worldwide.",
-        url: "https://vzbb.site",
-        tags: ["design"],
-        image: null
-    },
-    {
-        id: 2,
-        title: "Figma",
-        description: "Powerful interface design tool with real-time collaboration built into the browser.",
-        url: "https://www.figma.com",
-        tags: ["design", "tool"],
-        image: null
-    },
-    {
-        id: 3,
-        title: "Vercel",
-        description: "Frontend deployment platform with instant preview branches and edge functions.",
-        url: "https://vercel.com",
-        tags: ["dev", "tool"],
-        image: null
-    },
-    {
-        id: 4,
-        title: "GitHub",
-        description: "The world's largest platform for code hosting, collaboration, and open source.",
-        url: "https://github.com",
-        tags: ["dev", "tool"],
-        image: null
-    },
-    {
-        id: 5,
-        title: "Anthropic",
-        description: "AI safety company and creator of Claude — one of the most advanced AI assistants.",
-        url: "https://anthropic.com",
-        tags: ["ai"],
-        image: null
-    },
-    {
-        id: 6,
-        title: "Hugging Face",
-        description: "Hub for ML models, datasets, and demo spaces from the AI developer community.",
-        url: "https://huggingface.co",
-        tags: ["ai", "dev"],
-        image: null
-    },
-    {
-        id: 7,
-        title: "Dribbble",
-        description: "Platform for designers: shots, animations, portfolios and creative inspiration.",
-        url: "https://dribbble.com",
-        tags: ["design", "portfolio"],
-        image: null
-    },
-    {
-        id: 8,
-        title: "Hacker News",
-        description: "Tech news aggregator and discussion forum from Y Combinator community.",
-        url: "https://news.ycombinator.com",
-        tags: ["news", "dev"],
-        image: null
-    },
-    {
-        id: 9,
-        title: "Three.js",
-        description: "Popular JavaScript library for creating 3D graphics directly in the browser.",
-        url: "https://threejs.org",
-        tags: ["3d", "dev"],
-        image: null
-    },
-    {
-        id: 10,
-        title: "Spline",
-        description: "3D design tool for the web — create interactive scenes without code.",
-        url: "https://spline.design",
-        tags: ["3d", "design"],
-        image: null
-    },
-    {
-        id: 11,
-        title: "CodePen",
-        description: "Social development environment for front-end: build and share code snippets.",
-        url: "https://codepen.io",
-        tags: ["dev", "tool"],
-        image: null
-    },
-    {
-        id: 12,
-        title: "Behance",
-        description: "Adobe platform for showcasing and discovering creative work from designers.",
-        url: "https://www.behance.net",
-        tags: ["design", "portfolio"],
+        title: "Kawa & Klimat",
+        description: "Coffee shop landing page",
+        url: "https://01cheese.github.io/projects10hl/web_projects/kawa_and_klimat.html",
+        tags: ["landing"],
         image: null
     }
 ];
