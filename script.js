@@ -15,6 +15,14 @@ const projects = [
         url: "https://01cheese.github.io/projects10hl/web_projects/ticket_card.html",
         tags: ["animation"],
         image: null
+    },
+    {
+        id: 3,
+        title: "Hamster Animation",
+        description: "Animation hamster",
+        url: "https://01cheese.github.io/projects10hl/web_projects/hamster_animation.html",
+        tags: ["animation"],
+        image: null
     }
 ];
 
