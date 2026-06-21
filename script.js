@@ -7,6 +7,14 @@ const projects = [
         url: "https://01cheese.github.io/projects10hl/web_projects/kawa_and_klimat.html",
         tags: ["landing"],
         image: null
+    },
+{
+        id: 2,
+        title: "Ticket Card",
+        description: "Animation ticket",
+        url: "https://01cheese.github.io/projects10hl/web_projects/ticket_card.html",
+        tags: ["animation"],
+        image: null
     }
 ];
 
