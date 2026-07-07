@@ -7,7 +7,7 @@
     <meta name="description" content="Kawa & Klimat - Miejsce, gdzie kawa smakuje inaczej. Rodzinna kawiarnia w centrum Krakowa. Zarezerwuj stolik online.">
     <meta property="og:title" content="Kawa & Klimat">
     <meta property="og:description" content="Miejsce, gdzie kawa smakuje inaczej. Zapraszamy na ul. Floriańską 14, Kraków.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1200">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1200&q=60&auto=format">
     <meta name="description" content="Szukasz pysznej kawy na Starym Mieście? Odwiedź Kawa & Klimat przy ul. Floriańskiej 14. Serwujemy świetną kawę, domowe desery i pyszne śniadania. Sprawdź menu!">
     <meta name="keywords" content="kawiarnia kraków, kawa stare miasto, kawiarnia floriańska, pyszna kawa kraków, śniadanie kraków centrum, desery">
 
@@ -19,6 +19,11 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preload" as="image" fetchpriority="high"
+      imagesrcset="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=800&q=60&auto=format&fit=crop 800w,
+                    https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1600&q=70&auto=format&fit=crop 1600w"
+      imagesizes="100vw">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
@@ -769,8 +774,13 @@
 </div>
 
 <header id="home" class="hero">
-    <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1600" alt="Wnętrze kawiarni" class="hero-img">
-    <div class="hero-overlay"></div>
+<img
+  src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1600&q=70&auto=format&fit=crop"
+  srcset="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=800&q=60&auto=format&fit=crop 800w,
+          https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1600&q=70&auto=format&fit=crop 1600w"
+  sizes="100vw"
+  alt="Wnętrze kawiarni" class="hero-img" fetchpriority="high" decoding="async">
+  <div class="hero-overlay"></div>
     <div class="hero-content">
         <h1 class="anim-on-load">Kawa & Klimat</h1>
         <p class="anim-on-load" data-i18n="hero_tagline">Miejsce, gdzie kawa smakuje inaczej</p>
@@ -808,7 +818,7 @@
                 </div>
             </div>
             <div>
-                <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=800" alt="Proces parzenia kawy" class="about-img" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=800&q=60&auto=format" alt="Proces parzenia kawy" class="about-img" loading="lazy">
             </div>
         </div>
     </section>
@@ -825,21 +835,21 @@
 
         <div class="menu-grid active" id="tab-kawa">
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400" alt="Espresso" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=60&auto=format" alt="Espresso" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Espresso</h3><span class="menu-price">12 zł</span></div>
                     <p class="body-text" data-i18n="menu_espresso_desc">Intensywne i aromatyczne</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400" alt="Cappuccino" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=60&auto=format" alt="Cappuccino" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Cappuccino</h3><span class="menu-price">16 zł</span></div>
                     <p class="body-text" data-i18n="menu_cappuccino_desc">Kremowa pianka z delikatnym mlekiem</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=400" alt="Latte" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=400&q=60&auto=format" alt="Latte" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Latte</h3><span class="menu-price">17 zł</span></div>
                     <p class="body-text" data-i18n="menu_latte_desc">Aksamitna kawa z mlekiem</p>
@@ -853,7 +863,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=400" alt="Americano" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=400&q=60&auto=format" alt="Americano" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Americano</h3><span class="menu-price">14 zł</span></div>
                     <p class="body-text" data-i18n="menu_americano_desc">Łagodna i długa</p>
@@ -900,7 +910,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400" alt="Chai Latte" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400&q=60&auto=format" alt="Chai Latte" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Chai Latte</h3><span class="menu-price">16 zł</span></div>
                     <p class="body-text" data-i18n="menu_chai_desc">Korzenna herbata z mlekiem</p>
@@ -910,21 +920,21 @@
 
         <div class="menu-grid" id="tab-desery">
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400" alt="Sernik" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=60&auto=format" alt="Sernik" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3 data-i18n="menu_cheesecake">Sernik</h3><span class="menu-price">18 zł</span></div>
                     <p class="body-text" data-i18n="menu_cheesecake_desc">Klasyczny, kremowy, z musem malinowym</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400" alt="Brownie" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=60&auto=format" alt="Brownie" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Brownie</h3><span class="menu-price">16 zł</span></div>
                     <p class="body-text" data-i18n="menu_brownie_desc">Mocno czekoladowe ciasto podawane na ciepło</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" alt="Croissant" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=60&auto=format" alt="Croissant" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3>Croissant</h3><span class="menu-price">10 zł</span></div>
                     <p class="body-text" data-i18n="menu_croissant_desc">Maślany, chrupiący, prosto z pieca</p>
@@ -934,7 +944,7 @@
 
         <div class="menu-grid" id="tab-sniadania">
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400" alt="Tosty z awokado" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&q=60&auto=format" alt="Tosty z awokado" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3 data-i18n="menu_avocado">Tosty z awokado</h3><span class="menu-price">26 zł</span></div>
                     <p class="body-text" data-i18n="menu_avocado_desc">Chleb rzemieślniczy, jajko pošowane, awokado</p>
@@ -948,7 +958,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400" alt="Jajecznica" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&q=60&auto=format" alt="Jajecznica" loading="lazy">
                 <div class="menu-card-body">
                     <div class="menu-card-header"><h3 data-i18n="menu_eggs">Jajecznica</h3><span class="menu-price">22 zł</span></div>
                     <p class="body-text" data-i18n="menu_eggs_desc">Z 3 jajek wiejskich, masło, szczypiorek, pieczywo</p>
@@ -970,12 +980,12 @@
         <h2 class="section-title">Atmosphere in focus</h2>
 
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600" alt="Detale kawiarni"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" alt="Coffee Art"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600" alt="Coffee Cups"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600" alt="Cheers"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600" alt="Barista place"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600" alt="Filter Coffee"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=60&auto=format" alt="Detale kawiarni" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=60&auto=format" alt="Coffee Art" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=60&auto=format" alt="Coffee Cups" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=60&auto=format" alt="Cheers" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=60&auto=format" alt="Barista place" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600&q=60&auto=format" alt="Filter Coffee" loading="lazy"></div>
         </div>
     </section>
 
