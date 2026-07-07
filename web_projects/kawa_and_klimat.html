@@ -1349,7 +1349,7 @@
     const lightboxImg = document.getElementById('lightbox-img');
     let currentImgIdx = 0;
 
-    const imgSources = Array.from(galleryItems).map(img => img.src.replace('?w=600', '?w=1200'));
+    const imgSources = Array.from(galleryItems).map(img => img.src.replace('?w=600&q=60&auto=format', '?w=1200&q=60&auto=format'));
 
     galleryItems.forEach((img, idx) => {
         img.parentNode.addEventListener('click', () => {
