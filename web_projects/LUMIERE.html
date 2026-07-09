@@ -41,47 +41,49 @@
 
   <!-- ===== SEO: Dane strukturalne Schema.org (LocalBusiness / HairSalon) ===== -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HairSalon",
-      "name": "LUMIÈRE Barbershop",
-      "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200",
-      "url": "https://www.lumiere-barbershop.pl/",
-      "telephone": "+48123456789",
-      "email": "info@lumiere.krk",
-      "priceRange": "40-150 PLN",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "ul. Szewska 12",
-        "addressLocality": "Kraków",
-        "postalCode": "31-009",
-        "addressCountry": "PL"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 50.0619,
-        "longitude": 19.9368
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "10:00",
-          "closes": "20:00"
-        }
-      ],
-      "sameAs": [
-        "https://instagram.com",
-        "https://booksy.com"
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "2"
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "LUMIÈRE Barbershop",
+    "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200",
+    "url": "https://www.lumiere-barbershop.pl/",
+    "telephone": "+48123456789",
+    "email": "info@lumiere.krk",
+    "priceRange": "40-150 PLN",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. Szewska 12",
+      "addressLocality": "Kraków",
+      "postalCode": "31-009",
+      "addressCountry": "PL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.0619,
+      "longitude": 19.9368
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "10:00",
+        "closes": "20:00"
       }
+    ],
+    "sameAs": [
+      "https://instagram.com",
+      "https://booksy.com"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "2"
     }
+  }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -177,6 +179,20 @@
       color: rgba(255, 255, 255, 0.6);
       font-weight: 400;
     }
+    .hero-content {
+      will-change: transform, opacity;
+    }
+
+    /* Мягкое растворение низа главного экрана в контент — создаёт плавный переход */
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 260px;
+      background: linear-gradient(to bottom, rgba(10,10,10,0), var(--bg-body) 90%);
+      pointer-events: none;
+    }
+
     .scroll-arrow {
       position: absolute;
       bottom: 50px;
@@ -185,13 +201,35 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--text-muted);
+      text-decoration: none;
       animation: bounce 2s infinite;
+      transition: color 0.3s ease;
+      z-index: 2;
     }
+    .scroll-arrow:hover { color: var(--accent); }
 
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-8px); }
       60% { transform: translateY(-4px); }
+    }
+
+    /* Плавное появление карточек при прокрутке */
+    .card.reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card.reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .card.reveal, .scroll-arrow, .hero-content {
+        opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important;
+      }
     }
 
     /* --- СЕТКА BENTO --- */
@@ -267,7 +305,7 @@
 
     /* Типографика */
     h2 { font-size: 2rem; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-    h3 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; color: var(--accent); }
+    .eyebrow { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; color: var(--accent); }
     .card p { font-size: 1rem; line-height: 1.8; font-weight: 400; color: var(--text-muted); }
 
     /* Список услуг */
@@ -288,7 +326,7 @@
 
     /* Отзывы */
     .reviews-header-flex { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; }
-    .reviews-header-flex h3 { margin-bottom: 0; }
+    .reviews-header-flex h2 { margin-bottom: 0; font-size: 1.3rem; }
     .google-link { font-size: 0.75rem; color: var(--accent); text-decoration: none; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px dashed var(--accent); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s;}
     .google-link:hover { color: #fff; border-color: #fff; }
 
@@ -427,20 +465,24 @@
 
 <div id="custom-cursor"></div>
 
+<main>
+
 <!-- HERO SECTION -->
-<div class="hero-section">
-  <h3 data-i18n="subtitle">Преміум Барбершоп</h3>
-  <h1>LUMIÈRE</h1>
-  <p data-i18n="desc">Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.</p>
-  <div class="scroll-arrow" data-i18n="scroll_down">Листайте вниз ↓</div>
+<div class="hero-section" id="hero">
+  <div class="hero-content">
+    <p class="eyebrow" data-i18n="subtitle">Преміум Барбершоп</p>
+    <h1>LUMIÈRE</h1>
+    <p data-i18n="desc">Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.</p>
+  </div>
+  <a href="#content" class="scroll-arrow target-hover" data-i18n="scroll_down">Листайте вниз ↓</a>
 </div>
 
 <!-- БЕНТО-СЕТКА -->
-<div class="bento-grid">
+<div class="bento-grid" id="content">
 
   <!-- О Нас -->
   <div class="card card-about">
-    <h3 data-i18n="about_title">Our Philosophy</h3>
+    <p class="eyebrow" data-i18n="about_title">Our Philosophy</p>
     <h2 data-i18n="about_heading">Grooming Culture</h2>
     <p data-i18n="about_p">We don't just cut hair; we analyze your face shape, hair structure, and personal style to create a timeless look.</p>
   </div>
@@ -448,12 +490,12 @@
   <!-- Фото 1 -->
   <div class="card card-img-1 no-padding target-hover" onclick="openModal(0)">
     <div class="img-wrapper">
-      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200" alt="Haircut">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200" alt="Strzyżenie męskie w barbershopie LUMIÈRE" width="1200" height="1200" loading="lazy" decoding="async">
     </div>
   </div>
 
   <!-- Кнопка Booksy -->
-  <a href="https://booksy.com" target="_blank" class="card card-booksy target-hover">
+  <a href="https://booksy.com" target="_blank" rel="noopener" class="card card-booksy target-hover">
     <h2 data-i18n="booksy_title">Book Online</h2>
     <p data-i18n="booksy_sub">Go to Booksy ➔</p>
   </a>
@@ -492,8 +534,8 @@
   <!-- Отзывы -->
   <div class="card card-reviews">
     <div class="reviews-header-flex">
-      <h3 data-i18n="reviews_title">Guest Reviews</h3>
-      <a href="https://google.com/maps" target="_blank" class="google-link target-hover" data-i18n="read_all">Read on Google ➔</a>
+      <h2 data-i18n="reviews_title">Guest Reviews</h2>
+      <a href="https://google.com/maps" target="_blank" rel="noopener" class="google-link target-hover" data-i18n="read_all">Read on Google ➔</a>
     </div>
     <div class="review-item">
       <div class="review-stars">★★★★★</div>
@@ -510,20 +552,20 @@
   <!-- Фото 2 -->
   <div class="card card-img-2 no-padding target-hover" onclick="openModal(1)">
     <div class="img-wrapper">
-      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1200" alt="Barbershop">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1200" alt="Wnętrze barbershopu LUMIÈRE w Krakowie" width="1200" height="1200" loading="lazy" decoding="async">
     </div>
   </div>
 
   <!-- Карта -->
   <div class="card card-map no-padding">
-    <iframe src="https://maps.google.com/maps?q=Szewska%2012,%20Krakow&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+    <iframe src="https://maps.google.com/maps?q=Szewska%2012,%20Krakow&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Mapa dojazdu — LUMIÈRE Barbershop, ul. Szewska 12, Kraków"></iframe>
   </div>
 
   <!-- Кнопка Звонка -->
   <a href="tel:+48123456789" class="card card-call target-hover">
     <h2 data-i18n="call_title">Call Us</h2>
     <p>+48 123 456 789</p>
-    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5; font-weight: 400; text-transform: uppercase; letter-spacing: 1px;" data-i18n="call_sub">Tap to make a phone call</p>
+    <p style="font-size: 0.8rem; margin-top: 10px; color: rgba(255,255,255,0.82); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;" data-i18n="call_sub">Tap to make a phone call</p>
   </a>
 
   <!-- ФУТЕР -->
@@ -545,12 +587,14 @@
     </div>
     <div style="text-align: right;">
       <p data-i18n="hours" style="color: var(--text-light); font-weight: 600; letter-spacing: 1px;">Mon-Sat: 10:00 - 20:00</p>
-      <p style="margin-top: 8px; letter-spacing: 1px; font-weight: 500;">IG: <a href="https://instagram.com" target="_blank" class="target-hover" style="color: inherit; text-decoration: none;">@lumiere_krk</a></p>
+      <p style="margin-top: 8px; letter-spacing: 1px; font-weight: 500;">IG: <a href="https://instagram.com" target="_blank" rel="noopener" class="target-hover" style="color: inherit; text-decoration: none;">@lumiere_krk</a></p>
       <p style="margin-top: 25px; font-size: 0.8rem; color: var(--text-muted);">© 2026 Lumière Studio</p>
     </div>
   </div>
 
 </div>
+
+</main>
 
 <!-- МОДАЛКА ГАЛЕРЕИ С ВЫРАВНЕННЫМИ SVG ИКОНКАМИ -->
 <div id="photoModal" class="modal">
@@ -638,6 +682,46 @@
   modal.addEventListener('click', function(e) {
     if (e.target === modal) closeModal();
   });
+
+  // --- ПЛАВНЫЙ ПЕРЕХОД ИЗ HERO В КОНТЕНТ (параллакс на скролле) ---
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heroContent = document.querySelector('.hero-content');
+  const heroSection = document.getElementById('hero');
+
+  if (heroContent && heroSection && !prefersReducedMotion) {
+    let ticking = false;
+    const updateParallax = () => {
+      const scrolled = window.scrollY;
+      const heroHeight = heroSection.offsetHeight;
+      const progress = Math.min(scrolled / (heroHeight * 0.9), 1);
+      heroContent.style.transform = `translateY(${scrolled * 0.35}px)`;
+      heroContent.style.opacity = String(1 - progress);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // --- ПЛАВНОЕ ПОЯВЛЕНИЕ КАРТОЧЕК ПРИ СКРОЛЛЕ ---
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const revealCards = document.querySelectorAll('.bento-grid .card');
+    revealCards.forEach(card => card.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    revealCards.forEach(card => revealObserver.observe(card));
+  }
 
   document.addEventListener('keydown', function(e) {
     if (modal.style.display === "block") {
