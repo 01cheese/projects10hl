@@ -1,9 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMIÈRE — Premium Barbershop</title>
+
+  <!-- ===== SEO: Основные метатеги ===== -->
+  <title>LUMIÈRE Barbershop Kraków — Premium Męska Fryzjer, Strzyżenie i Broda | ul. Szewska 12</title>
+  <meta name="description" content="LUMIÈRE — premium barbershop w centrum Krakowa (ul. Szewska 12). Strzyżenie męskie, modelowanie brody, camuflage siwizny. Rezerwacja online przez Booksy. Pon-Sob 10:00-20:00.">
+  <meta name="keywords" content="barbershop Kraków, fryzjer męski Kraków, strzyżenie męskie, golenie brody, barber Szewska, premium barbershop, fade Kraków, LUMIÈRE">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="LUMIÈRE Barbershop">
+  <link rel="canonical" href="https://www.lumiere-barbershop.pl/">
+
+  <!-- ===== SEO: Open Graph (Facebook/Instagram) ===== -->
+  <meta property="og:type" content="business.business">
+  <meta property="og:title" content="LUMIÈRE — Premium Barbershop w Krakowie">
+  <meta property="og:description" content="Klasyczny styl spotyka nowoczesne wykonanie. Strzyżenie, broda, stylizacja — w samym sercu Krakowa. Zarezerwuj wizytę online.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200">
+  <meta property="og:url" content="https://www.lumiere-barbershop.pl/">
+  <meta property="og:site_name" content="LUMIÈRE Barbershop">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
+
+  <!-- ===== SEO: Twitter Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LUMIÈRE — Premium Barbershop w Krakowie">
+  <meta name="twitter:description" content="Klasyczny styl spotyka nowoczesne wykonanie. Strzyżenie, broda, stylizacja — w samym sercu Krakowa.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200">
+
+  <!-- ===== SEO: Geo tags (lokalne SEO) ===== -->
+  <meta name="geo.region" content="PL-MA">
+  <meta name="geo.placename" content="Kraków">
+  <meta name="geo.position" content="50.0619;19.9368">
+  <meta name="ICBM" content="50.0619, 19.9368">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- ===== SEO: Favicon ===== -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23d4af37' font-family='Georgia,serif'%3EL%3C/text%3E%3C/svg%3E">
+
+  <!-- ===== SEO: Dane strukturalne Schema.org (LocalBusiness / HairSalon) ===== -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HairSalon",
+      "name": "LUMIÈRE Barbershop",
+      "image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200",
+      "url": "https://www.lumiere-barbershop.pl/",
+      "telephone": "+48123456789",
+      "email": "info@lumiere.krk",
+      "priceRange": "40-150 PLN",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Szewska 12",
+        "addressLocality": "Kraków",
+        "postalCode": "31-009",
+        "addressCountry": "PL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.0619,
+        "longitude": 19.9368
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "10:00",
+          "closes": "20:00"
+        }
+      ],
+      "sameAs": [
+        "https://instagram.com",
+        "https://booksy.com"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "2"
+      }
+    }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -283,46 +361,65 @@
 
     .modal-nav:hover { background: white; border-color: white; color: black; }
 
-    /* --- МОБИЛЬНАЯ АДАПТИВНОСТЬ "BENTO-CAROUSEL" --- */
+    /* --- ПЛАНШЕТЫ --- */
     @media (max-width: 1200px) {
       .hero-section h1 { font-size: 5rem; }
       .card { padding: 40px; }
     }
+
+    /* --- МОБИЛЬНАЯ АДАПТИВНОСТЬ: ОБЫЧНЫЙ ВЕРТИКАЛЬНЫЙ СКРОЛЛ (как на ПК) --- */
     @media (max-width: 768px) {
       body, .modal { cursor: default !important; }
       #custom-cursor { display: none !important; }
 
-      .hero-section { padding: 0 30px; }
-      .hero-section h1 { font-size: 3.5rem; letter-spacing: 4px; }
+      .hero-section { height: auto; min-height: 100svh; padding: 140px 24px 80px; }
+      .hero-section h1 { font-size: 3rem; letter-spacing: 3px; }
+      .hero-section h3 { font-size: 0.85rem; letter-spacing: 4px; margin-bottom: 18px; }
+      .hero-section p { font-size: 1rem; line-height: 1.7; }
+      .scroll-arrow { display: none; }
 
+      /* Одна колонка, естественный поток документа — сайт просто листается вниз */
       .bento-grid {
-        display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-        grid-auto-rows: unset; gap: 12px; background-color: transparent;
-        padding: 0 20px 40px 20px; width: 100vw; border: none;
-        -webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
+        grid-auto-rows: unset;
+        gap: 1px;
+        width: 100%;
       }
-      .bento-grid::-webkit-scrollbar { display: none; }
 
       .card {
-        scroll-snap-align: start; flex: 0 0 85vw;
-        height: 520px; min-height: 520px; padding: 40px 30px;
-        border-radius: 16px; border: 1px solid var(--border-color);
-        background-color: #121212 !important;
+        width: 100%;
+        min-height: 0;
+        height: auto;
+        padding: 48px 24px;
       }
-      .no-padding { overflow: hidden; }
+
+      /* Фиксированная высота нужна только для наглядных фото и карты */
+      .card-img-1, .card-img-2 { height: 320px; }
+      .card-map { height: 320px; }
+
+      .no-padding { padding: 0 !important; }
 
       .card-booksy, .card-about, .card-img-2, .card-map, .card-img-1, .card-services, .card-reviews, .card-footer, .card-call {
         grid-column: unset !important; grid-row: unset !important;
       }
       .card-booksy, .card-call { justify-content: center; }
-      .card-footer { flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 20px; }
+
+      .service-list { gap: 0; }
+      .service-item { padding: 16px 0; }
+
+      .card-footer { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 28px; padding: 48px 24px; }
       .card-footer div:nth-child(2) { text-align: left !important; }
 
-      .modal-content { max-width: 85%; }
-      .modal-nav { width: 60px; height: 60px; }
+      h2 { font-size: 1.6rem; }
+
+      /* Модалка галереи адаптирована под мобильный экран */
+      .modal-content { max-width: 92%; max-height: 70vh; }
+      .modal-nav { width: 52px; height: 52px; top: auto; bottom: 30px; transform: none; }
       .modal-nav svg { width: 18px; height: 18px; }
-      .nav-left { left: 15px; }
-      .nav-right { right: 15px; }
+      .nav-left { left: 50%; margin-left: -70px; }
+      .nav-right { right: 50%; margin-right: -70px; }
+      .close { top: 24px; right: 24px; }
     }
   </style>
 </head>
