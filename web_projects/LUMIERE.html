@@ -172,6 +172,7 @@
       margin-bottom: 35px;
       color: var(--text-light);
     }
+    .title-accent { color: var(--accent); }
     .hero-section p {
       font-size: 1.2rem;
       line-height: 1.8;
@@ -325,14 +326,15 @@
     .service-item .duration { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; margin-left: 12px; text-transform: uppercase; letter-spacing: 1px;}
 
     /* Отзывы */
-    .reviews-header-flex { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; }
-    .reviews-header-flex h2 { margin-bottom: 0; font-size: 1.3rem; }
-    .google-link { font-size: 0.75rem; color: var(--accent); text-decoration: none; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px dashed var(--accent); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s;}
-    .google-link:hover { color: #fff; border-color: #fff; }
 
     .review-item { margin-bottom: 35px; }
     .review-stars { color: var(--accent); margin-bottom: 8px; font-size: 0.8rem; letter-spacing: 2px; }
-    .review-text { font-style: italic; font-size: 1rem; margin-bottom: 10px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .review-text {
+      display: block; font-style: italic; font-size: 1rem; margin-bottom: 10px;
+      color: rgba(255,255,255,0.8); line-height: 1.6; text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .review-text:hover { color: var(--accent); }
     .review-author { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;}
 
     /* Переключатель языков */
@@ -470,11 +472,11 @@
 <!-- HERO SECTION -->
 <div class="hero-section" id="hero">
   <div class="hero-content">
-    <p class="eyebrow" data-i18n="subtitle">Преміум Барбершоп</p>
-    <h1>LUMIÈRE</h1>
-    <p data-i18n="desc">Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.</p>
+    <p class="eyebrow" data-i18n="subtitle">Premium Barbershop</p>
+    <h1><span class="title-accent">LUMI</span>ÈRE</h1>
+    <p data-i18n="desc">Classic style meets modern execution. Crafted by experts, tailored specifically for you in the heart of Kraków.</p>
   </div>
-  <a href="#content" class="scroll-arrow target-hover" data-i18n="scroll_down">Листайте вниз ↓</a>
+  <a href="#content" class="scroll-arrow target-hover" data-i18n="scroll_down">Scroll down ↓</a>
 </div>
 
 <!-- БЕНТО-СЕТКА -->
@@ -533,18 +535,15 @@
 
   <!-- Отзывы -->
   <div class="card card-reviews">
-    <div class="reviews-header-flex">
-      <h2 data-i18n="reviews_title">Guest Reviews</h2>
-      <a href="https://google.com/maps" target="_blank" rel="noopener" class="google-link target-hover" data-i18n="read_all">Read on Google ➔</a>
-    </div>
+    <h2 data-i18n="reviews_title">Guest Reviews</h2>
     <div class="review-item">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text" data-i18n="rev_1">"The best fade in Kraków. Precision, atmosphere, and great espresso."</div>
+      <a href="https://google.com/maps" target="_blank" rel="noopener" class="review-text target-hover" data-i18n="rev_1">"The best fade in Kraków. Precision, atmosphere, and great espresso."</a>
       <div class="review-author">Jan Kowalski</div>
     </div>
     <div class="review-item" style="margin-bottom: 0;">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text" data-i18n="rev_2">"Top tier masters. Form and beard outline last for weeks."</div>
+      <a href="https://google.com/maps" target="_blank" rel="noopener" class="review-text target-hover" data-i18n="rev_2">"Top tier masters. Form and beard outline last for weeks."</a>
       <div class="review-author">Alex M.</div>
     </div>
   </div>
@@ -571,7 +570,7 @@
   <!-- ФУТЕР -->
   <div class="card card-footer">
     <div>
-      <h2 style="margin-bottom: 5px; font-weight: 800; letter-spacing: 2px;">LUMIÈRE</h2>
+      <h2 style="margin-bottom: 5px; font-weight: 800; letter-spacing: 2px;"><span class="title-accent">LUMI</span>ÈRE</h2>
       <p style="color: var(--text-light)">ul. Szewska 12, Kraków</p>
 
       <ul class="footer-contacts-list">
@@ -631,9 +630,9 @@
 
   // --- МУЛЬТИЯЗЫЧНОСТЬ ---
   const translations = {
-    en: { subtitle: "Premium Barbershop", desc: "Classic style meets modern execution. Crafted by experts, tailored specifically for you in the heart of Kraków.", scroll_down: "Scroll down ↓", about_title: "Our Philosophy", about_heading: "Grooming Culture", about_p: "We don't just cut hair; we analyze your face shape, hair structure, and personal style to create a timeless look.", services_title: "Services & Pricing", reviews_title: "Guest Reviews", read_all: "Read on Google ➔", rev_1: '"The best fade in Kraków. Precision, atmosphere, and great espresso."', rev_2: '"Top tier masters. Form and beard outline last for weeks."', s_haircut: "Men's Haircut", s_beard: "Beard Trim & Modeling", s_combo: "Haircut + Beard Combo", s_camou: "Grey Camouflage", s_kids: "Kids Haircut", s_styling: "Premium Hair Styling", booksy_title: "Book Online", booksy_sub: "Go to Booksy ➔", call_title: "Call Us", call_sub: "Tap to make a phone call", hours: "Mon-Sat: 10:00 - 20:00" },
-    pl: { subtitle: "Premium Barbershop", desc: "Klasyczny styl spotyka się z nowoczesnym wykonaniem. Tworzone przez ekspertów, dopasowane do Ciebie w samym sercu Krakowa.", scroll_down: "Przewiń w dół ↓", about_title: "Nasza Filozofia", about_heading: "Kultura Groomingu", about_p: "Nie tylko strzyżemy; analizujemy kształt twarzy, strukturę włosów i Twój osobisty styl, aby stworzyć ponadczasowy wygląd.", services_title: "Usługi i Ceny", reviews_title: "Opinie Gości", read_all: "Opinie Google ➔", rev_1: '"Najlepszy fade w Krakowie. Precyzja, klimat i świetne espresso."', rev_2: '"Mistrzowie najwyższej klasy. Kształt i kontur brody trzymają się tygodniami."', s_haircut: "Strzyżenie męskie", s_beard: "Trymowanie i modelowanie brody", s_combo: "Strzyżenie + Broda", s_camou: "Odsiwianie", s_kids: "Strzyżenie dziecięce", s_styling: "Stylizacja włosów Premium", booksy_title: "Zarezerwuj", booksy_sub: "Przejdź do Booksy ➔", call_title: "Zadzwoń do nas", call_sub: "Kliknij, aby zadzwonić", hours: "Pon-Sob: 10:00 - 20:00" },
-    uk: { subtitle: "Преміум Барбершоп", desc: "Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.", scroll_down: "Листайте вниз ↓", about_title: "Наша Філософія", about_heading: "Культура Догляду", about_p: "Ми не просто стрижемо волосся; ми аналізуємо форму вашого обличчя, структуру волосся та індивідуальний стиль для створення ідеального образу.", services_title: "Послуги та Ціни", reviews_title: "Відгуки Гостей", read_all: "Всі відгуки в Google ➔", rev_1: '"Найкращий фейд у Кракові. Прецизійність, чудова атмосфера та смачне еспресо."', rev_2: '"Майстри вищого класу. Форма та контур бороди тримаються тижнями."', s_haircut: "Чоловіча стрижка", s_beard: "Стрижка та моделювання бороди", s_combo: "Стрижка + Борода", s_camou: "Камуфлювання сивини", s_kids: "Дитяча стрижка", s_styling: "Преміум Укладка", booksy_title: "Забронювати", booksy_sub: "Перейти на Booksy ➔", call_title: "Зателефонувати", call_sub: "Натисніть, щоб зателефонувати", hours: "Пн-Сб: 10:00 - 20:00" }
+    en: { subtitle: "Premium Barbershop", desc: "Classic style meets modern execution. Crafted by experts, tailored specifically for you in the heart of Kraków.", scroll_down: "Scroll down ↓", about_title: "Our Philosophy", about_heading: "Grooming Culture", about_p: "We don't just cut hair; we analyze your face shape, hair structure, and personal style to create a timeless look.", services_title: "Services & Pricing", reviews_title: "Guest Reviews", rev_1: '"The best fade in Kraków. Precision, atmosphere, and great espresso."', rev_2: '"Top tier masters. Form and beard outline last for weeks."', s_haircut: "Men's Haircut", s_beard: "Beard Trim & Modeling", s_combo: "Haircut + Beard Combo", s_camou: "Grey Camouflage", s_kids: "Kids Haircut", s_styling: "Premium Hair Styling", booksy_title: "Book Online", booksy_sub: "Go to Booksy ➔", call_title: "Call Us", call_sub: "Tap to make a phone call", hours: "Mon-Sat: 10:00 - 20:00" },
+    pl: { subtitle: "Premium Barbershop", desc: "Klasyczny styl spotyka się z nowoczesnym wykonaniem. Tworzone przez ekspertów, dopasowane do Ciebie w samym sercu Krakowa.", scroll_down: "Przewiń w dół ↓", about_title: "Nasza Filozofia", about_heading: "Kultura Groomingu", about_p: "Nie tylko strzyżemy; analizujemy kształt twarzy, strukturę włosów i Twój osobisty styl, aby stworzyć ponadczasowy wygląd.", services_title: "Usługi i Ceny", reviews_title: "Opinie Gości", rev_1: '"Najlepszy fade w Krakowie. Precyzja, klimat i świetne espresso."', rev_2: '"Mistrzowie najwyższej klasy. Kształt i kontur brody trzymają się tygodniami."', s_haircut: "Strzyżenie męskie", s_beard: "Trymowanie i modelowanie brody", s_combo: "Strzyżenie + Broda", s_camou: "Odsiwianie", s_kids: "Strzyżenie dziecięce", s_styling: "Stylizacja włosów Premium", booksy_title: "Zarezerwuj", booksy_sub: "Przejdź do Booksy ➔", call_title: "Zadzwoń do nas", call_sub: "Kliknij, aby zadzwonić", hours: "Pon-Sob: 10:00 - 20:00" },
+    uk: { subtitle: "Преміум Барбершоп", desc: "Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.", scroll_down: "Листайте вниз ↓", about_title: "Наша Філософія", about_heading: "Культура Догляду", about_p: "Ми не просто стрижемо волосся; ми аналізуємо форму вашого обличчя, структуру волосся та індивідуальний стиль для створення ідеального образу.", services_title: "Послуги та Ціни", reviews_title: "Відгуки Гостей", rev_1: '"Найкращий фейд у Кракові. Прецизійність, чудова атмосфера та смачне еспресо."', rev_2: '"Майстри вищого класу. Форма та контур бороди тримаються тижнями."', s_haircut: "Чоловіча стрижка", s_beard: "Стрижка та моделювання бороди", s_combo: "Стрижка + Борода", s_camou: "Камуфлювання сивини", s_kids: "Дитяча стрижка", s_styling: "Преміум Укладка", booksy_title: "Забронювати", booksy_sub: "Перейти на Booksy ➔", call_title: "Зателефонувати", call_sub: "Натисніть, щоб зателефонувати", hours: "Пн-Сб: 10:00 - 20:00" }
   };
 
   function changeLanguage(lang, btn) {
@@ -643,7 +642,18 @@
     });
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    document.documentElement.lang = lang;
   }
+
+  // Синхронизируем текст с активной кнопкой языка сразу при загрузке —
+  // гарантирует, что весь сайт отображается на одном языке с первого кадра.
+  document.addEventListener('DOMContentLoaded', () => {
+    const activeBtn = document.querySelector('.lang-btn.active') || document.querySelector('.lang-btn');
+    if (activeBtn) {
+      const lang = activeBtn.textContent.trim().toLowerCase();
+      if (translations[lang]) changeLanguage(lang, activeBtn);
+    }
+  });
 
   // --- ГАЛЕРЕЯ ---
   const serviceImages = [
