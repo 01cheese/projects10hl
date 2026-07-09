@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMIÈRE — Premium Barbershop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-body: #0a0a0a;
+      --bg-card: rgba(20, 20, 20, 0.6);
+      --bg-card-alt: rgba(28, 28, 28, 0.6);
+      --border-color: rgba(255, 255, 255, 0.06);
+
+      /* Палитра: Черный, Красный, Синий */
+      --color-red: #5c0f0f;
+      --color-red-hover: #7a1515;
+      --color-blue: #0f375c;
+      --color-blue-hover: #154c7a;
+
+      --text-light: #ffffff;
+      --text-muted: #8e8e93;
+      --accent: #d4af37;
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* --- ПРЕМИАЛЬНЫЙ ПЛАВНЫЙ СКРОЛЛ --- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-main);
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: none !important;
+    }
+
+    /* --- СТИЛЬНЫЙ МИНИМАЛИСТИЧНЫЙ КУРСОР --- */
+    #custom-cursor {
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-light);
+      border-radius: 50%;
+      position: fixed;
+      left: -100px;
+      top: -100px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 999999 !important; /* Максимальный приоритет над модалкой */
+      mix-blend-mode: difference;
+      transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1), height 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    #custom-cursor.hovered {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero-section {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10%;
+      position: relative;
+      background: radial-gradient(circle at 80% 20%, #1a1a1a 0%, var(--bg-body) 100%);
+    }
+    .hero-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: var(--accent);
+      margin-bottom: 25px;
+    }
+    .hero-section h1 {
+      font-size: 7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      line-height: 0.95;
+      margin-bottom: 35px;
+      color: var(--text-light);
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 650px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+    }
+    .scroll-arrow {
+      position: absolute;
+      bottom: 50px;
+      left: 10%;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    /* --- СЕТКА BENTO --- */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 480px;
+      gap: 1px;
+      background-color: var(--border-color);
+      width: 100vw;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+      position: relative;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card:nth-child(even):not(.bg-red):not(.no-padding):not(.card-call) {
+      background-color: var(--bg-card-alt);
+    }
+
+    .no-padding { padding: 0 !important; }
+
+    /* Кнопка записи Booksy (Красная) */
+    .card-booksy {
+      grid-column: span 2;
+      grid-row: span 1;
+      background: var(--color-red);
+      text-decoration: none;
+      align-items: center;
+      text-align: center;
+      transition: background 0.4s ease;
+    }
+    .card-booksy:hover {
+      background: var(--color-red-hover);
+    }
+    .card-booksy h2 { font-size: 2.5rem; letter-spacing: 4px; margin-bottom: 15px; color: #fff; text-transform: uppercase; }
+    .card-booksy p { color: var(--accent); font-weight: 700; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;}
+
+    /* Кнопка Позвонить (Синяя) */
+    .card-call {
+      grid-column: span 1;
+      grid-row: span 1;
+      background: var(--color-blue);
+      text-decoration: none;
+      align-items: center;
+      text-align: center;
+      transition: background 0.4s ease;
+    }
+    .card-call:hover {
+      background: var(--color-blue-hover);
+    }
+    .card-call h2 { font-size: 2.2rem; letter-spacing: 3px; margin-bottom: 15px; color: #fff; text-transform: uppercase; }
+    .card-call p { color: #fff; font-weight: 600; font-size: 1.3rem; letter-spacing: 1px;}
+
+    /* Распределение ячеек */
+    .card-about    { grid-column: span 1; grid-row: span 1; }
+    .card-img-1    { grid-column: span 1; grid-row: span 1; }
+    .card-services { grid-column: span 1; grid-row: span 2; }
+    .card-reviews  { grid-column: span 1; grid-row: span 1; }
+    .card-img-2    { grid-column: span 1; grid-row: span 1; }
+    .card-map      { grid-column: span 1; grid-row: span 1; }
+    .card-footer   { grid-column: span 2; grid-row: span 1; flex-direction: row; justify-content: space-between; align-items: center; background-color: #050505 !important;}
+
+    /* Типографика */
+    h2 { font-size: 2rem; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+    h3 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; color: var(--accent); }
+    .card p { font-size: 1rem; line-height: 1.8; font-weight: 400; color: var(--text-muted); }
+
+    /* Список услуг */
+    .service-list { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 10px;}
+    .service-item {
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .service-item:hover { color: var(--accent); padding-left: 8px; border-bottom-color: var(--accent); }
+    .service-item .price { font-weight: 700; color: var(--text-light); }
+    .service-item .duration { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; margin-left: 12px; text-transform: uppercase; letter-spacing: 1px;}
+
+    /* Отзывы */
+    .reviews-header-flex { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; }
+    .reviews-header-flex h3 { margin-bottom: 0; }
+    .google-link { font-size: 0.75rem; color: var(--accent); text-decoration: none; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px dashed var(--accent); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s;}
+    .google-link:hover { color: #fff; border-color: #fff; }
+
+    .review-item { margin-bottom: 35px; }
+    .review-stars { color: var(--accent); margin-bottom: 8px; font-size: 0.8rem; letter-spacing: 2px; }
+    .review-text { font-style: italic; font-size: 1rem; margin-bottom: 10px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .review-author { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;}
+
+    /* Переключатель языков */
+    .footer-lang { display: flex; gap: 20px; margin-top: 25px; }
+    .lang-btn {
+      background: transparent; border: none; color: var(--text-muted);
+      font-size: 0.8rem; font-weight: 700; transition: color 0.3s;
+      letter-spacing: 1px; padding-bottom: 4px;
+    }
+    .lang-btn.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+    .lang-btn:hover { color: var(--text-light); }
+
+    /* Изображения */
+    .img-wrapper { width: 100%; height: 100%; position: relative; overflow: hidden; }
+    .img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+    .img-wrapper:hover img { transform: scale(1.05); }
+
+    /* Контейнер карты */
+    .card-map { position: relative; width: 100%; height: 100%; min-height: 100%; overflow: hidden; }
+    iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%) invert(92%) contrast(120%); display: block; opacity: 0.8; transition: opacity 0.3s; }
+    .card-map:hover iframe { opacity: 1; }
+
+    /* Футер контакты */
+    .footer-contacts-list { margin-top: 15px; list-style: none; }
+    .footer-contacts-list li { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 8px; display: flex; gap: 10px; }
+    .footer-contacts-list a { color: var(--text-light); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .footer-contacts-list a:hover { color: var(--accent); }
+
+    /* --- МОДАЛЬНОЕ ОКНО И СТРЕЛКИ С АБСОЛЮТНЫМ ГЕОМЕТРИЧЕСКИМ ЦЕНТРИРОВАНИЕМ --- */
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      z-index: 99999; cursor: none !important;
+    }
+    .modal-content {
+      margin: auto; display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      max-width: 70%; max-height: 80vh; object-fit: contain; border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+
+    /* Кнопка закрытия на базе SVG */
+    .close {
+      position: absolute; top: 40px; right: 50px; color: #fff;
+      transition: color 0.3s, transform 0.2s; z-index: 100001;
+      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+    }
+    .close svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .close:hover { color: var(--accent); transform: scale(1.1); }
+
+    /* Идеальные круглые стрелки навигации через SVG флексбокс */
+    .modal-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 80px; height: 80px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 100001;
+      color: white;
+    }
+    .modal-nav svg {
+      width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .nav-left { left: 40px; }
+    .nav-right { right: 40px; }
+
+    .modal-nav:hover { background: white; border-color: white; color: black; }
+
+    /* --- МОБИЛЬНАЯ АДАПТИВНОСТЬ "BENTO-CAROUSEL" --- */
+    @media (max-width: 1200px) {
+      .hero-section h1 { font-size: 5rem; }
+      .card { padding: 40px; }
+    }
+    @media (max-width: 768px) {
+      body, .modal { cursor: default !important; }
+      #custom-cursor { display: none !important; }
+
+      .hero-section { padding: 0 30px; }
+      .hero-section h1 { font-size: 3.5rem; letter-spacing: 4px; }
+
+      .bento-grid {
+        display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+        grid-auto-rows: unset; gap: 12px; background-color: transparent;
+        padding: 0 20px 40px 20px; width: 100vw; border: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .bento-grid::-webkit-scrollbar { display: none; }
+
+      .card {
+        scroll-snap-align: start; flex: 0 0 85vw;
+        height: 520px; min-height: 520px; padding: 40px 30px;
+        border-radius: 16px; border: 1px solid var(--border-color);
+        background-color: #121212 !important;
+      }
+      .no-padding { overflow: hidden; }
+
+      .card-booksy, .card-about, .card-img-2, .card-map, .card-img-1, .card-services, .card-reviews, .card-footer, .card-call {
+        grid-column: unset !important; grid-row: unset !important;
+      }
+      .card-booksy, .card-call { justify-content: center; }
+      .card-footer { flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 20px; }
+      .card-footer div:nth-child(2) { text-align: left !important; }
+
+      .modal-content { max-width: 85%; }
+      .modal-nav { width: 60px; height: 60px; }
+      .modal-nav svg { width: 18px; height: 18px; }
+      .nav-left { left: 15px; }
+      .nav-right { right: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="custom-cursor"></div>
+
+<!-- HERO SECTION -->
+<div class="hero-section">
+  <h3 data-i18n="subtitle">Преміум Барбершоп</h3>
+  <h1>LUMIÈRE</h1>
+  <p data-i18n="desc">Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.</p>
+  <div class="scroll-arrow" data-i18n="scroll_down">Листайте вниз ↓</div>
+</div>
+
+<!-- БЕНТО-СЕТКА -->
+<div class="bento-grid">
+
+  <!-- О Нас -->
+  <div class="card card-about">
+    <h3 data-i18n="about_title">Our Philosophy</h3>
+    <h2 data-i18n="about_heading">Grooming Culture</h2>
+    <p data-i18n="about_p">We don't just cut hair; we analyze your face shape, hair structure, and personal style to create a timeless look.</p>
+  </div>
+
+  <!-- Фото 1 -->
+  <div class="card card-img-1 no-padding target-hover" onclick="openModal(0)">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200" alt="Haircut">
+    </div>
+  </div>
+
+  <!-- Кнопка Booksy -->
+  <a href="https://booksy.com" target="_blank" class="card card-booksy target-hover">
+    <h2 data-i18n="booksy_title">Book Online</h2>
+    <p data-i18n="booksy_sub">Go to Booksy ➔</p>
+  </a>
+
+  <!-- Прайс-лист -->
+  <div class="card card-services">
+    <h2 data-i18n="services_title">Services & Pricing</h2>
+    <div class="service-list">
+      <div class="service-item target-hover" onclick="openModal(0)">
+        <div><span data-i18n="s_haircut">Men's Haircut</span><span class="duration">45 min</span></div>
+        <div class="price">100 PLN</div>
+      </div>
+      <div class="service-item target-hover" onclick="openModal(1)">
+        <div><span data-i18n="s_beard">Beard Trim & Modeling</span><span class="duration">30 min</span></div>
+        <div class="price">70 PLN</div>
+      </div>
+      <div class="service-item target-hover" onclick="openModal(2)">
+        <div><span data-i18n="s_combo">Haircut + Beard Combo</span><span class="duration">75 min</span></div>
+        <div class="price">150 PLN</div>
+      </div>
+      <div class="service-item target-hover" onclick="openModal(3)">
+        <div><span data-i18n="s_camou">Grey Camouflage</span><span class="duration">30 min</span></div>
+        <div class="price">60 PLN</div>
+      </div>
+      <div class="service-item target-hover" onclick="openModal(4)">
+        <div><span data-i18n="s_kids">Kids Haircut</span><span class="duration">30 min</span></div>
+        <div class="price">60 PLN</div>
+      </div>
+      <div class="service-item target-hover" onclick="openModal(5)">
+        <div><span data-i18n="s_styling">Premium Hair Styling</span><span class="duration">20 min</span></div>
+        <div class="price">40 PLN</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Отзывы -->
+  <div class="card card-reviews">
+    <div class="reviews-header-flex">
+      <h3 data-i18n="reviews_title">Guest Reviews</h3>
+      <a href="https://google.com/maps" target="_blank" class="google-link target-hover" data-i18n="read_all">Read on Google ➔</a>
+    </div>
+    <div class="review-item">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text" data-i18n="rev_1">"The best fade in Kraków. Precision, atmosphere, and great espresso."</div>
+      <div class="review-author">Jan Kowalski</div>
+    </div>
+    <div class="review-item" style="margin-bottom: 0;">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text" data-i18n="rev_2">"Top tier masters. Form and beard outline last for weeks."</div>
+      <div class="review-author">Alex M.</div>
+    </div>
+  </div>
+
+  <!-- Фото 2 -->
+  <div class="card card-img-2 no-padding target-hover" onclick="openModal(1)">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1200" alt="Barbershop">
+    </div>
+  </div>
+
+  <!-- Карта -->
+  <div class="card card-map no-padding">
+    <iframe src="https://maps.google.com/maps?q=Szewska%2012,%20Krakow&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+  </div>
+
+  <!-- Кнопка Звонка -->
+  <a href="tel:+48123456789" class="card card-call target-hover">
+    <h2 data-i18n="call_title">Call Us</h2>
+    <p>+48 123 456 789</p>
+    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5; font-weight: 400; text-transform: uppercase; letter-spacing: 1px;" data-i18n="call_sub">Tap to make a phone call</p>
+  </a>
+
+  <!-- ФУТЕР -->
+  <div class="card card-footer">
+    <div>
+      <h2 style="margin-bottom: 5px; font-weight: 800; letter-spacing: 2px;">LUMIÈRE</h2>
+      <p style="color: var(--text-light)">ul. Szewska 12, Kraków</p>
+
+      <ul class="footer-contacts-list">
+        <li>Tel: <a href="tel:+48123456789" class="target-hover">+48 123 456 789</a></li>
+        <li>Email: <a href="mailto:info@lumiere.krk" class="target-hover">info@lumiere.krk</a></li>
+      </ul>
+
+      <div class="footer-lang">
+        <button class="lang-btn active target-hover" onclick="changeLanguage('en', this)">EN</button>
+        <button class="lang-btn target-hover" onclick="changeLanguage('pl', this)">PL</button>
+        <button class="lang-btn target-hover" onclick="changeLanguage('uk', this)">UK</button>
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <p data-i18n="hours" style="color: var(--text-light); font-weight: 600; letter-spacing: 1px;">Mon-Sat: 10:00 - 20:00</p>
+      <p style="margin-top: 8px; letter-spacing: 1px; font-weight: 500;">IG: <a href="https://instagram.com" target="_blank" class="target-hover" style="color: inherit; text-decoration: none;">@lumiere_krk</a></p>
+      <p style="margin-top: 25px; font-size: 0.8rem; color: var(--text-muted);">© 2026 Lumière Studio</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- МОДАЛКА ГАЛЕРЕИ С ВЫРАВНЕННЫМИ SVG ИКОНКАМИ -->
+<div id="photoModal" class="modal">
+  <div class="close target-hover" onclick="closeModal()">
+    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </div>
+  <div class="modal-nav nav-left target-hover" onclick="changeImg(-1)">
+    <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+  </div>
+  <img class="modal-content" id="expandedImg" alt="Expanded view">
+  <div class="modal-nav nav-right target-hover" onclick="changeImg(1)">
+    <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+</div>
+
+<script>
+  // --- АБСОЛЮТНО СТАБИЛЬНЫЙ КУРСОР ---
+  const cursor = document.getElementById('custom-cursor');
+
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  }, { passive: true });
+
+  // Глобальное делегирование наведения
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target;
+    if (target.classList.contains('target-hover') || target.closest('.target-hover') || target.closest('.modal-nav') || target.closest('.close')) {
+      cursor.classList.add('hovered');
+    } else {
+      cursor.classList.remove('hovered');
+    }
+  });
+
+  // --- МУЛЬТИЯЗЫЧНОСТЬ ---
+  const translations = {
+    en: { subtitle: "Premium Barbershop", desc: "Classic style meets modern execution. Crafted by experts, tailored specifically for you in the heart of Kraków.", scroll_down: "Scroll down ↓", about_title: "Our Philosophy", about_heading: "Grooming Culture", about_p: "We don't just cut hair; we analyze your face shape, hair structure, and personal style to create a timeless look.", services_title: "Services & Pricing", reviews_title: "Guest Reviews", read_all: "Read on Google ➔", rev_1: '"The best fade in Kraków. Precision, atmosphere, and great espresso."', rev_2: '"Top tier masters. Form and beard outline last for weeks."', s_haircut: "Men's Haircut", s_beard: "Beard Trim & Modeling", s_combo: "Haircut + Beard Combo", s_camou: "Grey Camouflage", s_kids: "Kids Haircut", s_styling: "Premium Hair Styling", booksy_title: "Book Online", booksy_sub: "Go to Booksy ➔", call_title: "Call Us", call_sub: "Tap to make a phone call", hours: "Mon-Sat: 10:00 - 20:00" },
+    pl: { subtitle: "Premium Barbershop", desc: "Klasyczny styl spotyka się z nowoczesnym wykonaniem. Tworzone przez ekspertów, dopasowane do Ciebie w samym sercu Krakowa.", scroll_down: "Przewiń w dół ↓", about_title: "Nasza Filozofia", about_heading: "Kultura Groomingu", about_p: "Nie tylko strzyżemy; analizujemy kształt twarzy, strukturę włosów i Twój osobisty styl, aby stworzyć ponadczasowy wygląd.", services_title: "Usługi i Ceny", reviews_title: "Opinie Gości", read_all: "Opinie Google ➔", rev_1: '"Najlepszy fade w Krakowie. Precyzja, klimat i świetne espresso."', rev_2: '"Mistrzowie najwyższej klasy. Kształt i kontur brody trzymają się tygodniami."', s_haircut: "Strzyżenie męskie", s_beard: "Trymowanie i modelowanie brody", s_combo: "Strzyżenie + Broda", s_camou: "Odsiwianie", s_kids: "Strzyżenie dziecięce", s_styling: "Stylizacja włosów Premium", booksy_title: "Zarezerwuj", booksy_sub: "Przejdź do Booksy ➔", call_title: "Zadzwoń do nas", call_sub: "Kliknij, aby zadzwonić", hours: "Pon-Sob: 10:00 - 20:00" },
+    uk: { subtitle: "Преміум Барбершоп", desc: "Класичний стиль зустрічається з сучасним виконанням. Створено експертами, спеціально для вас у самому серці Кракова.", scroll_down: "Листайте вниз ↓", about_title: "Наша Філософія", about_heading: "Культура Догляду", about_p: "Ми не просто стрижемо волосся; ми аналізуємо форму вашого обличчя, структуру волосся та індивідуальний стиль для створення ідеального образу.", services_title: "Послуги та Ціни", reviews_title: "Відгуки Гостей", read_all: "Всі відгуки в Google ➔", rev_1: '"Найкращий фейд у Кракові. Прецизійність, чудова атмосфера та смачне еспресо."', rev_2: '"Майстри вищого класу. Форма та контур бороди тримаються тижнями."', s_haircut: "Чоловіча стрижка", s_beard: "Стрижка та моделювання бороди", s_combo: "Стрижка + Борода", s_camou: "Камуфлювання сивини", s_kids: "Дитяча стрижка", s_styling: "Преміум Укладка", booksy_title: "Забронювати", booksy_sub: "Перейти на Booksy ➔", call_title: "Зателефонувати", call_sub: "Натисніть, щоб зателефонувати", hours: "Пн-Сб: 10:00 - 20:00" }
+  };
+
+  function changeLanguage(lang, btn) {
+    document.querySelectorAll('[data-i18n]').forEach(elem => {
+      const key = elem.getAttribute('data-i18n');
+      if (translations[lang][key]) elem.textContent = translations[lang][key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // --- ГАЛЕРЕЯ ---
+  const serviceImages = [
+    "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1200",
+    "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1200",
+    "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1200",
+    "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=1200",
+    "https://images.unsplash.com/photo-1517832606589-7a598b647192?q=80&w=1200",
+    "https://images.unsplash.com/photo-1605497746444-ac9da5848af7?q=80&w=1200"
+  ];
+
+  let currentImgIndex = 0;
+  const modal = document.getElementById("photoModal");
+  const modalImg = document.getElementById("expandedImg");
+
+  function openModal(index) {
+    currentImgIndex = index;
+    modal.style.display = "block";
+    modalImg.src = serviceImages[currentImgIndex];
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+    cursor.classList.remove('hovered');
+  }
+
+  function changeImg(direction) {
+    currentImgIndex += direction;
+    if (currentImgIndex >= serviceImages.length) currentImgIndex = 0;
+    if (currentImgIndex < 0) currentImgIndex = serviceImages.length - 1;
+    modalImg.src = serviceImages[currentImgIndex];
+  }
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (modal.style.display === "block") {
+      if (e.key === "ArrowLeft") changeImg(-1);
+      if (e.key === "ArrowRight") changeImg(1);
+      if (e.key === "Escape") closeModal();
+    }
+  });
+</script>
+</body>
+</html>
