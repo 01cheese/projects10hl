@@ -17,9 +17,9 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop&fm=webp">
 
   <!-- Загружаем библиотеки без defer, чтобы они гарантированно были доступны -->
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js" async></script>
+  <script src="https://unpkg.com/lucide@latest" async></script>
+  <script src="https://cdn.tailwindcss.com" async></script>
 
   <!-- Шрифты -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,14 +70,16 @@
 
   <style>
     /* Base styles */
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fafafa; color: #09090b; cursor: none; overflow-x: hidden;}
-
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fafafa; color: #09090b; cursor: none; overflow-x: hidden; min-height: 100vh;}
+    
     /* Lenis Smooth Scroll Base */
     html.lenis { height: auto; }
     .lenis.lenis-smooth { scroll-behavior: auto; }
     .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
     .lenis.lenis-stopped { overflow: hidden; }
     .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+    i[data-lucide] { display: inline-block; width: 1.5em; height: 1.5em; }
 
     /* Stylish Custom Cursor (Arrow) */
     .custom-cursor {
