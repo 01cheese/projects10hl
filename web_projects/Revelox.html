@@ -3,15 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lumina | Next-Gen Agency</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SEO & Open Graph Meta Tags -->
+  <title>Lumina | Next-Gen Digital Agency</title>
+  <meta name="description" content="Lumina - инновационное digital-агентство. Создаем масштабируемые веб-приложения, генеративный UI/UX и внедряем AI-аналитику для бизнеса.">
+  <meta name="keywords" content="разработка сайтов, UI/UX дизайн, AI маркетинг, веб-приложения, digital агентство, Lumina">
+  <meta name="author" content="Lumina Agency">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Lumina | Next-Gen Digital Agency">
+  <meta property="og:description" content="Проектируем цифровое завтра. Экосистема для брендов, объединяющая дизайн-коды и ИИ.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop&fm=webp">
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+
   <!-- Designer Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Deferred Scripts -->
+  <script defer src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
     tailwind.config = {
@@ -55,7 +76,6 @@
     /* Base styles */
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fafafa; color: #09090b; cursor: none; overflow-x: hidden;}
 
-    /* Custom Cursor */
     /* Lenis Smooth Scroll Base */
     html.lenis { height: auto; }
     .lenis.lenis-smooth { scroll-behavior: auto; }
@@ -88,7 +108,7 @@
       body { cursor: auto; }
       .custom-cursor { display: none !important; }
     }
-    
+
     /* Scroll Animation Classes */
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
@@ -104,10 +124,8 @@
     .v0-card > * { position: relative; z-index: 1; }
     .v0-card-hidden-overflow { overflow: hidden; }
 
-    /* Gradient Text */
+    /* Gradient Text & Glassmorphism */
     .text-gradient { background: linear-gradient(to right, #09090b, #71717a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    /* Glassmorphism */
     .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.05); }
     .widget-glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
   </style>
@@ -121,7 +139,7 @@
 <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex justify-between items-center relative">
 
-    <div class="flex items-center gap-2 cursor-pointer link-hover z-50 shrink-0">
+    <div class="flex items-center gap-2 cursor-pointer link-hover z-50 shrink-0" tabindex="0" aria-label="На главную">
       <div class="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center shadow-md">
         <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
       </div>
@@ -132,7 +150,7 @@
     <nav class="hidden lg:flex flex-1 justify-center gap-6 xl:gap-8 text-sm font-medium text-zinc-500 mx-4">
       <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Платформа</a>
       <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Кейсы</a>
-      <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Интеграции</a>
+      <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Блог</a>
       <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Отзывы</a>
     </nav>
 
@@ -142,18 +160,18 @@
       </button>
     </div>
 
-    <!-- Mobile Burger Button -->
-    <button id="mobile-menu-btn" class="lg:hidden text-zinc-800 hover:text-primary transition-colors p-2 z-50 ml-auto flex items-center justify-center w-10 h-10">
+    <!-- Mobile Burger Button (A11y Fixed) -->
+    <button id="mobile-menu-btn" aria-label="Открыть мобильное меню" class="lg:hidden text-zinc-800 hover:text-primary transition-colors p-2 z-50 ml-auto flex items-center justify-center w-10 h-10">
       <svg id="burger-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 ease-in-out">
         <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
       </svg>
     </button>
 
     <!-- Mobile Dropdown -->
-    <div id="mobile-menu" class="absolute top-16 md:top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-zinc-200 shadow-xl transition-all duration-300 origin-top scale-y-0 opacity-0 px-6 py-8 flex flex-col gap-6 lg:hidden z-40 rounded-b-3xl">
+    <div id="mobile-menu" class="absolute top-16 md:top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-zinc-200 shadow-xl transition-all duration-300 origin-top scale-y-0 opacity-0 pointer-events-none px-6 py-8 flex flex-col gap-6 lg:hidden z-40 rounded-b-3xl">
       <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Платформа</a>
       <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Кейсы</a>
-      <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Интеграции</a>
+      <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Блог</a>
       <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Отзывы</a>
       <button class="w-full bg-primary text-white px-5 py-4 rounded-xl text-base font-medium hover:bg-zinc-800 transition-colors mt-2">
         Войти
@@ -172,7 +190,7 @@
         Встречайте Lumina v2.0
       </div>
 
-      <!-- Убраны классы break-words и hyphens-auto. Теперь слова переносятся целиком. -->
+      <!-- Без hyphens-auto, слова переносятся целиком -->
       <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6 text-zinc-900 w-full">
         Проектируем <br class="hidden sm:block"><span class="text-gradient">цифровое завтра.</span>
       </h1>
@@ -193,7 +211,8 @@
 
     <div class="relative reveal reveal-delay-1 mt-6 lg:mt-0">
       <div class="relative w-full aspect-[4/3] md:aspect-auto md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden border border-zinc-200/50 shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Abstract 3D" class="absolute inset-0 w-full h-full object-cover">
+        <!-- Hero Image (Optimized: WebP, fetchpriority high) -->
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop&fm=webp&q=70" alt="Абстрактный 3D дизайн" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
         <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 widget-glass rounded-2xl p-4 flex items-center justify-between z-20">
@@ -206,9 +225,23 @@
               <p class="text-[10px] md:text-sm text-white/80 font-medium">+142% в этом месяце</p>
             </div>
           </div>
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/40 shrink-0">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&fm=webp&q=70" alt="Аватар пользователя" fetchpriority="high" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/40 shrink-0">
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW SECTION: Partners Logo Strip -->
+<section class="py-10 border-y border-zinc-200 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col items-center">
+    <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-6 text-center">Нам доверяют лидеры индустрии</p>
+    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale pointer-events-none select-none">
+      <span class="text-xl md:text-2xl font-black text-zinc-800">AcmeCorp</span>
+      <span class="text-xl md:text-2xl font-black text-zinc-800 tracking-tighter">GLOBEX</span>
+      <span class="text-xl md:text-2xl font-bold text-zinc-800 italic">Soylent</span>
+      <span class="text-xl md:text-2xl font-black text-zinc-800">Initech</span>
+      <span class="text-xl md:text-2xl font-bold text-zinc-800 uppercase hidden md:block">Massive Dynamic</span>
     </div>
   </div>
 </section>
@@ -257,7 +290,6 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 md:auto-rows-[240px]">
-    <!-- Bento Box 1 (Large) -->
     <div class="v0-card v0-card-hidden-overflow col-span-1 md:col-span-2 lg:col-span-2 md:row-span-2 p-6 md:p-8 flex flex-col justify-between reveal">
       <div class="mb-6 md:mb-0">
         <div class="w-12 h-12 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-6">
@@ -266,12 +298,11 @@
         <h3 class="text-xl md:text-2xl font-bold mb-2">Генеративный UI/UX</h3>
         <p class="text-zinc-500 text-sm max-w-sm mb-6">Используем алгоритмы для создания интерфейсов, которые адаптируются под поведение каждого пользователя.</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" class="rounded-xl w-full h-40 md:h-56 object-cover border border-zinc-200 transition-transform duration-700 hover:scale-105">
+      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="Разработка интерфейсов" loading="lazy" decoding="async" class="rounded-xl w-full h-40 md:h-56 object-cover border border-zinc-200 transition-transform duration-700 hover:scale-105">
     </div>
 
-    <!-- Bento Box 2 -->
     <div class="v0-card v0-card-hidden-overflow col-span-1 md:col-span-1 lg:col-span-2 p-6 md:p-8 reveal reveal-delay-1 relative overflow-hidden group min-h-[200px]">
-      <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+      <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="Аналитика данных" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-500">
       <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 relative z-10">
         <i data-lucide="bar-chart-3" class="w-5 h-5 text-blue-600"></i>
       </div>
@@ -279,7 +310,6 @@
       <p class="text-zinc-500 text-sm max-w-xs relative z-10">Аналитика на базе ИИ для вывода в ТОП и удержания лидерских позиций.</p>
     </div>
 
-    <!-- Bento Box 3 -->
     <div class="v0-card col-span-1 p-6 md:p-8 reveal reveal-delay-2 flex flex-col justify-center bg-gradient-to-br from-blue-50 to-white min-h-[160px] md:min-h-[200px]">
       <h3 class="text-4xl md:text-5xl font-black text-blue-600 mb-2">99.9%</h3>
       <p class="text-zinc-600 text-sm font-medium">Uptime серверов</p>
@@ -288,26 +318,24 @@
       </div>
     </div>
 
-    <!-- Bento Box 4 -->
     <div class="v0-card col-span-1 p-6 md:p-8 reveal reveal-delay-3 bg-zinc-900 text-white border-zinc-800 min-h-[160px] md:min-h-[200px] flex flex-col justify-center">
       <i data-lucide="shield-check" class="w-8 h-8 text-green-400 mb-4"></i>
       <h3 class="text-lg md:text-xl font-bold mb-2">Безопасность</h3>
       <p class="text-zinc-400 text-sm">Шифрование Enterprise уровня и защита данных.</p>
     </div>
 
-    <!-- Bento Box 5 -->
     <div class="v0-card col-span-1 md:col-span-2 lg:col-span-4 p-6 md:p-8 reveal flex flex-col sm:flex-row gap-6 items-center justify-between text-center sm:text-left min-h-[200px]">
       <div class="flex-1">
         <h3 class="text-lg md:text-xl font-bold mb-2">Motion Design</h3>
         <p class="text-zinc-500 text-sm max-w-2xl">Оживляем бренды с помощью микро-интеракций и 3D графики, делая опыт использования продукта по-настоящему запоминающимся.</p>
       </div>
-      <div class="w-16 h-16 md:w-24 md:h-24 rounded-full border-[6px] border-zinc-100 flex items-center justify-center relative flex-shrink-0 group-hover:scale-110 transition-transform cursor-pointer mt-4 sm:mt-0">
+      <div class="w-16 h-16 md:w-24 md:h-24 rounded-full border-[6px] border-zinc-100 flex items-center justify-center relative flex-shrink-0 group-hover:scale-110 transition-transform cursor-pointer mt-4 sm:mt-0 link-hover">
         <div class="absolute inset-0 rounded-full border-[6px] border-blue-500 border-t-transparent animate-spin"></div>
         <i data-lucide="play" class="w-5 h-5 md:w-6 md:h-6 text-zinc-400 ml-1"></i>
       </div>
     </div>
 
-    <!-- Bento Box 6 -->
+    <!-- Integrations -->
     <div class="v0-card col-span-1 md:col-span-3 lg:col-span-4 p-6 md:p-10 reveal flex flex-col lg:flex-row gap-8 items-center justify-between bg-zinc-50">
       <div class="text-center lg:text-left">
         <h3 class="text-xl md:text-2xl font-bold mb-2">Экосистема Интеграций</h3>
@@ -315,19 +343,19 @@
       </div>
 
       <div class="flex gap-3 md:gap-6 flex-wrap justify-center w-full lg:w-auto">
-        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform group">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform group" aria-label="GitHub">
           <svg class="w-6 h-6 md:w-7 md:h-7 text-zinc-800 group-hover:text-black" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
         </div>
-        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform" aria-label="Figma">
           <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 28.5C19 33.7467 14.7467 38 9.5 38C4.25329 38 0 33.7467 0 28.5C0 23.2533 4.25329 19 9.5 19H19V28.5Z" fill="#0ACF83"/><path d="M0 47.5C0 52.7467 4.25329 57 9.5 57C14.7467 57 19 52.7467 19 47.5V38H9.5C4.25329 38 0 42.2533 0 47.5Z" fill="#1ABCFE"/><path d="M38 9.5C38 14.7467 33.7467 19 28.5 19H19V0H28.5C33.7467 0 38 4.25329 38 9.5Z" fill="#F24E1E"/><path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#FF7262"/><path d="M38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5Z" fill="#A259FF"/></svg>
         </div>
-        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform" aria-label="Slack">
           <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.523-2.522v-2.522h2.523zM15.165 17.688a2.527 2.527 0 0 1-2.523-2.523 2.526 2.526 0 0 1 2.523-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.52h-6.313z" fill="#E01E5A"/></svg>
         </div>
-        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform" aria-label="Trello">
           <svg class="w-6 h-6 md:w-7 md:h-7 text-[#0052CC]" viewBox="0 0 24 24" fill="currentColor"><path d="M2.778 24h18.444A2.778 2.778 0 0024 21.222V2.778A2.778 2.778 0 0021.222 0H2.778A2.778 2.778 0 000 2.778v18.444A2.778 2.778 0 002.778 24zm8.333-2.778H4.444V4.444h6.667v16.778zm8.445-8.333h-6.667V4.444h6.667v8.445z"/></svg>
         </div>
-        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform" aria-label="Zapier">
           <svg class="w-6 h-6 md:w-7 md:h-7 text-[#FF4A00]" viewBox="0 0 24 24" fill="currentColor"><path d="M21.905 10.37L16.273.743A1.408 1.408 0 0 0 15.056 0H2.607C1.493 0 .809 1.221 1.391 2.164L7.87 12.63l-5.753 9.48C1.517 23.102 2.228 24 3.387 24h12.56a1.411 1.411 0 0 0 1.206-.68l5.836-9.61a1.597 1.597 0 0 0-.17-1.74l-.914-1.6z"/></svg>
         </div>
       </div>
@@ -369,10 +397,10 @@
       </div>
     </div>
     <div class="reveal reveal-delay-1 grid grid-cols-2 gap-3 md:gap-4">
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop" class="rounded-2xl h-40 md:h-64 w-full object-cover translate-y-4 md:translate-y-8 border border-white/10 shadow-2xl">
-      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500&auto=format&fit=crop" class="rounded-2xl h-40 md:h-64 w-full object-cover border border-white/10 shadow-2xl">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500&auto=format&fit=crop" class="rounded-2xl h-32 md:h-48 w-full object-cover translate-y-4 md:translate-y-8 border border-white/10 shadow-2xl mt-2 md:mt-4">
-      <div class="rounded-2xl h-32 md:h-48 w-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center mt-2 md:mt-4">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop&fm=webp&q=70" alt="Разработка кода" loading="lazy" decoding="async" class="rounded-2xl h-40 md:h-64 w-full object-cover translate-y-4 md:translate-y-8 border border-white/10 shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500&auto=format&fit=crop&fm=webp&q=70" alt="Абстрактный дизайн" loading="lazy" decoding="async" class="rounded-2xl h-40 md:h-64 w-full object-cover border border-white/10 shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500&auto=format&fit=crop&fm=webp&q=70" alt="Технологии" loading="lazy" decoding="async" class="rounded-2xl h-32 md:h-48 w-full object-cover translate-y-4 md:translate-y-8 border border-white/10 shadow-2xl mt-2 md:mt-4">
+      <div class="rounded-2xl h-32 md:h-48 w-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center mt-2 md:mt-4 cursor-default link-hover">
         <div class="text-center">
           <p class="text-2xl md:text-3xl font-bold text-white mb-1">10k+</p>
           <p class="text-[10px] md:text-xs text-zinc-400 uppercase tracking-wider">Коммитов</p>
@@ -382,8 +410,272 @@
   </div>
 </section>
 
-<!-- Pricing Section (NEW) -->
-<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
+<!-- Portfolio Section -->
+<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto border-t border-zinc-200">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 reveal">
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Избранные проекты</h2>
+      <p class="text-zinc-500 max-w-md">Мы создаем цифровые продукты, которые меняют правила игры в своих нишах.</p>
+    </div>
+    <a href="#" aria-label="Смотреть все кейсы" class="hidden md:inline-flex items-center gap-2 font-semibold text-primary hover:text-blue-500 transition-colors link-hover mt-4 md:mt-0">
+      Все кейсы <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+    </a>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
+    <div class="group cursor-pointer link-hover reveal reveal-delay-1">
+      <div class="overflow-hidden rounded-2xl mb-6 relative shadow-lg">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+        <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="Проект Nova Bank" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute bottom-4 left-4 z-20 flex gap-2">
+          <span class="bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1.5 rounded-full shadow-sm text-zinc-900">FinTech</span>
+          <span class="bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1.5 rounded-full shadow-sm text-zinc-900">Web App</span>
+        </div>
+      </div>
+      <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 transition-colors">Nova Bank</h3>
+      <p class="text-zinc-500 text-sm">Необанк нового поколения с ИИ-ассистентом для смарт-управления финансами.</p>
+    </div>
+
+    <div class="group cursor-pointer link-hover reveal reveal-delay-2 md:mt-16">
+      <div class="overflow-hidden rounded-2xl mb-6 relative shadow-lg">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+        <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="Проект Aura Store" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute bottom-4 left-4 z-20 flex gap-2">
+          <span class="bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1.5 rounded-full shadow-sm text-zinc-900">E-commerce</span>
+        </div>
+      </div>
+      <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 transition-colors">Aura Store</h3>
+      <p class="text-zinc-500 text-sm">Омниканальная платформа и редизайн мобильного приложения для премиального бренда.</p>
+    </div>
+  </div>
+
+  <div class="mt-8 text-center md:hidden reveal reveal-delay-3">
+    <button class="w-full py-3 rounded-xl border border-zinc-200 font-medium hover:bg-zinc-50 transition-colors link-hover flex items-center justify-center gap-2">
+      Смотреть все <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+    </button>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-16 md:py-24 bg-zinc-50 border-t border-zinc-200">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-12 md:mb-16 reveal">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Люди за пикселями</h2>
+      <p class="text-zinc-500 max-w-2xl mx-auto">Команда инженеров, дизайнеров и маркетологов с опытом работы в мировых IT-компаниях.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="v0-card p-6 text-center reveal">
+        <div class="relative w-24 h-24 mx-auto mb-4">
+          <div class="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-20"></div>
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop&fm=webp&q=70" alt="Алексей Иванов - CEO" loading="lazy" decoding="async" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+        </div>
+        <h4 class="font-bold text-lg mb-1 text-zinc-900">Алексей Иванов</h4>
+        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">CEO & Founder</p>
+        <div class="flex justify-center gap-4 text-zinc-400">
+          <a href="#" aria-label="LinkedIn Алексея" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          <a href="#" aria-label="Twitter Алексея" class="hover:text-primary transition-colors link-hover"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <div class="v0-card p-6 text-center reveal reveal-delay-1">
+        <div class="relative w-24 h-24 mx-auto mb-4">
+          <div class="absolute inset-0 bg-purple-500 rounded-full blur-md opacity-20"></div>
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop&fm=webp&q=70" alt="Мария Смирнова - Design Director" loading="lazy" decoding="async" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+        </div>
+        <h4 class="font-bold text-lg mb-1 text-zinc-900">Мария Смирнова</h4>
+        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">Design Director</p>
+        <div class="flex justify-center gap-4 text-zinc-400">
+          <a href="#" aria-label="Dribbble Марии" class="hover:text-primary transition-colors link-hover"><i data-lucide="dribbble" class="w-4 h-4"></i></a>
+          <a href="#" aria-label="LinkedIn Марии" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <div class="v0-card p-6 text-center reveal reveal-delay-2">
+        <div class="relative w-24 h-24 mx-auto mb-4">
+          <div class="absolute inset-0 bg-green-500 rounded-full blur-md opacity-20"></div>
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop&fm=webp&q=70" alt="Дмитрий Волков - Lead Engineer" loading="lazy" decoding="async" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+        </div>
+        <h4 class="font-bold text-lg mb-1 text-zinc-900">Дмитрий Волков</h4>
+        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">Lead Engineer</p>
+        <div class="flex justify-center gap-4 text-zinc-400">
+          <a href="#" aria-label="GitHub Дмитрия" class="hover:text-primary transition-colors link-hover"><i data-lucide="github" class="w-4 h-4"></i></a>
+          <a href="#" aria-label="LinkedIn Дмитрия" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <div class="v0-card p-6 text-center reveal reveal-delay-3">
+        <div class="relative w-24 h-24 mx-auto mb-4">
+          <div class="absolute inset-0 bg-orange-500 rounded-full blur-md opacity-20"></div>
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop&fm=webp&q=70" alt="Анна Росс - Head of Marketing" loading="lazy" decoding="async" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+        </div>
+        <h4 class="font-bold text-lg mb-1 text-zinc-900">Анна Росс</h4>
+        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">Head of Marketing</p>
+        <div class="flex justify-center gap-4 text-zinc-400">
+          <a href="#" aria-label="LinkedIn Анны" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          <a href="#" aria-label="Twitter Анны" class="hover:text-primary transition-colors link-hover"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scrolling Testimonials -->
+<section class="py-16 md:py-32 overflow-hidden bg-white relative border-t border-zinc-200">
+  <div class="text-center mb-10 md:mb-16 reveal max-w-7xl mx-auto px-4 md:px-6">
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Нас рекомендуют</h2>
+    <p class="text-zinc-500">От стартапов до Enterprise компаний.</p>
+  </div>
+
+  <div class="relative group flex overflow-hidden">
+    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+    <div class="flex shrink-0 animate-scroll-left group-hover:[animation-play-state:paused]">
+      <div class="flex">
+        <!-- Card 1 -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6 cursor-default link-hover">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Lumina полностью изменила наш подход к разработке. Редизайн приложения повысил конверсию на 40% уже в первый месяц. Ребята — настоящие инженеры интерфейсов."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&fm=webp&q=70" alt="Елена Соколова" loading="lazy" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Елена Соколова</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CEO, FinTech Startup</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6 cursor-default link-hover">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Их подход к компонентному дизайну сэкономил нам сотни часов разработки. UI-kit, который они собрали, работает безупречно на всех платформах."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&fm=webp&q=70" alt="Михаил Воронов" loading="lazy" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Михаил Воронов</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CTO, E-commerce Group</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6 cursor-default link-hover">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Идеальное сочетание креатива и технологий. Внедренная AI-аналитика помогла нам снизить стоимость лида в 2.5 раза. Крайне рекомендую к сотрудничеству."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&fm=webp&q=70" alt="Анна Коваленко" loading="lazy" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Анна Коваленко</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">Marketing Director, SaaS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duplicate for Seamless Loop -->
+    <div class="flex shrink-0 animate-scroll-left group-hover:[animation-play-state:paused]" aria-hidden="true">
+      <div class="flex">
+        <!-- Дубликаты карточек (такие же как выше) для бесконечной ленты -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6 cursor-default link-hover">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Lumina полностью изменила наш подход к разработке. Редизайн приложения повысил конверсию на 40% уже в первый месяц. Ребята — настоящие инженеры интерфейсов."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&fm=webp&q=70" alt="Елена Соколова" loading="lazy" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Елена Соколова</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CEO, FinTech Startup</p>
+            </div>
+          </div>
+        </div>
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6 cursor-default link-hover">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Их подход к компонентному дизайну сэкономил нам сотни часов разработки. UI-kit, который они собрали, работает безупречно на всех платформах."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&fm=webp&q=70" alt="Михаил Воронов" loading="lazy" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Михаил Воронов</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CTO, E-commerce Group</p>
+            </div>
+          </div>
+        </div>
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6 cursor-default link-hover">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Идеальное сочетание креатива и технологий. Внедренная AI-аналитика помогла нам снизить стоимость лида в 2.5 раза. Крайне рекомендую к сотрудничеству."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&fm=webp&q=70" alt="Анна Коваленко" loading="lazy" decoding="async" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Анна Коваленко</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">Marketing Director, SaaS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog / Insights Section (NEW) -->
+<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto border-t border-zinc-200">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 reveal">
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Журнал инноваций</h2>
+      <p class="text-zinc-500 max-w-md">Инсайты, тренды и наши мысли о будущем цифрового дизайна.</p>
+    </div>
+    <a href="#" aria-label="Все статьи блога" class="hidden md:inline-flex items-center gap-2 font-semibold text-primary hover:text-blue-500 transition-colors link-hover mt-4 md:mt-0">
+      Читать блог <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+    </a>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+    <div class="v0-card cursor-pointer group link-hover reveal reveal-delay-1 p-0 overflow-hidden">
+      <div class="overflow-hidden relative h-48 w-full border-b border-zinc-200">
+        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="ИИ в дизайне" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+      </div>
+      <div class="p-6">
+        <div class="text-xs font-bold text-blue-600 mb-3 uppercase tracking-widest">Технологии</div>
+        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-600 transition-colors leading-tight">Как нейросети меняют процесс прототипирования</h3>
+        <p class="text-zinc-500 text-sm">Разбираем реальные кейсы использования генеративного ИИ для ускорения разработки UI/UX...</p>
+      </div>
+    </div>
+
+    <div class="v0-card cursor-pointer group link-hover reveal reveal-delay-2 p-0 overflow-hidden">
+      <div class="overflow-hidden relative h-48 w-full border-b border-zinc-200">
+        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="Дизайн системы" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+      </div>
+      <div class="p-6">
+        <div class="text-xs font-bold text-purple-600 mb-3 uppercase tracking-widest">Архитектура</div>
+        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-600 transition-colors leading-tight">Построение масштабируемых дизайн-систем</h3>
+        <p class="text-zinc-500 text-sm">Гайд по созданию компонентной базы, которая будет расти вместе с вашим бизнесом...</p>
+      </div>
+    </div>
+
+    <div class="v0-card cursor-pointer group link-hover reveal reveal-delay-3 p-0 overflow-hidden">
+      <div class="overflow-hidden relative h-48 w-full border-b border-zinc-200">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop&fm=webp&q=70" alt="Аналитика и данные" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+      </div>
+      <div class="p-6">
+        <div class="text-xs font-bold text-green-600 mb-3 uppercase tracking-widest">Аналитика</div>
+        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-600 transition-colors leading-tight">Predictive SEO: Как предсказывать тренды</h3>
+        <p class="text-zinc-500 text-sm">Используем машинное обучение для анализа паттернов поиска и вывода продуктов в ТОП...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto bg-zinc-50 border-t border-zinc-200 rounded-[2rem] md:rounded-[4rem] mb-16 md:mb-24 shadow-inner">
   <div class="text-center mb-12 md:mb-16 reveal">
     <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Прозрачные тарифы</h2>
     <p class="text-zinc-500">Масштабируемые решения для проектов любого размера.</p>
@@ -391,7 +683,7 @@
 
   <div class="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
     <!-- Basic Plan -->
-    <div class="v0-card p-8 flex flex-col reveal reveal-delay-1">
+    <div class="v0-card p-8 flex flex-col reveal reveal-delay-1 bg-white">
       <h3 class="text-xl font-bold mb-2">Старт</h3>
       <p class="text-zinc-500 text-sm mb-6">Для небольших команд и стартапов.</p>
       <div class="mb-6">
@@ -425,7 +717,7 @@
     </div>
 
     <!-- Enterprise Plan -->
-    <div class="v0-card p-8 flex flex-col reveal reveal-delay-2">
+    <div class="v0-card p-8 flex flex-col reveal reveal-delay-2 bg-white">
       <h3 class="text-xl font-bold mb-2">Enterprise</h3>
       <p class="text-zinc-500 text-sm mb-6">Кастомная разработка.</p>
       <div class="mb-6">
@@ -441,226 +733,7 @@
   </div>
 </section>
 
-<!-- Scrolling Testimonials -->
-<section class="py-16 md:py-32 overflow-hidden bg-zinc-50 relative border-t border-zinc-200">
-  <div class="text-center mb-10 md:mb-16 reveal max-w-7xl mx-auto px-4 md:px-6">
-    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Нас рекомендуют</h2>
-    <p class="text-zinc-500">От стартапов до Enterprise компаний.</p>
-  </div>
-
-  <div class="relative group flex overflow-hidden">
-    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-zinc-50 to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-zinc-50 to-transparent z-10 pointer-events-none"></div>
-
-    <div class="flex shrink-0 animate-scroll-left group-hover:[animation-play-state:paused]">
-      <div class="flex">
-        <!-- Card 1 -->
-        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
-          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Lumina полностью изменила наш подход к разработке. Редизайн приложения повысил конверсию на 40% уже в первый месяц. Ребята — настоящие инженеры интерфейсов."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
-            <div>
-              <p class="text-xs md:text-sm font-bold text-primary">Елена Соколова</p>
-              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CEO, FinTech Startup</p>
-            </div>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
-          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Их подход к компонентному дизайну сэкономил нам сотни часов разработки. UI-kit, который они собрали, работает безупречно на всех платформах."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
-            <div>
-              <p class="text-xs md:text-sm font-bold text-primary">Михаил Воронов</p>
-              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CTO, E-commerce Group</p>
-            </div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
-          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Идеальное сочетание креатива и технологий. Внедренная AI-аналитика помогла нам снизить стоимость лида в 2.5 раза. Крайне рекомендую к сотрудничеству."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
-            <div>
-              <p class="text-xs md:text-sm font-bold text-primary">Анна Коваленко</p>
-              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">Marketing Director, SaaS</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Duplicate for Seamless Loop -->
-    <div class="flex shrink-0 animate-scroll-left group-hover:[animation-play-state:paused]" aria-hidden="true">
-      <div class="flex">
-        <!-- Дубликаты карточек (такие же как выше) для бесконечной ленты -->
-        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
-          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Lumina полностью изменила наш подход к разработке. Редизайн приложения повысил конверсию на 40% уже в первый месяц. Ребята — настоящие инженеры интерфейсов."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
-            <div>
-              <p class="text-xs md:text-sm font-bold text-primary">Елена Соколова</p>
-              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CEO, FinTech Startup</p>
-            </div>
-          </div>
-        </div>
-        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
-          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Их подход к компонентному дизайну сэкономил нам сотни часов разработки. UI-kit, который они собрали, работает безупречно на всех платформах."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
-            <div>
-              <p class="text-xs md:text-sm font-bold text-primary">Михаил Воронов</p>
-              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CTO, E-commerce Group</p>
-            </div>
-          </div>
-        </div>
-        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
-          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
-          </div>
-          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Идеальное сочетание креатива и технологий. Внедренная AI-аналитика помогла нам снизить стоимость лида в 2.5 раза. Крайне рекомендую к сотрудничеству."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
-            <div>
-              <p class="text-xs md:text-sm font-bold text-primary">Анна Коваленко</p>
-              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">Marketing Director, SaaS</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Portfolio Section (NEW) -->
-<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto border-t border-zinc-200">
-  <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 reveal">
-    <div>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Избранные проекты</h2>
-      <p class="text-zinc-500 max-w-md">Мы создаем цифровые продукты, которые меняют правила игры в своих нишах.</p>
-    </div>
-    <a href="#" class="hidden md:inline-flex items-center gap-2 font-semibold text-primary hover:text-blue-500 transition-colors link-hover mt-4 md:mt-0">
-      Все кейсы <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
-    </a>
-  </div>
-
-  <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
-    <!-- Project 1 -->
-    <div class="group cursor-pointer link-hover reveal reveal-delay-1">
-      <div class="overflow-hidden rounded-2xl mb-6 relative shadow-lg">
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-        <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800&auto=format&fit=crop" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700">
-        <div class="absolute bottom-4 left-4 z-20 flex gap-2">
-          <span class="bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1.5 rounded-full shadow-sm text-zinc-900">FinTech</span>
-          <span class="bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1.5 rounded-full shadow-sm text-zinc-900">Web App</span>
-        </div>
-      </div>
-      <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 transition-colors">Nova Bank</h3>
-      <p class="text-zinc-500 text-sm">Необанк нового поколения с ИИ-ассистентом для смарт-управления финансами.</p>
-    </div>
-    <!-- Project 2 -->
-    <div class="group cursor-pointer link-hover reveal reveal-delay-2 md:mt-16">
-      <div class="overflow-hidden rounded-2xl mb-6 relative shadow-lg">
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-        <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700">
-        <div class="absolute bottom-4 left-4 z-20 flex gap-2">
-          <span class="bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1.5 rounded-full shadow-sm text-zinc-900">E-commerce</span>
-        </div>
-      </div>
-      <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 transition-colors">Aura Store</h3>
-      <p class="text-zinc-500 text-sm">Омниканальная платформа и редизайн мобильного приложения для премиального бренда.</p>
-    </div>
-  </div>
-
-  <!-- Мобильная кнопка "Все кейсы" -->
-  <div class="mt-8 text-center md:hidden reveal reveal-delay-3">
-    <button class="w-full py-3 rounded-xl border border-zinc-200 font-medium hover:bg-zinc-50 transition-colors link-hover flex items-center justify-center gap-2">
-      Смотреть все <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-    </button>
-  </div>
-</section>
-
-<!-- Team Section (NEW) -->
-<section class="py-16 md:py-24 bg-zinc-50 border-t border-zinc-200">
-  <div class="max-w-7xl mx-auto px-4 md:px-6">
-    <div class="text-center mb-12 md:mb-16 reveal">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Люди за пикселями</h2>
-      <p class="text-zinc-500 max-w-2xl mx-auto">Команда инженеров, дизайнеров и маркетологов с опытом работы в мировых IT-компаниях.</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Member 1 -->
-      <div class="v0-card p-6 text-center reveal">
-        <div class="relative w-24 h-24 mx-auto mb-4">
-          <div class="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-20"></div>
-          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
-        </div>
-        <h4 class="font-bold text-lg mb-1 text-zinc-900">Алексей Иванов</h4>
-        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">CEO & Founder</p>
-        <div class="flex justify-center gap-4 text-zinc-400">
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-      <!-- Member 2 -->
-      <div class="v0-card p-6 text-center reveal reveal-delay-1">
-        <div class="relative w-24 h-24 mx-auto mb-4">
-          <div class="absolute inset-0 bg-purple-500 rounded-full blur-md opacity-20"></div>
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
-        </div>
-        <h4 class="font-bold text-lg mb-1 text-zinc-900">Мария Смирнова</h4>
-        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">Design Director</p>
-        <div class="flex justify-center gap-4 text-zinc-400">
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="dribbble" class="w-4 h-4"></i></a>
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-      <!-- Member 3 -->
-      <div class="v0-card p-6 text-center reveal reveal-delay-2">
-        <div class="relative w-24 h-24 mx-auto mb-4">
-          <div class="absolute inset-0 bg-green-500 rounded-full blur-md opacity-20"></div>
-          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
-        </div>
-        <h4 class="font-bold text-lg mb-1 text-zinc-900">Дмитрий Волков</h4>
-        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">Lead Engineer</p>
-        <div class="flex justify-center gap-4 text-zinc-400">
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="github" class="w-4 h-4"></i></a>
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-      <!-- Member 4 -->
-      <div class="v0-card p-6 text-center reveal reveal-delay-3">
-        <div class="relative w-24 h-24 mx-auto mb-4">
-          <div class="absolute inset-0 bg-orange-500 rounded-full blur-md opacity-20"></div>
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop" class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
-        </div>
-        <h4 class="font-bold text-lg mb-1 text-zinc-900">Анна Росс</h4>
-        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-4">Head of Marketing</p>
-        <div class="flex justify-center gap-4 text-zinc-400">
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-          <a href="#" class="hover:text-primary transition-colors link-hover"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ Section (NEW) -->
+<!-- FAQ Section -->
 <section class="py-16 md:py-24 px-4 md:px-6 max-w-3xl mx-auto">
   <div class="text-center mb-12 reveal">
     <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Ответы на вопросы</h2>
@@ -682,12 +755,12 @@
   </div>
 </section>
 
-<!-- Final CTA Section (NEW) -->
+<!-- Final CTA Section -->
 <section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto mb-12 relative">
   <div class="bg-primary rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden reveal shadow-2xl">
     <!-- Декоративные круги -->
-    <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
-    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+    <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 pointer-events-none"></div>
 
     <div class="relative z-10">
       <h2 class="text-3xl md:text-5xl font-black mb-6 tracking-tight">Готовы обогнать конкурентов?</h2>
@@ -715,14 +788,14 @@
         Мы переосмысляем то, как бренды взаимодействуют с цифровым миром. Инновации в каждом пикселе.
       </p>
       <form class="flex w-full max-w-sm border border-zinc-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/20 transition-all">
-        <input type="email" placeholder="Email для подписки" class="w-full min-w-0 flex-1 px-4 py-3 text-sm focus:outline-none bg-transparent">
-        <button class="bg-primary text-white px-4 md:px-6 py-3 text-sm font-medium hover:bg-zinc-800 transition-colors link-hover border-l border-zinc-800 shrink-0">
+        <input type="email" aria-label="Ваш Email для подписки" placeholder="Email для подписки" class="w-full min-w-0 flex-1 px-4 py-3 text-sm focus:outline-none bg-transparent">
+        <button aria-label="Подписаться" class="bg-primary text-white px-4 md:px-6 py-3 text-sm font-medium hover:bg-zinc-800 transition-colors link-hover border-l border-zinc-800 shrink-0">
           Подписаться
         </button>
       </form>
     </div>
 
-    <!-- Products -->
+    <!-- Links -->
     <div>
       <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Продукты</h4>
       <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
@@ -732,19 +805,15 @@
         <li><a href="#" class="hover:text-primary transition link-hover block">Инфраструктура</a></li>
       </ul>
     </div>
-
-    <!-- Company -->
     <div>
       <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Компания</h4>
       <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
         <li><a href="#" class="hover:text-primary transition link-hover block">О нас</a></li>
-        <li><a href="#" class="hover:text-primary transition link-hover block">Карьера <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded ml-1">Найм</span></a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block flex items-center gap-2">Карьера <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded">Найм</span></a></li>
         <li><a href="#" class="hover:text-primary transition link-hover block">Блог</a></li>
         <li><a href="#" class="hover:text-primary transition link-hover block">Контакты</a></li>
       </ul>
     </div>
-
-    <!-- Resources -->
     <div>
       <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Ресурсы</h4>
       <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
@@ -754,8 +823,6 @@
         <li><a href="#" class="hover:text-primary transition link-hover block">Статус систем</a></li>
       </ul>
     </div>
-
-    <!-- Legal -->
     <div>
       <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Правовая инф.</h4>
       <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
@@ -770,21 +837,21 @@
   <!-- Footer Bottom -->
   <div class="max-w-7xl mx-auto px-4 md:px-6 border-t border-zinc-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
     <p class="text-sm text-zinc-400 text-center md:text-left">
-      &copy; 2026 Lumina. Built with Tailwind & V0 Magic.
+      &copy; 2026 Lumina. Built with Tailwind & Passion.
     </p>
     <div class="flex items-center gap-5 text-zinc-400">
-      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="github" class="w-5 h-5"></i></a>
-      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="figma" class="w-5 h-5"></i></a>
-      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="Наш Twitter" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="Наш GitHub" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="github" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="Наш Figma" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="figma" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="Наш LinkedIn" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="Наш YouTube" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="youtube" class="w-5 h-5"></i></a>
     </div>
   </div>
 </footer>
 
 <!-- Scripts -->
 <script>
-  // 1. Lenis Smooth Scrolling (Затяжной плавный скролл)
+  // 1. Lenis Smooth Scrolling
   const lenis = new Lenis({
     duration: 1.6,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -800,10 +867,25 @@
   }
   requestAnimationFrame(raf);
 
-  // 2. Инициализация иконок
+  // 1. Lenis Smooth Scrolling (с проверкой на загрузку)
+  window.addEventListener('load', () => {
+    const lenis = new Lenis({
+      duration: 1.6,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  });
+
+  // 2. Initialize Icons
   lucide.createIcons();
 
-  // 3. Логика мобильного меню (с фиксом SVG анимации)
+  // 3. Mobile Menu Logic (SVG Morphing)
   const mobileBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const burgerSvgIcon = document.getElementById('burger-icon-svg');
@@ -836,7 +918,7 @@
     });
   }
 
-  // 4. Логика стилизованного курсора-стрелки
+  // 4. Custom Cursor Logic
   const customCursor = document.getElementById('custom-cursor');
   const isMobile = () => window.innerWidth < 1024;
 
@@ -848,19 +930,19 @@
 
   document.body.addEventListener('mouseover', (e) => {
     if(isMobile() || !customCursor) return;
-    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button')) {
+    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) {
       customCursor.classList.add('hover');
     }
   });
 
   document.body.addEventListener('mouseout', (e) => {
     if(isMobile() || !customCursor) return;
-    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button')) {
+    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) {
       customCursor.classList.remove('hover');
     }
   });
 
-  // 5. Анимация появления при скролле
+  // 5. Scroll Reveal Animation Observer
   const revealElements = document.querySelectorAll('.reveal');
   const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
 
