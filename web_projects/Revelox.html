@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revelox | Next-Gen Agency</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Designer Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            background: '#fafafa',
+            foreground: '#09090b',
+            muted: '#f4f4f5',
+            border: '#e4e4e7',
+            primary: '#18181b',
+            accent: '#3b82f6'
+          },
+          boxShadow: {
+            'glass': '0 4px 30px rgba(0, 0, 0, 0.05)',
+            'glow': '0 0 20px rgba(59, 130, 246, 0.15)',
+          },
+          animation: {
+            'scroll-left': 'scroll-left 25s linear infinite',
+            'scroll-right': 'scroll-right 35s linear infinite',
+          },
+          keyframes: {
+            'scroll-left': {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-100%)' }
+            },
+            'scroll-right': {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(0)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base styles */
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fafafa; color: #09090b; cursor: none; overflow-x: hidden;}
+
+    /* Custom Cursor */
+    .cursor-dot { width: 8px; height: 8px; background-color: #09090b; border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s; mix-blend-mode: difference;}
+    .cursor-dot.hover { width: 40px; height: 40px; background-color: rgba(9, 9, 11, 0.1); backdrop-filter: blur(2px); mix-blend-mode: normal; border: 1px solid rgba(0,0,0,0.1); }
+    .cursor-outline { width: 32px; height: 32px; border: 1px solid rgba(9, 9, 11, 0.3); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9998; transition: transform 0.1s ease-out; }
+    .cursor-outline.hover { transform: translate(-50%, -50%) scale(1.5); border-color: rgba(9, 9, 11, 0.1); }
+
+    /* Scroll Animation Classes */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Interesting Card Hover */
+    .v0-card { position: relative; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 1.5rem; transition: all 0.4s ease; overflow: visible; }
+    .v0-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 60%); opacity: 0; transition: opacity 0.4s ease; z-index: 0; border-radius: inherit; pointer-events: none;}
+    .v0-card:hover { border-color: #d4d4d8; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .v0-card:hover::before { opacity: 1; }
+    .v0-card > * { position: relative; z-index: 1; }
+    .v0-card-hidden-overflow { overflow: hidden; }
+
+    /* Gradient Text */
+    .text-gradient { background: linear-gradient(to right, #09090b, #71717a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Glassmorphism */
+    .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .widget-glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+  </style>
+</head>
+<body class="antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen overflow-x-hidden">
+
+<!-- Custom Cursor -->
+<div class="cursor-dot hidden md:block" id="cursor-dot"></div>
+<div class="cursor-outline hidden md:block" id="cursor-outline"></div>
+
+<!-- Navigation -->
+<header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex justify-between items-center relative">
+
+    <div class="flex items-center gap-2 cursor-pointer link-hover z-50 shrink-0">
+      <div class="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center shadow-md">
+        <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+      </div>
+      <span class="text-xl font-bold tracking-tight">REVELOX.</span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden lg:flex flex-1 justify-center gap-6 xl:gap-8 text-sm font-medium text-zinc-500 mx-4">
+      <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Платформа</a>
+      <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Кейсы</a>
+      <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Интеграции</a>
+      <a href="#" class="hover:text-primary transition-colors link-hover whitespace-nowrap">Отзывы</a>
+    </nav>
+
+    <div class="hidden lg:flex gap-4 items-center z-50 shrink-0">
+      <button class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-zinc-800 transition-colors link-hover whitespace-nowrap">
+        Войти
+      </button>
+    </div>
+
+    <!-- Mobile Burger Button -->
+    <button id="mobile-menu-btn" class="lg:hidden text-zinc-800 hover:text-primary transition-colors p-2 z-50 ml-auto">
+      <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="absolute top-16 md:top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-zinc-200 shadow-xl transition-all duration-300 origin-top scale-y-0 opacity-0 px-6 py-8 flex flex-col gap-6 lg:hidden z-40 rounded-b-3xl">
+      <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Платформа</a>
+      <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Кейсы</a>
+      <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Интеграции</a>
+      <a href="#" class="text-lg font-semibold text-zinc-800 hover:text-primary border-b border-zinc-100 pb-2">Отзывы</a>
+      <button class="w-full bg-primary text-white px-5 py-4 rounded-xl text-base font-medium hover:bg-zinc-800 transition-colors mt-2">
+        Войти
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="relative pt-28 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 overflow-hidden px-4 md:px-6">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-100 via-background to-background"></div>
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
+    <div class="reveal mt-4 md:mt-0 text-center lg:text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white shadow-sm text-xs font-semibold mb-6">
+        <span class="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
+        Встречайте Revelox
+      </div>
+
+      <!-- Убраны классы break-words и hyphens-auto. Теперь слова переносятся целиком. -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6 text-zinc-900 w-full">
+        Проектируем <br class="hidden sm:block"><span class="text-gradient">цифровое завтра.</span>
+      </h1>
+
+      <p class="text-sm md:text-lg text-zinc-500 mb-8 max-w-md mx-auto lg:mx-0 font-light leading-relaxed">
+        Экосистема для брендов, объединяющая дизайн-коды, ИИ-маркетинг и безупречную инженерию интерфейсов.
+      </p>
+
+      <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+        <a href="#" class="link-hover flex h-12 lg:h-14 items-center justify-center rounded-xl bg-primary px-8 text-sm font-medium text-white shadow-md transition-all hover:scale-105 hover:bg-zinc-800 w-full sm:w-auto">
+          Начать проект <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+        </a>
+        <a href="#" class="link-hover flex h-12 lg:h-14 items-center justify-center rounded-xl border border-zinc-200 bg-white px-8 text-sm font-medium text-primary shadow-sm transition-all hover:bg-zinc-50 w-full sm:w-auto">
+          Смотреть шоурил
+        </a>
+      </div>
+    </div>
+
+    <div class="relative reveal reveal-delay-1 mt-6 lg:mt-0">
+      <div class="relative w-full aspect-[4/3] md:aspect-auto md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden border border-zinc-200/50 shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Abstract 3D" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+
+        <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 widget-glass rounded-2xl p-4 flex items-center justify-between z-20">
+          <div class="flex items-center gap-3 md:gap-4">
+            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-md shrink-0">
+              <i data-lucide="activity" class="w-5 h-5 md:w-6 md:h-6 text-white"></i>
+            </div>
+            <div>
+              <p class="text-xs md:text-base font-bold text-white leading-tight">Производительность</p>
+              <p class="text-[10px] md:text-sm text-white/80 font-medium">+142% в этом месяце</p>
+            </div>
+          </div>
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/40 shrink-0">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Infinite Text Marquee -->
+<div class="relative py-4 md:py-6 my-8 md:my-12 transform -rotate-2 scale-110 shadow-xl z-20 bg-primary text-white border-y border-zinc-800 overflow-hidden flex">
+  <div class="flex shrink-0 animate-scroll-left">
+    <div class="flex items-center">
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          ✦ Генеративный UI <i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6 text-blue-400 ml-4 shrink-0"></i>
+      </span>
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          Масштабируемая Архитектура <i data-lucide="zap" class="w-5 h-5 md:w-6 md:h-6 text-orange-400 ml-4 shrink-0"></i>
+      </span>
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          AI Маркетинг <i data-lucide="cpu" class="w-5 h-5 md:w-6 md:h-6 text-green-400 ml-4 shrink-0"></i>
+      </span>
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          Бесшовная Интеграция <i data-lucide="layers" class="w-5 h-5 md:w-6 md:h-6 text-purple-400 ml-4 shrink-0"></i>
+      </span>
+    </div>
+  </div>
+  <div class="flex shrink-0 animate-scroll-left" aria-hidden="true">
+    <div class="flex items-center">
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          ✦ Генеративный UI <i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6 text-blue-400 ml-4 shrink-0"></i>
+      </span>
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          Масштабируемая Архитектура <i data-lucide="zap" class="w-5 h-5 md:w-6 md:h-6 text-orange-400 ml-4 shrink-0"></i>
+      </span>
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          AI Маркетинг <i data-lucide="cpu" class="w-5 h-5 md:w-6 md:h-6 text-green-400 ml-4 shrink-0"></i>
+      </span>
+      <span class="text-lg md:text-2xl font-black uppercase tracking-widest flex items-center pr-8 whitespace-nowrap">
+          Бесшовная Интеграция <i data-lucide="layers" class="w-5 h-5 md:w-6 md:h-6 text-purple-400 ml-4 shrink-0"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Bento Grid Services -->
+<section class="py-12 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
+  <div class="reveal mb-10 md:mb-16 max-w-2xl">
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Архитектура вашего успеха</h2>
+    <p class="text-zinc-500">Мы не просто делаем дизайн. Мы создаем модульные решения, которые масштабируются вместе с вашим бизнесом.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 md:auto-rows-[240px]">
+    <!-- Bento Box 1 (Large) -->
+    <div class="v0-card v0-card-hidden-overflow col-span-1 md:col-span-2 lg:col-span-2 md:row-span-2 p-6 md:p-8 flex flex-col justify-between reveal">
+      <div class="mb-6 md:mb-0">
+        <div class="w-12 h-12 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-6">
+          <i data-lucide="layout-template" class="w-6 h-6 text-primary"></i>
+        </div>
+        <h3 class="text-xl md:text-2xl font-bold mb-2">Генеративный UI/UX</h3>
+        <p class="text-zinc-500 text-sm max-w-sm mb-6">Используем алгоритмы для создания интерфейсов, которые адаптируются под поведение каждого пользователя.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" class="rounded-xl w-full h-40 md:h-56 object-cover border border-zinc-200 transition-transform duration-700 hover:scale-105">
+    </div>
+
+    <!-- Bento Box 2 -->
+    <div class="v0-card v0-card-hidden-overflow col-span-1 md:col-span-1 lg:col-span-2 p-6 md:p-8 reveal reveal-delay-1 relative overflow-hidden group min-h-[200px]">
+      <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+      <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 relative z-10">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 text-blue-600"></i>
+      </div>
+      <h3 class="text-lg md:text-xl font-bold mb-2 relative z-10">Predictive SEO</h3>
+      <p class="text-zinc-500 text-sm max-w-xs relative z-10">Аналитика на базе ИИ для вывода в ТОП и удержания лидерских позиций.</p>
+    </div>
+
+    <!-- Bento Box 3 -->
+    <div class="v0-card col-span-1 p-6 md:p-8 reveal reveal-delay-2 flex flex-col justify-center bg-gradient-to-br from-blue-50 to-white min-h-[160px] md:min-h-[200px]">
+      <h3 class="text-4xl md:text-5xl font-black text-blue-600 mb-2">99.9%</h3>
+      <p class="text-zinc-600 text-sm font-medium">Uptime серверов</p>
+      <div class="w-full h-2 bg-blue-100 rounded-full mt-4 overflow-hidden">
+        <div class="w-[99%] h-full bg-blue-500 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Bento Box 4 -->
+    <div class="v0-card col-span-1 p-6 md:p-8 reveal reveal-delay-3 bg-zinc-900 text-white border-zinc-800 min-h-[160px] md:min-h-[200px] flex flex-col justify-center">
+      <i data-lucide="shield-check" class="w-8 h-8 text-green-400 mb-4"></i>
+      <h3 class="text-lg md:text-xl font-bold mb-2">Безопасность</h3>
+      <p class="text-zinc-400 text-sm">Шифрование Enterprise уровня и защита данных.</p>
+    </div>
+
+    <!-- Bento Box 5 -->
+    <div class="v0-card col-span-1 md:col-span-2 lg:col-span-4 p-6 md:p-8 reveal flex flex-col sm:flex-row gap-6 items-center justify-between text-center sm:text-left min-h-[200px]">
+      <div class="flex-1">
+        <h3 class="text-lg md:text-xl font-bold mb-2">Motion Design</h3>
+        <p class="text-zinc-500 text-sm max-w-2xl">Оживляем бренды с помощью микро-интеракций и 3D графики, делая опыт использования продукта по-настоящему запоминающимся.</p>
+      </div>
+      <div class="w-16 h-16 md:w-24 md:h-24 rounded-full border-[6px] border-zinc-100 flex items-center justify-center relative flex-shrink-0 group-hover:scale-110 transition-transform cursor-pointer mt-4 sm:mt-0">
+        <div class="absolute inset-0 rounded-full border-[6px] border-blue-500 border-t-transparent animate-spin"></div>
+        <i data-lucide="play" class="w-5 h-5 md:w-6 md:h-6 text-zinc-400 ml-1"></i>
+      </div>
+    </div>
+
+    <!-- Bento Box 6 -->
+    <div class="v0-card col-span-1 md:col-span-3 lg:col-span-4 p-6 md:p-10 reveal flex flex-col lg:flex-row gap-8 items-center justify-between bg-zinc-50">
+      <div class="text-center lg:text-left">
+        <h3 class="text-xl md:text-2xl font-bold mb-2">Экосистема Интеграций</h3>
+        <p class="text-zinc-500 text-sm max-w-md mx-auto lg:mx-0">Мы легко интегрируемся с вашими любимыми инструментами для бесшовного рабочего процесса.</p>
+      </div>
+
+      <div class="flex gap-3 md:gap-6 flex-wrap justify-center w-full lg:w-auto">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform group">
+          <svg class="w-6 h-6 md:w-7 md:h-7 text-zinc-800 group-hover:text-black" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+        </div>
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+          <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 28.5C19 33.7467 14.7467 38 9.5 38C4.25329 38 0 33.7467 0 28.5C0 23.2533 4.25329 19 9.5 19H19V28.5Z" fill="#0ACF83"/><path d="M0 47.5C0 52.7467 4.25329 57 9.5 57C14.7467 57 19 52.7467 19 47.5V38H9.5C4.25329 38 0 42.2533 0 47.5Z" fill="#1ABCFE"/><path d="M38 9.5C38 14.7467 33.7467 19 28.5 19H19V0H28.5C33.7467 0 38 4.25329 38 9.5Z" fill="#F24E1E"/><path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#FF7262"/><path d="M38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5Z" fill="#A259FF"/></svg>
+        </div>
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+          <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.523-2.522v-2.522h2.523zM15.165 17.688a2.527 2.527 0 0 1-2.523-2.523 2.526 2.526 0 0 1 2.523-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.52h-6.313z" fill="#E01E5A"/></svg>
+        </div>
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+          <svg class="w-6 h-6 md:w-7 md:h-7 text-[#0052CC]" viewBox="0 0 24 24" fill="currentColor"><path d="M2.778 24h18.444A2.778 2.778 0 0024 21.222V2.778A2.778 2.778 0 0021.222 0H2.778A2.778 2.778 0 000 2.778v18.444A2.778 2.778 0 002.778 24zm8.333-2.778H4.444V4.444h6.667v16.778zm8.445-8.333h-6.667V4.444h6.667v8.445z"/></svg>
+        </div>
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-white border border-zinc-200 rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm hover:-translate-y-1 transition-transform">
+          <svg class="w-6 h-6 md:w-7 md:h-7 text-[#FF4A00]" viewBox="0 0 24 24" fill="currentColor"><path d="M21.905 10.37L16.273.743A1.408 1.408 0 0 0 15.056 0H2.607C1.493 0 .809 1.221 1.391 2.164L7.87 12.63l-5.753 9.48C1.517 23.102 2.228 24 3.387 24h12.56a1.411 1.411 0 0 0 1.206-.68l5.836-9.61a1.597 1.597 0 0 0-.17-1.74l-.914-1.6z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Showcase / How we work -->
+<section class="py-16 md:py-24 bg-zinc-900 text-white md:mt-10 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+  <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div class="reveal">
+      <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md mb-6 border border-white/20">
+        <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Инженерный подход <br>к креативу</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="mt-1"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-400"></i></div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">Синхронизация команд</h4>
+            <p class="text-zinc-400 text-sm">Работаем в едином пространстве, исключая потерю контекста.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="mt-1"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-400"></i></div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">Компонентный дизайн</h4>
+            <p class="text-zinc-400 text-sm">Создаем UI-киты, которые можно переиспользовать бесконечно.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="mt-1"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-400"></i></div>
+          <div>
+            <h4 class="font-bold text-lg mb-1">CI/CD Автоматизация</h4>
+            <p class="text-zinc-400 text-sm">Мгновенный деплой и проверка качества на каждом этапе.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1 grid grid-cols-2 gap-3 md:gap-4">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop" class="rounded-2xl h-40 md:h-64 w-full object-cover translate-y-4 md:translate-y-8 border border-white/10 shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500&auto=format&fit=crop" class="rounded-2xl h-40 md:h-64 w-full object-cover border border-white/10 shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500&auto=format&fit=crop" class="rounded-2xl h-32 md:h-48 w-full object-cover translate-y-4 md:translate-y-8 border border-white/10 shadow-2xl mt-2 md:mt-4">
+      <div class="rounded-2xl h-32 md:h-48 w-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center mt-2 md:mt-4">
+        <div class="text-center">
+          <p class="text-2xl md:text-3xl font-bold text-white mb-1">10k+</p>
+          <p class="text-[10px] md:text-xs text-zinc-400 uppercase tracking-wider">Коммитов</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section (NEW) -->
+<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
+  <div class="text-center mb-12 md:mb-16 reveal">
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Прозрачные тарифы</h2>
+    <p class="text-zinc-500">Масштабируемые решения для проектов любого размера.</p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+    <!-- Basic Plan -->
+    <div class="v0-card p-8 flex flex-col reveal reveal-delay-1">
+      <h3 class="text-xl font-bold mb-2">Старт</h3>
+      <p class="text-zinc-500 text-sm mb-6">Для небольших команд и стартапов.</p>
+      <div class="mb-6">
+        <span class="text-4xl font-black">$499</span>
+        <span class="text-zinc-500 text-sm">/мес</span>
+      </div>
+      <ul class="space-y-4 text-sm text-zinc-600 mb-8 flex-1">
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Базовый UI-kit</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Адаптивный дизайн</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> До 5 страниц</li>
+      </ul>
+      <button class="w-full py-3 rounded-xl border border-zinc-200 font-medium hover:bg-zinc-50 transition-colors link-hover">Выбрать план</button>
+    </div>
+
+    <!-- Pro Plan (Highlighted) -->
+    <div class="v0-card p-8 flex flex-col reveal bg-primary text-white border-none shadow-2xl relative overflow-hidden md:-translate-y-4">
+      <div class="absolute top-0 right-0 bg-blue-500 text-xs font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">Популярный</div>
+      <h3 class="text-xl font-bold mb-2">Про</h3>
+      <p class="text-zinc-400 text-sm mb-6">Для растущего бизнеса.</p>
+      <div class="mb-6">
+        <span class="text-4xl font-black">$1299</span>
+        <span class="text-zinc-400 text-sm">/мес</span>
+      </div>
+      <ul class="space-y-4 text-sm text-zinc-300 mb-8 flex-1">
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Всё из тарифа Старт</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Дизайн-система (Figma)</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Интеграция AI-аналитики</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Безлимитные страницы</li>
+      </ul>
+      <button class="w-full py-3 rounded-xl bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors link-hover shadow-[0_0_15px_rgba(59,130,246,0.5)]">Выбрать Про</button>
+    </div>
+
+    <!-- Enterprise Plan -->
+    <div class="v0-card p-8 flex flex-col reveal reveal-delay-2">
+      <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+      <p class="text-zinc-500 text-sm mb-6">Кастомная разработка.</p>
+      <div class="mb-6">
+        <span class="text-4xl font-black">Индивид.</span>
+      </div>
+      <ul class="space-y-4 text-sm text-zinc-600 mb-8 flex-1">
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Выделенная команда</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Enterprise безопасность</li>
+        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> SLA 99.9%</li>
+      </ul>
+      <button class="w-full py-3 rounded-xl border border-zinc-200 font-medium hover:bg-zinc-50 transition-colors link-hover">Связаться с нами</button>
+    </div>
+  </div>
+</section>
+
+<!-- Scrolling Testimonials -->
+<section class="py-16 md:py-32 overflow-hidden bg-zinc-50 relative border-t border-zinc-200">
+  <div class="text-center mb-10 md:mb-16 reveal max-w-7xl mx-auto px-4 md:px-6">
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Нас рекомендуют</h2>
+    <p class="text-zinc-500">От стартапов до Enterprise компаний.</p>
+  </div>
+
+  <div class="relative group flex overflow-hidden">
+    <div class="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-zinc-50 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-zinc-50 to-transparent z-10 pointer-events-none"></div>
+
+    <div class="flex shrink-0 animate-scroll-left group-hover:[animation-play-state:paused]">
+      <div class="flex">
+        <!-- Card 1 -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Revelox полностью изменила наш подход к разработке. Редизайн приложения повысил конверсию на 40% уже в первый месяц. Ребята — настоящие инженеры интерфейсов."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Елена Соколова</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CEO, FinTech Startup</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Их подход к компонентному дизайну сэкономил нам сотни часов разработки. UI-kit, который они собрали, работает безупречно на всех платформах."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Михаил Воронов</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CTO, E-commerce Group</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Идеальное сочетание креатива и технологий. Внедренная AI-аналитика помогла нам снизить стоимость лида в 2.5 раза. Крайне рекомендую к сотрудничеству."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Анна Коваленко</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">Marketing Director, SaaS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duplicate for Seamless Loop -->
+    <div class="flex shrink-0 animate-scroll-left group-hover:[animation-play-state:paused]" aria-hidden="true">
+      <div class="flex">
+        <!-- Дубликаты карточек (такие же как выше) для бесконечной ленты -->
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Revelox полностью изменил наш подход к разработке. Редизайн приложения повысил конверсию на 40% уже в первый месяц. Ребята — настоящие инженеры интерфейсов."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Елена Соколова</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CEO, FinTech Startup</p>
+            </div>
+          </div>
+        </div>
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Их подход к компонентному дизайну сэкономил нам сотни часов разработки. UI-kit, который они собрали, работает безупречно на всех платформах."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Михаил Воронов</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">CTO, E-commerce Group</p>
+            </div>
+          </div>
+        </div>
+        <div class="v0-card w-[280px] sm:w-[320px] md:w-[400px] p-5 md:p-6 whitespace-normal flex-shrink-0 mr-4 md:mr-6">
+          <div class="flex items-center gap-1.5 text-yellow-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-zinc-600 text-xs md:text-sm mb-6 leading-relaxed">"Идеальное сочетание креатива и технологий. Внедренная AI-аналитика помогла нам снизить стоимость лида в 2.5 раза. Крайне рекомендую к сотрудничеству."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0">
+            <div>
+              <p class="text-xs md:text-sm font-bold text-primary">Анна Коваленко</p>
+              <p class="text-[9px] md:text-[10px] uppercase tracking-wider text-zinc-500">Marketing Director, SaaS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section (NEW) -->
+<section class="py-16 md:py-24 px-4 md:px-6 max-w-3xl mx-auto">
+  <div class="text-center mb-12 reveal">
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Ответы на вопросы</h2>
+  </div>
+
+  <div class="space-y-4 reveal reveal-delay-1">
+    <div class="v0-card p-6 border-zinc-200">
+      <h4 class="font-bold text-lg mb-2 text-zinc-900">Как быстро вы запускаете проекты?</h4>
+      <p class="text-zinc-500 text-sm">Обычно разработка первого MVP занимает от 2 до 4 недель, в зависимости от сложности логики и интеграций.</p>
+    </div>
+    <div class="v0-card p-6 border-zinc-200">
+      <h4 class="font-bold text-lg mb-2 text-zinc-900">Можем ли мы использовать свои макеты?</h4>
+      <p class="text-zinc-500 text-sm">Да, мы с удовольствием интегрируем ваш готовый UI/UX дизайн и перенесем его на современный и быстрый стек технологий.</p>
+    </div>
+    <div class="v0-card p-6 border-zinc-200">
+      <h4 class="font-bold text-lg mb-2 text-zinc-900">Что входит в техническую поддержку?</h4>
+      <p class="text-zinc-500 text-sm">Мониторинг серверов 24/7, регулярное обновление зависимостей, бэкапы данных и оперативное исправление багов.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA Section (NEW) -->
+<section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto mb-12 relative">
+  <div class="bg-primary rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden reveal shadow-2xl">
+    <!-- Декоративные круги -->
+    <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
+    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+
+    <div class="relative z-10">
+      <h2 class="text-3xl md:text-5xl font-black mb-6 tracking-tight">Готовы обогнать конкурентов?</h2>
+      <p class="text-zinc-400 mb-10 max-w-xl mx-auto text-sm md:text-base">Оставьте заявку сегодня и получите бесплатный аудит вашей текущей архитектуры от наших Senior инженеров.</p>
+      <button class="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-zinc-100 transition-colors link-hover shadow-lg inline-flex items-center gap-2">
+        Обсудить проект <i data-lucide="rocket" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Expanded Footer -->
+<footer class="border-t border-zinc-200 bg-white pt-12 md:pt-24 pb-8 md:pb-12 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 md:gap-8 mb-12 md:mb-16">
+
+    <!-- Logo & Newsletter -->
+    <div class="lg:col-span-2">
+      <div class="flex items-center gap-2 mb-6">
+        <div class="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight">REVELOX.</span>
+      </div>
+      <p class="text-zinc-500 text-sm max-w-sm mb-6 leading-relaxed">
+        Мы переосмысляем то, как бренды взаимодействуют с цифровым миром. Инновации в каждом пикселе.
+      </p>
+      <form class="flex w-full max-w-sm border border-zinc-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+        <input type="email" placeholder="Email для подписки" class="w-full min-w-0 flex-1 px-4 py-3 text-sm focus:outline-none bg-transparent">
+        <button class="bg-primary text-white px-4 md:px-6 py-3 text-sm font-medium hover:bg-zinc-800 transition-colors link-hover border-l border-zinc-800 shrink-0">
+          Подписаться
+        </button>
+      </form>
+    </div>
+
+    <!-- Products -->
+    <div>
+      <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Продукты</h4>
+      <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
+        <li><a href="#" class="hover:text-primary transition link-hover block">Дизайн системы</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Веб-приложения</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">AI Аналитика</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Инфраструктура</a></li>
+      </ul>
+    </div>
+
+    <!-- Company -->
+    <div>
+      <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Компания</h4>
+      <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
+        <li><a href="#" class="hover:text-primary transition link-hover block">О нас</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Карьера <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded ml-1">Найм</span></a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Блог</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Контакты</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div>
+      <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Ресурсы</h4>
+      <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
+        <li><a href="#" class="hover:text-primary transition link-hover block">Help Center</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Гайды</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">API Документация</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Статус систем</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal -->
+    <div>
+      <h4 class="font-bold mb-4 md:mb-6 text-zinc-900">Правовая инф.</h4>
+      <ul class="space-y-3 md:space-y-4 text-sm text-zinc-500">
+        <li><a href="#" class="hover:text-primary transition link-hover block">Пользовательское согл.</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Политика конф.</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Cookies</a></li>
+        <li><a href="#" class="hover:text-primary transition link-hover block">Лицензии</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="max-w-7xl mx-auto px-4 md:px-6 border-t border-zinc-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <p class="text-sm text-zinc-400 text-center md:text-left">
+      &copy; 2026 Revelox. Design by VZBB.
+    </p>
+    <div class="flex items-center gap-5 text-zinc-400">
+      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="github" class="w-5 h-5"></i></a>
+      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="figma" class="w-5 h-5"></i></a>
+      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      <a href="#" class="hover:text-primary transition-colors link-hover hover:scale-110 transform"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  // Initialize Lucide Icons
+  lucide.createIcons();
+
+  // --- Mobile Menu Toggle Logic ---
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  let isMenuOpen = false;
+
+  mobileBtn.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    if(isMenuOpen) {
+      mobileMenu.classList.remove('scale-y-0', 'opacity-0');
+      mobileMenu.classList.add('scale-y-100', 'opacity-100');
+      menuIcon.setAttribute('data-lucide', 'x');
+    } else {
+      mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+      mobileMenu.classList.add('scale-y-0', 'opacity-0');
+      menuIcon.setAttribute('data-lucide', 'menu');
+    }
+    lucide.createIcons();
+  });
+
+  // --- Custom Cursor Logic ---
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorOutline = document.getElementById('cursor-outline');
+
+  const isMobile = () => window.innerWidth < 1024;
+
+  window.addEventListener('mousemove', (e) => {
+    if(isMobile()) return;
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    cursorDot.style.left = `${posX}px`;
+    cursorDot.style.top = `${posY}px`;
+
+    setTimeout(() => {
+      cursorOutline.style.left = `${posX}px`;
+      cursorOutline.style.top = `${posY}px`;
+    }, 50);
+  });
+
+  document.body.addEventListener('mouseover', (e) => {
+    if(isMobile()) return;
+    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button')) {
+      cursorDot.classList.add('hover');
+      cursorOutline.classList.add('hover');
+    }
+  });
+
+  document.body.addEventListener('mouseout', (e) => {
+    if(isMobile()) return;
+    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button')) {
+      cursorDot.classList.remove('hover');
+      cursorOutline.classList.remove('hover');
+    }
+  });
+
+  // --- Scroll Animation Observer ---
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
+
+  const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  revealElements.forEach(el => revealOnScroll.observe(el));
+</script>
+</body>
+</html>
