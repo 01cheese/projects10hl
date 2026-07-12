@@ -16,21 +16,17 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop&fm=webp">
 
-  <!-- Preconnect for Performance -->
+  <!-- Загружаем библиотеки без defer, чтобы они гарантированно были доступны -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Шрифты -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Designer Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Lenis Smooth Scroll -->
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-
-  <!-- Deferred Scripts -->
-  <script defer src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-  <script defer src="https://unpkg.com/lucide@latest"></script>
-
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -851,24 +847,15 @@
 
 <!-- Scripts -->
 <script>
-  // 1. Lenis Smooth Scrolling
-  const lenis = new Lenis({
-    duration: 1.6,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 1.1,
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // 1. Lenis Smooth Scrolling (с проверкой на загрузку)
+  // Ждем загрузки всех библиотек перед инициализацией
   window.addEventListener('load', () => {
+
+    // 1. Инициализация иконок
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+
+    // 2. Lenis Smooth Scrolling
     const lenis = new Lenis({
       duration: 1.6,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -880,82 +867,54 @@
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-  });
 
-  // 2. Initialize Icons
-  lucide.createIcons();
+    // 3. Логика мобильного меню
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const burgerSvgIcon = document.getElementById('burger-icon-svg');
 
-  // 3. Mobile Menu Logic (SVG Morphing)
-  const mobileBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const burgerSvgIcon = document.getElementById('burger-icon-svg');
+    const iconMenuPath = `<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>`;
+    const iconClosePath = `<path d="M18 6 6 18"/><path d="m6 6 12 12"/>`;
 
-  const iconMenuPath = `<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>`;
-  const iconClosePath = `<path d="M18 6 6 18"/><path d="m6 6 12 12"/>`;
+    let isMenuOpen = false;
 
-  let isMenuOpen = false;
-
-  if (mobileBtn && mobileMenu) {
-    mobileBtn.addEventListener('click', () => {
-      isMenuOpen = !isMenuOpen;
-      if(isMenuOpen) {
-        mobileMenu.classList.remove('scale-y-0', 'opacity-0', 'pointer-events-none');
-        mobileMenu.classList.add('scale-y-100', 'opacity-100', 'pointer-events-auto');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        mobileMenu.classList.toggle('scale-y-100', isMenuOpen);
+        mobileMenu.classList.toggle('opacity-100', isMenuOpen);
+        mobileMenu.classList.toggle('pointer-events-auto', isMenuOpen);
 
         if (burgerSvgIcon) {
-          burgerSvgIcon.style.transform = 'rotate(90deg)';
-          setTimeout(() => { burgerSvgIcon.innerHTML = iconClosePath; }, 150);
+          burgerSvgIcon.style.transform = isMenuOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+          burgerSvgIcon.innerHTML = isMenuOpen ? iconClosePath : iconMenuPath;
         }
-      } else {
-        mobileMenu.classList.remove('scale-y-100', 'opacity-100', 'pointer-events-auto');
-        mobileMenu.classList.add('scale-y-0', 'opacity-0', 'pointer-events-none');
+      });
+    }
 
-        if (burgerSvgIcon) {
-          burgerSvgIcon.style.transform = 'rotate(0deg)';
-          setTimeout(() => { burgerSvgIcon.innerHTML = iconMenuPath; }, 150);
+    // 4. Логика курсора
+    const customCursor = document.getElementById('custom-cursor');
+    const isMobile = () => window.innerWidth < 1024;
+
+    window.addEventListener('mousemove', (e) => {
+      if(isMobile() || !customCursor) return;
+      customCursor.style.left = `${e.clientX}px`;
+      customCursor.style.top = `${e.clientY}px`;
+    });
+
+    // 5. Scroll Reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
         }
-      }
-    });
-  }
+      });
+    }, { threshold: 0.15 });
 
-  // 4. Custom Cursor Logic
-  const customCursor = document.getElementById('custom-cursor');
-  const isMobile = () => window.innerWidth < 1024;
-
-  window.addEventListener('mousemove', (e) => {
-    if(isMobile() || !customCursor) return;
-    customCursor.style.left = `${e.clientX}px`;
-    customCursor.style.top = `${e.clientY}px`;
+    revealElements.forEach(el => observer.observe(el));
   });
-
-  document.body.addEventListener('mouseover', (e) => {
-    if(isMobile() || !customCursor) return;
-    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) {
-      customCursor.classList.add('hover');
-    }
-  });
-
-  document.body.addEventListener('mouseout', (e) => {
-    if(isMobile() || !customCursor) return;
-    if(e.target.closest('.link-hover') || e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) {
-      customCursor.classList.remove('hover');
-    }
-  });
-
-  // 5. Scroll Reveal Animation Observer
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-
-  const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, revealOptions);
-
-  revealElements.forEach(el => revealOnScroll.observe(el));
 </script>
 </body>
 </html>
