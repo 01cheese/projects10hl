@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EuroLogistics - Комплексные логистические решения</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#0f172a',
+            accent: '#dc2626',
+            light: '#f8fafc',
+            dark: '#1e293b'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hero-bg {
+      background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-white">
+
+<nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 transition duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex-shrink-0 flex items-center cursor-pointer">
+        <i class="fa-solid fa-route text-accent text-3xl mr-2"></i>
+        <span class="font-extrabold text-2xl tracking-tight text-primary">Euro<span class="text-accent">Logistics</span></span>
+      </div>
+      <div class="hidden lg:flex space-x-6">
+        <a href="#services" class="text-sm font-semibold text-gray-700 hover:text-accent transition">Услуги</a>
+        <a href="#solutions" class="text-sm font-semibold text-gray-700 hover:text-accent transition">Почему мы</a>
+        <a href="#geography" class="text-sm font-semibold text-gray-700 hover:text-accent transition">География</a>
+        <a href="#about" class="text-sm font-semibold text-gray-700 hover:text-accent transition">О нас</a>
+        <a href="#expertise" class="text-sm font-semibold text-gray-700 hover:text-accent transition">Экспертность</a>
+        <a href="#contact" class="text-sm font-semibold text-gray-700 hover:text-accent transition">Контакты</a>
+      </div>
+      <div class="hidden lg:flex items-center space-x-4">
+        <a href="tel:+48123456789" class="font-bold text-primary"><i class="fa-solid fa-phone mr-1 text-accent"></i> +48 123 456 789</a>
+        <a href="#contact" class="bg-accent text-white px-5 py-2.5 rounded text-sm font-bold hover:bg-red-700 transition shadow-md">Заказать расчет</a>
+      </div>
+      <div class="lg:hidden flex items-center">
+        <button id="mobile-menu-btn" class="text-primary focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+      <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent hover:bg-gray-50">Услуги</a>
+      <a href="#solutions" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent hover:bg-gray-50">Почему мы</a>
+      <a href="#geography" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent hover:bg-gray-50">География</a>
+      <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent hover:bg-gray-50">О нас</a>
+      <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent hover:bg-gray-50">Контакты</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-bg relative pt-32 pb-24 lg:pt-40 lg:pb-32 flex items-center min-h-[85vh]">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
+    <div class="lg:w-3/5 text-center lg:text-left">
+      <div class="inline-block bg-accent/20 border border-accent/50 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+        Международная логистика без границ
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+        Стабильные грузоперевозки <br class="hidden md:block">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-accent">по всей Европе и Азии</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
+        Гарантируем сохранность груза, соблюдение сроков и оптимизацию логистических затрат. От небольших партий до масштабных промышленных проектов.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <a href="#contact" class="bg-accent text-white px-8 py-4 rounded font-bold text-lg hover:bg-red-700 transition shadow-lg shadow-red-900/50">
+          Оставить заявку
+        </a>
+        <a href="#services" class="bg-white/10 border border-white/30 text-white px-8 py-4 rounded font-bold text-lg hover:bg-white hover:text-primary transition backdrop-blur-sm">
+          Наши услуги
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:w-2/5 w-full max-w-md bg-white p-8 rounded-xl shadow-2xl relative">
+      <div class="absolute -top-4 -right-4 bg-accent w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-white">
+        <i class="fa-solid fa-percent text-xl"></i>
+      </div>
+      <h3 class="text-2xl font-bold mb-2 text-primary">Быстрый расчет</h3>
+      <p class="text-gray-500 text-sm mb-6">Получите стоимость доставки за 15 минут</p>
+      <form class="space-y-4">
+        <div class="flex gap-4">
+          <div class="w-1/2">
+            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase">Откуда</label>
+            <input type="text" placeholder="Город, страна" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition">
+          </div>
+          <div class="w-1/2">
+            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase">Куда</label>
+            <input type="text" placeholder="Город, страна" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase">Вес и объем (примерно)</label>
+          <input type="text" placeholder="Например: 10 тонн, 40 м3" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase">Ваш телефон</label>
+          <input type="tel" placeholder="+ (___) ___ - __ - __" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition">
+        </div>
+        <button type="button" class="w-full bg-primary text-white font-bold py-3.5 rounded hover:bg-slate-800 transition mt-2">
+          Получить предложение
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="bg-primary text-white py-12 border-b border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-700">
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">10+</div>
+        <div class="text-sm font-medium text-gray-400">Лет на рынке</div>
+      </div>
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">250+</div>
+        <div class="text-sm font-medium text-gray-400">Единиц автопарка</div>
+      </div>
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">15k+</div>
+        <div class="text-sm font-medium text-gray-400">Успешных рейсов в год</div>
+      </div>
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">99%</div>
+        <div class="text-sm font-medium text-gray-400">Доставок в срок</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-primary mb-4">Наши логистические <span class="text-accent">услуги</span></h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Полный спектр решений для доставки вашего груза в любую точку Европы и Азии.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-light p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent group-hover:text-white transition">
+          <i class="fa-solid fa-truck text-2xl text-primary group-hover:text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">FTL (Комплектные грузы)</h3>
+        <p class="text-gray-600 text-sm">Подача отдельного грузовика под ваш товар. Прямая доставка от двери до двери без перегрузок на терминалах. Максимальная скорость.</p>
+      </div>
+
+      <div class="bg-light p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent group-hover:text-white transition">
+          <i class="fa-solid fa-boxes-stacked text-2xl text-primary group-hover:text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">LTL (Сборные грузы)</h3>
+        <p class="text-gray-600 text-sm">Идеально для небольших партий от 1 палеты. Консолидация на наших складах в Европе. Вы платите только за занимаемое место.</p>
+      </div>
+
+      <div class="bg-light p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent group-hover:text-white transition">
+          <i class="fa-regular fa-snowflake text-2xl text-primary group-hover:text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">Температурные грузы</h3>
+        <p class="text-gray-600 text-sm">Перевозка рефрижераторами с поддержкой режима от -20°C до +25°C. Продукты питания, медикаменты, косметика, химия.</p>
+      </div>
+
+      <div class="bg-light p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent group-hover:text-white transition">
+          <i class="fa-solid fa-weight-hanging text-2xl text-primary group-hover:text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">Негабаритные перевозки</h3>
+        <p class="text-gray-600 text-sm">Доставка спецтехники, станков и конструкций. Получение разрешений, организация сопровождения пилотами и полицией.</p>
+      </div>
+
+      <div class="bg-light p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent group-hover:text-white transition">
+          <i class="fa-solid fa-file-signature text-2xl text-primary group-hover:text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">Таможенное оформление</h3>
+        <p class="text-gray-600 text-sm">Услуги таможенного брокера. Оформление EX1, T1, EPI, Carnet TIR. Помощь с классификацией кодов ТН ВЭД.</p>
+      </div>
+
+      <div class="bg-light p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent group-hover:text-white transition">
+          <i class="fa-solid fa-warehouse text-2xl text-primary group-hover:text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3 text-primary">Складская логистика</h3>
+        <p class="text-gray-600 text-sm">Ответственное хранение на складах класса А в Польше, Германии и Литве. Кросс-докинг, переупаковка, маркировка.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="solutions" class="py-24 bg-light border-y border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-12">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-primary mb-4">Легкие и надежные <br>логистические решения</h2>
+      <p class="text-gray-600 max-w-2xl">Наша компания гарантирует высокое качество и доступность доставки, точные сроки и максимальное удобство на каждом этапе сотрудничества.</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-10">
+      <div class="lg:w-1/4 space-y-2">
+        <button class="tab-btn w-full text-left px-5 py-4 border-l-4 border-accent text-primary font-bold bg-white shadow-sm transition-all rounded-r" data-target="tab-availability">
+          Доступность транспорта
+        </button>
+        <button class="tab-btn w-full text-left px-5 py-4 border-l-4 border-transparent text-gray-500 hover:bg-gray-50 font-medium transition-all rounded-r" data-target="tab-transparency">
+          Прозрачность и контроль
+        </button>
+        <button class="tab-btn w-full text-left px-5 py-4 border-l-4 border-transparent text-gray-500 hover:bg-gray-50 font-medium transition-all rounded-r" data-target="tab-insurance">
+          Страхование и гарантии
+        </button>
+        <button class="tab-btn w-full text-left px-5 py-4 border-l-4 border-transparent text-gray-500 hover:bg-gray-50 font-medium transition-all rounded-r" data-target="tab-service">
+          Ответственный сервис
+        </button>
+        <button class="tab-btn w-full text-left px-5 py-4 border-l-4 border-transparent text-gray-500 hover:bg-gray-50 font-medium transition-all rounded-r" data-target="tab-finance">
+          Цифровые решения
+        </button>
+      </div>
+
+      <div class="lg:w-3/4 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <div id="tab-availability" class="tab-content block animate-fade-in">
+          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Доступность транспорта" class="w-full h-72 object-cover rounded-lg mb-8">
+          <h3 class="text-2xl font-bold text-primary mb-4">Доступность транспорта — даже в высокий сезон</h3>
+          <p class="text-gray-600 mb-4">Мы обеспечиваем клиентам стабильный доступ к транспортным средствам благодаря обширной сети собственных и партнерских автопарков по всей Европе, Турции и странам СНГ.</p>
+          <p class="text-gray-600 mb-4 font-semibold">Наши форматы доставки:</p>
+          <ul class="space-y-2 text-gray-600 mb-6">
+            <li><i class="fa-solid fa-check text-accent mr-2"></i> <b>FTL</b> — полная загрузка авто под крупные партии грузов;</li>
+            <li><i class="fa-solid fa-check text-accent mr-2"></i> <b>LTL</b> — сборные линии для оптимизации ваших затрат;</li>
+            <li><i class="fa-solid fa-check text-accent mr-2"></i> <b>Рефрижераторы</b> — для грузов, требующих температурного контроля;</li>
+            <li><i class="fa-solid fa-check text-accent mr-2"></i> <b>Мультимодальные</b> — комбинирование авто, ж/д и морского транспорта.</li>
+          </ul>
+        </div>
+
+        <div id="tab-transparency" class="tab-content hidden animate-fade-in">
+          <img src="https://images.unsplash.com/photo-1519003300449-424ad0405076?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Контроль груза" class="w-full h-72 object-cover rounded-lg mb-8">
+          <h3 class="text-2xl font-bold text-primary mb-4">Полная прозрачность и контроль процессов</h3>
+          <p class="text-gray-600 mb-4">В современной логистике осведомленность — ключевое условие стабильности. Мы предоставляем клиентам полную видимость всех этапов перевозки: от погрузки до выгрузки.</p>
+          <ul class="space-y-4 text-gray-600 mb-6 mt-6">
+            <li class="flex items-start">
+              <div class="bg-red-100 p-2 rounded text-accent mr-4 mt-1"><i class="fa-solid fa-location-dot"></i></div>
+              <div><b>GPS-мониторинг:</b> Вы получаете регулярные обновления статуса и прогнозируемое время прибытия.</div>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-red-100 p-2 rounded text-accent mr-4 mt-1"><i class="fa-solid fa-file-invoice"></i></div>
+              <div><b>Документооборот:</b> Быстрый доступ ко всей сопроводительной документации (CMR, EX1, инвойсы, фото груза).</div>
+            </li>
+          </ul>
+        </div>
+
+        <div id="tab-insurance" class="tab-content hidden animate-fade-in">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Страхование" class="w-full h-72 object-cover rounded-lg mb-8">
+          <h3 class="text-2xl font-bold text-primary mb-4">Надежное страхование и финансовые гарантии</h3>
+          <p class="text-gray-600 mb-4">Безопасность вашего груза — наш абсолютный приоритет. Ответственность перевозчика застрахована согласно конвенции CMR на сумму от 300 000 евро.</p>
+          <p class="text-gray-600 mb-4">Дополнительно мы предлагаем полисы "All Risks" (От всех рисков) от ведущих европейских страховых компаний для дорогостоящих товаров (электроника, фармацевтика, брендовая одежда). Мы берем на себя все процессы урегулирования в случае инцидентов.</p>
+        </div>
+
+        <div id="tab-service" class="tab-content hidden animate-fade-in">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Сервис" class="w-full h-72 object-cover rounded-lg mb-8">
+          <h3 class="text-2xl font-bold text-primary mb-4">Персональный и ответственный сервис</h3>
+          <p class="text-gray-600 mb-4">За вашей компанией закрепляется выделенный аккаунт-менеджер, который доступен 24/7. Он глубоко погружается в специфику вашего бизнеса, знает требования складов загрузки и выгрузки.</p>
+          <p class="text-gray-600 mb-4">В случае изменения планов поставок, очередей на границах или форс-мажоров, наш менеджер не просто сообщает проблему, а сразу предлагает 2-3 проактивных варианта ее решения.</p>
+        </div>
+
+        <div id="tab-finance" class="tab-content hidden animate-fade-in">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Цифровые решения" class="w-full h-72 object-cover rounded-lg mb-8">
+          <h3 class="text-2xl font-bold text-primary mb-4">Интеграции и удобный документооборот</h3>
+          <p class="text-gray-600 mb-4">Мы инвестируем в IT-инфраструктуру. Внедряем современные EDI-системы и API для бесшовной интеграции с вашими ERP (SAP, 1C, Oracle).</p>
+          <p class="text-gray-600 mb-4">Электронный документооборот (ЭДО) позволяет ускорить обмен закрывающими документами, исключить потерю оригиналов и минимизировать бюрократию, ускоряя финансовые взаиморасчеты.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section id="geography" class="py-24 bg-primary text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4">География <span class="text-accent">маршрутов</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Мы покрываем ключевые логистические коридоры Евразии, обеспечивая бесперебойные поставки.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="p-8 border border-gray-700 rounded-xl bg-dark">
+        <i class="fa-solid fa-map-location-dot text-4xl text-accent mb-6"></i>
+        <h3 class="text-xl font-bold mb-4">Европейский Союз</h3>
+        <ul class="space-y-2 text-gray-400">
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Германия, Франция, Италия</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Испания, Португалия, Бенилюкс</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Польша, Чехия, Прибалтика</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Скандинавия</li>
+        </ul>
+      </div>
+      <div class="p-8 border border-gray-700 rounded-xl bg-dark">
+        <i class="fa-solid fa-globe text-4xl text-accent mb-6"></i>
+        <h3 class="text-xl font-bold mb-4">Балканы и Турция</h3>
+        <ul class="space-y-2 text-gray-400">
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Турция (Стамбул, Измир, Бурса)</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Румыния, Болгария, Греция</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Сербия, Хорватия, Словения</li>
+        </ul>
+      </div>
+      <div class="p-8 border border-gray-700 rounded-xl bg-dark">
+        <i class="fa-solid fa-route text-4xl text-accent mb-6"></i>
+        <h3 class="text-xl font-bold mb-4">СНГ и Азия</h3>
+        <ul class="space-y-2 text-gray-400">
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Казахстан, Узбекистан</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Грузия, Азербайджан, Армения</li>
+          <li><i class="fa-solid fa-arrow-right text-xs text-accent mr-2"></i> Китай (авто и мультимодал)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="about" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-primary mb-12">Про нас</h2>
+
+    <p class="text-lg text-gray-800 font-semibold mb-6">EuroLogistics — Ваш надежный партнер в международных грузовых перевозках с 2014 года.</p>
+    <p class="text-gray-600 mb-10 max-w-4xl">
+      Мы сотрудничаем с ведущими европейскими производителями, обеспечивая не просто доставку, а комплексные логистические решения, поддерживающие стабильность бизнеса наших клиентов.
+    </p>
+    
+    <div class="flex flex-col md:flex-row gap-6 mb-16 items-stretch">
+
+      <div class="flex-grow bg-gray-50 p-8 md:p-10 rounded-lg border-t-4 border-[#dc2626]">
+        <h4 class="text-2xl font-bold text-primary mb-4">Наша миссия:</h4>
+        <p class="text-gray-600 text-base leading-relaxed">
+          Предоставлять надежные, эффективные и прозрачные транспортные решения, которые помогают сокращать логистические затраты и повышать эффективность цепочек поставок наших клиентов.
+        </p>
+      </div>
+
+      <div class="w-full md:w-80 bg-white p-8 rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] border border-gray-100 flex flex-col items-center justify-center">
+        <h4 class="text-sm font-bold text-gray-500 uppercase mb-6 tracking-wider">Сертификаты</h4>
+        <div class="flex gap-4">
+          <div class="w-24 h-28 bg-gray-100 flex items-center justify-center text-sm text-gray-500 font-bold border border-gray-200">ISO 9001</div>
+          <div class="w-24 h-28 bg-gray-100 flex items-center justify-center text-sm text-gray-500 font-bold border border-gray-200">GDP</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-50 flex items-center gap-6 hover:-translate-y-1 transition duration-300">
+        <div class="text-4xl text-accent"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h4 class="font-bold text-primary text-lg">Европейский уровень</h4>
+          <p class="text-sm text-gray-500 mt-1">Сервиса и коммуникации</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-50 flex items-center gap-6 hover:-translate-y-1 transition duration-300">
+        <div class="text-4xl text-accent"><i class="fa-solid fa-puzzle-piece"></i></div>
+        <div>
+          <h4 class="font-bold text-primary text-lg">Гибкие решения</h4>
+          <p class="text-sm text-gray-500 mt-1">Индивидуально под бизнес</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-50 flex items-center gap-6 hover:-translate-y-1 transition duration-300">
+        <div class="text-4xl text-accent"><i class="fa-solid fa-trophy"></i></div>
+        <div>
+          <h4 class="font-bold text-primary text-lg">Безупречная репутация</h4>
+          <p class="text-sm text-gray-500 mt-1">Проверена лидерами рынка</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="expertise" class="py-24 bg-light border-y border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-primary">Индустриальная <span class="text-accent">экспертность</span></h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Мы понимаем специфику различных отраслей экономики и предоставляем специализированный транспорт, отвечающий всем стандартам.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="p-8 border border-gray-200 rounded-xl bg-white hover:shadow-lg transition">
+        <i class="fa-solid fa-cart-shopping text-4xl text-accent mb-4"></i>
+        <h3 class="font-bold text-lg mb-2 text-primary">FMCG & Ритейл</h3>
+        <p class="text-sm text-gray-500">Быстрые поставки товаров в распределительные центры.</p>
+      </div>
+      <div class="p-8 border border-gray-200 rounded-xl bg-white hover:shadow-lg transition">
+        <i class="fa-solid fa-car text-4xl text-accent mb-4"></i>
+        <h3 class="font-bold text-lg mb-2 text-primary">Automotive</h3>
+        <p class="text-sm text-gray-500">Поставки автокомпонентов точно в срок (JIT) на конвейеры.</p>
+      </div>
+      <div class="p-8 border border-gray-200 rounded-xl bg-white hover:shadow-lg transition">
+        <i class="fa-solid fa-pills text-4xl text-accent mb-4"></i>
+        <h3 class="font-bold text-lg mb-2 text-primary">Фармацевтика</h3>
+        <p class="text-sm text-gray-500">Соблюдение GDP стандартов валидированными рефами.</p>
+      </div>
+      <div class="p-8 border border-gray-200 rounded-xl bg-white hover:shadow-lg transition">
+        <i class="fa-solid fa-skull-crossbones text-4xl text-accent mb-4"></i>
+        <h3 class="font-bold text-lg mb-2 text-primary">ADR (Опасные грузы)</h3>
+        <p class="text-sm text-gray-500">Обученные водители и транспорт для перевозки химии.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-primary mb-12 text-center">Отзывы <span class="text-accent">клиентов</span></h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-gray-50 p-8 rounded-xl relative">
+        <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-4 left-4"></i>
+        <p class="text-gray-600 mb-6 relative z-10 italic">"Работаем с EuroLogistics более трех лет. Очень радует стабильность подачи авто даже в предновогодний сезон. Менеджеры всегда на связи, вопросы решаются молниеносно."</p>
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">А</div>
+          <div>
+            <h4 class="font-bold text-primary">Александр В.</h4>
+            <p class="text-sm text-gray-500">Директор по логистике, Retail Group</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 p-8 rounded-xl relative">
+        <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-4 left-4"></i>
+        <p class="text-gray-600 mb-6 relative z-10 italic">"Регулярно заказываем рефрижераторы для перевозки медикаментов из Германии. Никаких нареканий к температурному режиму. Документы всегда в порядке."</p>
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">M</div>
+          <div>
+            <h4 class="font-bold text-primary">Мария К.</h4>
+            <p class="text-sm text-gray-500">Руководитель ВЭД, Pharma Supply</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="careers" class="py-24 bg-primary text-white">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-700 pb-4">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-2">Присоединяйтесь к <span class="text-accent">команде</span></h2>
+        <p class="text-gray-400">Актуальные вакансии в наших офисах в Европе</p>
+      </div>
+      <a href="#contact" class="hidden md:inline-block text-accent font-bold hover:underline mt-4 md:mt-0">Смотреть все вакансии <i class="fa-solid fa-arrow-right text-sm ml-1"></i></a>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-dark p-6 rounded-lg border border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 hover:border-accent transition">
+        <div>
+          <div class="inline-block px-2 py-1 bg-green-900/50 text-green-400 border border-green-800 text-xs font-bold rounded mb-2">Открыто</div>
+          <h3 class="text-xl font-bold mb-1">Водитель-международник (Категория C+E)</h3>
+          <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot mr-1"></i> База в Варшаве, Польша | <i class="fa-solid fa-wallet ml-3 mr-1"></i> от 2500€ до 3200€</p>
+        </div>
+        <button class="w-full md:w-auto px-6 py-2 border-2 border-accent text-white font-bold rounded hover:bg-accent transition">Откликнуться</button>
+      </div>
+      <div class="bg-dark p-6 rounded-lg border border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 hover:border-accent transition">
+        <div>
+          <div class="inline-block px-2 py-1 bg-green-900/50 text-green-400 border border-green-800 text-xs font-bold rounded mb-2">Открыто</div>
+          <h3 class="text-xl font-bold mb-1">Менеджер по логистике (Экспедитор)</h3>
+          <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot mr-1"></i> Офис в Гданьске, Польша | Опыт от 1 года | Знание английского</p>
+        </div>
+        <button class="w-full md:w-auto px-6 py-2 border-2 border-accent text-white font-bold rounded hover:bg-accent transition">Откликнуться</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="bg-light pt-24 pb-0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-200">
+
+      <div class="lg:w-2/5 bg-primary text-white p-10 flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-accent/30 rounded-full blur-3xl"></div>
+        <div class="relative z-10">
+          <h3 class="text-3xl font-bold mb-4">Свяжитесь с нами</h3>
+          <p class="text-gray-400 mb-10 text-sm">Оставьте заявку, и наш специалист свяжется с вами для уточнения деталей и расчета точной стоимости доставки вашего груза.</p>
+
+          <div class="space-y-8">
+            <div class="flex items-start">
+              <div class="bg-white/10 p-3 rounded-lg mr-4">
+                <i class="fa-solid fa-location-dot text-accent text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-200">Главный офис</h4>
+                <p class="text-gray-400 text-sm mt-1">ul. Logistyczna 15,<br> 00-001 Warszawa, Polska</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-white/10 p-3 rounded-lg mr-4">
+                <i class="fa-solid fa-phone text-accent text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-200">Телефоны</h4>
+                <p class="text-gray-400 text-sm mt-1">+48 123 456 789 (PL)</p>
+                <p class="text-gray-400 text-sm">+49 30 1234567 (DE)</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-white/10 p-3 rounded-lg mr-4">
+                <i class="fa-solid fa-envelope text-accent text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-200">Электронная почта</h4>
+                <p class="text-gray-400 text-sm mt-1">request@eurologistics-demo.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:w-3/5 p-10 bg-white">
+        <h3 class="text-2xl font-bold text-primary mb-6">Детали вашего груза</h3>
+        <form class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Ваше имя / Компания</label>
+              <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Email или Телефон *</label>
+              <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent" required>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Откуда (Страна, Индекс)</label>
+              <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Куда (Страна, Индекс)</label>
+              <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Вес (кг)</label>
+              <input type="number" step="50" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Тип кузова</label>
+              <select class="custom-select w-full px-4 h-12 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:border-gray-400 transition text-gray-800 cursor-pointer">
+                <option>Тент (Standard)</option>
+                <option>Рефрижератор</option>
+                <option>Мега (Mega)</option>
+                <option>Сборный (LTL)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Дата загрузки</label>
+              <input type="date" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent text-gray-600">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Комментарий</label>
+            <textarea rows="3" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent" placeholder="Уточните детали груза (характер, стоимость)"></textarea>
+          </div>
+
+          <button type="submit" class="w-full px-8 py-4 bg-accent text-white font-bold rounded hover:bg-red-700 transition shadow-lg text-lg">
+            Запросить ставку
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-primary pt-16 pb-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="col-span-1 md:col-span-1">
+          <div class="flex items-center mb-4">
+            <i class="fa-solid fa-route text-accent text-2xl mr-2"></i>
+            <span class="font-bold text-xl tracking-tight text-white">Euro<span class="text-gray-400">Logistics</span></span>
+          </div>
+          <p class="text-gray-400 text-sm">Надежные логистические решения и международные перевозки по стандартам качества ISO 9001.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Меню</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#services" class="hover:text-accent transition">Услуги</a></li>
+            <li><a href="#solutions" class="hover:text-accent transition">Почему мы</a></li>
+            <li><a href="#about" class="hover:text-accent transition">О компании</a></li>
+            <li><a href="#careers" class="hover:text-accent transition">Карьера</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Услуги</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#services" class="hover:text-accent transition">FTL перевозки</a></li>
+            <li><a href="#services" class="hover:text-accent transition">LTL (Сборные грузы)</a></li>
+            <li><a href="#services" class="hover:text-accent transition">Рефрижераторы</a></li>
+            <li><a href="#services" class="hover:text-accent transition">Таможенное оформление</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Соцсети</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-dark rounded flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="w-10 h-10 bg-dark rounded flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-10 h-10 bg-dark rounded flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <p>&copy; 2026 EuroLogistics Group. Все права защищены.</p>
+        <div class="space-x-4 mt-4 md:mt-0">
+          <a href="#" class="hover:text-white transition">Политика конфиденциальности</a>
+          <a href="#" class="hover:text-white transition">Условия использования</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(t => {
+          t.classList.remove('border-accent', 'text-primary', 'bg-white', 'shadow-sm', 'font-bold');
+          t.classList.add('border-transparent', 'text-gray-500', 'font-medium');
+        });
+
+        tabContents.forEach(c => c.classList.add('hidden'));
+
+        btn.classList.remove('border-transparent', 'text-gray-500', 'font-medium');
+        btn.classList.add('border-accent', 'text-primary', 'bg-white', 'shadow-sm', 'font-bold');
+
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.remove('hidden');
+      });
+    });
+
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  });
+</script>
+</body>
+</html>
